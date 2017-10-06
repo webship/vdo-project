@@ -21,6 +21,10 @@
     }
   ],
   "require": {
+    "composer/installers": "1.4.0",
+    "cweagans/composer-patches": "1.6.2",
+    "drupal-composer/drupal-scaffold": "2.3.0",
+    "drupal/drupal-library-installer-plugin": "0.3",
     "webship/vdo": "8.1.x-dev"
   },
   "conflict": {
@@ -34,7 +38,20 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-8.x-1.x": "8.1.x-dev"
-    }
+      "dev-8.x-1.x": "8.1.x-dev",
+      "dev-8.1.x": "8.1.x-dev"
+    },
+    "installer-paths": {
+      "web/core": ["drupal/core"],
+      "web/profiles/{$name}": ["type:drupal-profile"],
+      "web/modules/contrib/{$name}": ["type:drupal-module"],
+      "web/themes/contrib/{$name}": ["type:drupal-theme"],
+      "web/libraries/{$name}": ["type:drupal-library"],
+      "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+      "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
+      "drush/contrib/{$name}": ["type:drupal-drush"]
+    },
+    "enable-patching": true,
+    "composer-exit-on-patch-failure": true
   }
 }
