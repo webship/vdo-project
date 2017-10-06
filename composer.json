@@ -24,30 +24,7 @@
     "composer/installers": "^1.2",
     "cweagans/composer-patches": "^1.6",
     "drupal-composer/drupal-scaffold": "^2.2",
-    "drupal/console": "~1.0",
-    "drush/drush": "~8.0",
-    "webflo/drupal-finder": "^0.3.0",
-    "webmozart/path-util": "^2.3",
     "webship/vdo": "8.1.x-dev"
-  },
-  "require-dev": {
-    "drush/drush": "^8.0.0",
-    "drupal/drupal-extension": "^3.2",
-    "jakoch/phantomjs-installer": "1.9.8",
-    "behat/behat": "^3.0",
-    "drupal/coder": "8.*",
-    "phing/phing": "^2.14",
-    "behat/mink": "~1.7",
-    "behat/mink-goutte-driver": "~1.2",
-    "behat/mink-zombie-driver": "@stable",
-    "behat/mink-selenium2-driver":  "~1.3",
-    "mikey179/vfsStream": "~1.2",
-    "phpunit/phpunit": "~4.8",
-    "guzzlehttp/guzzle": "6.2.*@stable",
-    "symfony/css-selector": "~2.8",
-    "squizlabs/php_codesniffer": "2.*",
-    "behatch/contexts": "*",
-    "emuse/behat-html-formatter": "^0.1.0"
   },
   "conflict": {
     "drupal/drupal": "*"
@@ -56,7 +33,6 @@
   "prefer-stable": true,
   "config": {
     "bin-dir": "bin/",
-    "sort-packages": true,
     "secure-http": false
   },
   "autoload": {
@@ -64,31 +40,16 @@
       "scripts/composer/ScriptHandler.php"
     ]
   },
-  "scripts": {
-    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
-    "pre-install-cmd": [
-      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-    ],
-    "pre-update-cmd": [
-      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-    ],
-    "post-install-cmd": [
-      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-    ],
-    "post-update-cmd": [
-      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-    ]
-  },
   "extra": {
     "branch-alias": {
       "dev-8.x-1.x": "8.1.x-dev"
     },
     "installer-paths": {
-      "docroot/core": ["type:drupal-core"],
-      "docroot/libraries/{$name}": ["type:drupal-library"],
-      "docroot/modules/{$name}": ["type:drupal-module"],
-      "docroot/profiles/{$name}": ["type:drupal-profile"],
-      "docroot/themes/{$name}": ["type:drupal-theme"],
+      "web/core": ["type:drupal-core"],
+      "web/libraries/{$name}": ["type:drupal-library"],
+      "web/modules/{$name}": ["type:drupal-module"],
+      "web/profiles/{$name}": ["type:drupal-profile"],
+      "web/themes/{$name}": ["type:drupal-theme"],
       "drush/{$name}": ["type:drupal-drush"]
     },
     "enable-patching": true
