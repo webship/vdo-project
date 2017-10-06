@@ -21,9 +21,6 @@
     }
   ],
   "require": {
-    "composer/installers": "^1.2",
-    "cweagans/composer-patches": "^1.6",
-    "drupal-composer/drupal-scaffold": "^2.2",
     "webship/vdo": "8.1.x-dev"
   },
   "conflict": {
@@ -35,23 +32,9 @@
     "bin-dir": "bin/",
     "secure-http": false
   },
-  "autoload": {
-    "classmap": [
-      "scripts/composer/ScriptHandler.php"
-    ]
-  },
   "extra": {
     "branch-alias": {
       "dev-8.x-1.x": "8.1.x-dev"
-    },
-    "installer-paths": {
-      "web/core": ["type:drupal-core"],
-      "web/libraries/{$name}": ["type:drupal-library"],
-      "web/modules/{$name}": ["type:drupal-module"],
-      "web/profiles/{$name}": ["type:drupal-profile"],
-      "web/themes/{$name}": ["type:drupal-theme"],
-      "drush/{$name}": ["type:drupal-drush"]
-    },
-    "enable-patching": true
+    }
   }
 }
