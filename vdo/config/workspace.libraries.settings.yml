@@ -1,0 +1,7 @@
+doc:
+  name: libraries
+  path: /var/www/html/libraries
+web:
+  url: http://localhost/libraries
+database:
+  prefix: libraries_

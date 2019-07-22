@@ -1,0 +1,55 @@
+doc:
+  name: profiles
+  path: /var/www/html
+web:
+  url: http://localhost/profiles
+database:
+  prefix: profiles_
+profiles:
+  - lightning
+  - thunder
+  - social
+  - opigno_lms
+  - panopoly
+  - webship
+  - cucumber
+  - vdo
+  - droopler
+  - openedu
+  - openfed
+  - openrestaurant
+  - openy
+  - pino
+  - quick_start
+  - seeds
+  - university
+  - wxt
+  - brainstorm_profile
+  - druppio_small_business_distribution
+  - degov
+  - base
+  - zircon_profile
+  - crypto_distribution
+  - agov
+  - multilingual_demo
+  - drustack
+  - pankm
+  - apigeedev_portal
+  - newspublish
+  - open_door
+  - real_estate_lp_profile
+  - champion
+  - presto
+  - spectra_server
+  - media_dev
+  - bene
+  - splashawards
+  - guardr
+  - drutopia
+  - connect_profile
+  - mandatory
+  - niobi
+  - govcms8
+  - sm_dev_portal
+  - dcco
+  - dropsolid_rocketship

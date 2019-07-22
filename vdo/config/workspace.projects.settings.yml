@@ -1,0 +1,7 @@
+doc:
+  name: projects
+  path: /var/www/html/projects
+web:
+  url: http://localhost/projects
+database:
+  prefix: projects_

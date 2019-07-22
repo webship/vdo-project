@@ -1,0 +1,27 @@
+vdo:
+  root: /var/www/html
+  path: /var/www/html/vdo
+  scripts: /var/www/html/vdo/scripts
+  config: /var/www/html/vdo/config
+  host: localhost
+  web: http://localhost/vdo
+  backups: /var/www/html/backups
+database:
+  username: DATABASE_USERNAME
+  password: DATABASE_PASSWORD
+  host: DATABASE_HOST
+account:
+    name: DRUPAL_WEBMASTER_NAME
+    pass: DRUPAL_WEBMASTER_PASSWORD
+    mail: DRUPAL_WEBMASTER_EMIL
+workspaces:
+  - products
+  - dev
+  - test
+  - demos
+  - sandboxes
+  - profiles
+  - modules
+  - themes
+  - libraries
+  - forked

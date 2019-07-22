@@ -1,0 +1,7 @@
+doc:
+  name: demos
+  path: /var/www/html/demos
+web:
+  url: http://localhost/demos
+database:
+  prefix: demos_

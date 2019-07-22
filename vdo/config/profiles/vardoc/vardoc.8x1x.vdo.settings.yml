@@ -1,0 +1,11 @@
+products:
+  -
+    name: 'vardoc-project'
+    git_drupal: ''
+    git_github: 'git@github.com:Vardot/vardoc-project.git'
+    branch: '8.x-1.x'
+  -
+    name: 'vardoc'
+    git_drupal: 'git@git.drupal.org:project/vardoc.git'
+    git_github: 'git@github.com:Vardot/vardoc.git'
+    branch: '8.x-1.x'

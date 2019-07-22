@@ -1,0 +1,7 @@
+doc:
+  name: modules
+  path: /var/www/html/modules
+web:
+  url: http://localhost/modules
+database:
+  prefix: modules_

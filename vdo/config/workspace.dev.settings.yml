@@ -1,0 +1,7 @@
+doc:
+  name: dev
+  path: /var/www/html/dev
+web:
+  url: http://localhost/dev
+database:
+  prefix: dev_

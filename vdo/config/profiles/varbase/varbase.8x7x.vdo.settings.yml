@@ -1,0 +1,121 @@
+products:
+  -
+    name: 'varbse-project'
+    git_drupal: ''
+    git_github: 'git@github.com:Vardot/varbase-project.git'
+    branch: '8.7.x'
+  -
+    name: 'platformsh-example-varbase'
+    git_drupal: ''
+    git_github: 'git@github.com:Vardot/platformsh-example-varbase.git'
+    branch: 'master'
+  -
+    name: 'varbse'
+    git_drupal: 'git@git.drupal.org:project/varbase.git'
+    git_github: 'git@github.com:Vardot/varbase.git'
+    branch: '8.x-7.x'
+  -
+    name: 'varbase_core'
+    git_drupal: 'git@git.drupal.org:project/varbase_core.git'
+    git_github: 'git@github.com:Vardot/varbase_core.git'
+    branch: '8.x-7.x'
+  -
+    name: 'varbase_api'
+    git_drupal: 'git@git.drupal.org:project/varbase_api.git'
+    git_github: 'git@github.com:Vardot/varbase_api.git'
+    branch: '8.x-7.x'
+  -
+    name: 'varbase_email'
+    git_drupal: 'git@git.drupal.org:project/varbase_email.git'
+    git_github: 'git@github.com:Vardot/varbase_email.git'
+    branch: '8.x-6.x'
+  -
+    name: 'varbase_media'
+    git_drupal: 'git@git.drupal.org:project/varbase_media.git'
+    git_github: 'git@github.com:Vardot/varbase_media.git'
+    branch: '8.x-7.x'
+  -
+    name: 'varbase_editor'
+    git_drupal: 'git@git.drupal.org:project/varbase_editor.git'
+    git_github: 'git@github.com:Vardot/varbase_editor.git'
+    branch: '8.x-7.x'
+  -
+    name: 'varbase_auth'
+    git_drupal: 'git@git.drupal.org:project/varbase_auth.git'
+    git_github: 'git@github.com:Vardot/varbase_auth.git'
+    branch: '8.x-6.x'
+  -
+    name: 'varbase_blog'
+    git_drupal: 'git@git.drupal.org:project/varbase_blog.git'
+    git_github: 'git@github.com:Vardot/varbase_blog.git'
+    branch: '8.x-7.x'
+  -
+    name: 'varbase_bootstrap_paragraphs'
+    git_drupal: 'git@git.drupal.org:project/varbase_bootstrap_paragraphs.git'
+    git_github: 'git@github.com:Vardot/varbase_bootstrap_paragraphs.git'
+    branch: '8.x-7.x'
+  -
+    name: 'varbase_landing'
+    git_drupal: 'git@git.drupal.org:project/varbase_landing.git'
+    git_github: 'git@github.com:Vardot/varbase_landing.git'
+    branch: '8.x-7.x'
+  -
+    name: 'varbase_carousels'
+    git_drupal: 'git@git.drupal.org:project/varbase_carousels.git'
+    git_github: 'git@github.com:Vardot/varbase_carousels.git'
+    branch: '8.x-7.x'
+  -
+    name: 'varbase_heroslider_media'
+    git_drupal: 'git@git.drupal.org:project/varbase_heroslider_media.git'
+    git_github: 'git@github.com:Vardot/varbase_heroslider_media.git'
+    branch: '8.x-7.x'
+  -
+    name: 'varbase_search'
+    git_drupal: 'git@git.drupal.org:project/varbase_search.git'
+    git_github: 'git@github.com:Vardot/varbase_search.git'
+    branch: '8.x-6.x'
+  -
+    name: 'varbase_seo'
+    git_drupal: 'git@git.drupal.org:project/varbase_seo.git'
+    git_github: 'git@github.com:Vardot/varbase_seo.git'
+    branch: '8.x-6.x'
+  -
+    name: 'varbase_total_control'
+    git_drupal: 'git@git.drupal.org:project/varbase_total_control.git'
+    git_github: 'git@github.com:Vardot/varbase_total_control.git'
+    branch: '8.x-6.x'
+  -
+    name: 'varbase_styleguide'
+    git_drupal: 'git@git.drupal.org:project/varbase_styleguide.git'
+    git_github: 'git@github.com:Vardot/varbase_styleguide.git'
+    branch: '8.x-6.x'
+  -
+    name: 'vartheme'
+    git_drupal: 'git@git.drupal.org:project/vartheme.git'
+    git_github: 'git@github.com:Vardot/vartheme.git'
+    branch: '8.x-6.x'
+  -
+    name: 'vartheme_admin'
+    git_drupal: 'git@git.drupal.org:project/vartheme_admin.git'
+    git_github: 'git@github.com:Vardot/vartheme_admin.git'
+    branch: '8.x-6.x'
+  -
+    name: 'varbase_faqs'
+    git_drupal: 'git@git.drupal.org:project/varbase_faqs.git'
+    git_github: 'git@github.com:Vardot/varbase_faqs.git'
+    branch: '8.x-6.x'
+  -
+    name: 'varbase_reports'
+    git_drupal: 'git@git.drupal.org:project/varbase_reports.git'
+    git_github: 'git@github.com:Vardot/varbase_reports.git'
+    branch: '8.x-6.x'
+  -
+    name: 'varbase_vmi_demo'
+    git_drupal: ''
+    git_github: 'git@github.com:Vardot/varbase_vmi_demo.git'
+    branch: '8.x-7.x'
+  -
+    name: 'varbase_story_demo'
+    git_drupal: ''
+    git_github: 'git@github.com:Vardot/varbase_story_demo.git'
+    branch: '8.x-7.x'

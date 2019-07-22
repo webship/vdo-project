@@ -1,0 +1,7 @@
+doc:
+  name: forked
+  path: /var/www/html/forked
+web:
+  url: http://localhost/forked
+database:
+  prefix: forked_

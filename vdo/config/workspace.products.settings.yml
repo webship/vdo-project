@@ -1,0 +1,7 @@
+doc:
+  name: products
+  path: /var/www/html/products
+web:
+  url: http://localhost/products
+database:
+  prefix: products_

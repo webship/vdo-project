@@ -1,0 +1,7 @@
+doc:
+  name: sandboxes
+  path: /var/www/html/sandboxes
+web:
+  url: http://localhost/sandboxes
+database:
+  prefix: sandboxes_
