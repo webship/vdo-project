@@ -15,19 +15,6 @@ site_version_code="86DEV";
 # Change to true if you want to install varbase.
 install_site=false;
 
-# The user name and password for the installed varbase sites.
-varbase_username=${account_name};
-varbase_password="${account_pass}";
-
-# Change with true or false, if you want to install the feature.
-enable_multilingual=true;
-vmi=true;
-varbase_heroslider_media=true;
-varbase_carousels=true;
-varbase_search=true;
-varbase_development=true;
-
-
 base_url="${web_url}/${project_name}";
 
 # GET the project name argument.

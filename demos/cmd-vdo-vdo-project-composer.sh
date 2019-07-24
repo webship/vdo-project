@@ -6,9 +6,9 @@
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
 
-# Change with the version of vdo 8.1.x-dev, 8.1.06, 8.1.07, 8.1.08
+# Change with the version.
 site_version="8.1.x-dev";
-# Change with the version of vdo 81DEV, 8105, 8106, 8107, 8108
+# Change with the version.
 site_version_code="81DEV";
 
 
@@ -63,6 +63,7 @@ if $install_site ; then
   --account-pass="${account_pass}" \
   --account-mail="${account_mail}" \
   --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" -vvv ;
+
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";
   echo  "Go to ${base_url}";

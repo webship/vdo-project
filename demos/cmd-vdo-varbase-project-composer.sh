@@ -6,26 +6,14 @@
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
 
-# Change with the version of Varbase 8.4.x-dev, 8.4.05, 8.4.06, 8.4.07
-site_version="^8.6";
-# Change with the version of Varbase 84DEV, 8405, 8406, 8407
-site_version_code="86DEV";
+# Change with the version.
+site_version="~8.7.0";
+# Change with the version.
+site_version_code="80700xDEV";
 
 
-# Change to true if you want to install varbase.
+# Change to true if you want to install.
 install_site=false;
-
-# The user name and password for the installed varbase sites.
-varbase_username=${account_name};
-varbase_password="${account_pass}";
-
-# Change with true or false, if you want to install the feature.
-enable_multilingual=true;
-vmi=true;
-varbase_heroslider_media=true;
-varbase_carousels=true;
-varbase_search=true;
-varbase_development=true;
 
 
 base_url="${web_url}";
@@ -68,7 +56,19 @@ if $install_site ; then
   # Change directory to the docroot.
   cd ${vdo_root}/${doc_name}/${project_name}/docroot;
   # Install Varbase with Drush.
-  drush site-install varbase --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url=mysql://${database_username}:${database_password}@${database_host}/${full_database_name} varbase_multilingual_configuration.enable_multilingual=1 varbase_extra_components.vmi=1 varbase_extra_components.varbase_heroslider_media=1 varbase_extra_components.varbase_carousels=1 varbase_extra_components.varbase_search=1 varbase_development_tools.varbase_development=1 -vvv;
+  drush site-install varbase --yes \
+  --site-name="${doc_name} ${project_name}" \
+  --account-name="${account_name}" \
+  --account-pass="${account_pass}" \
+  --account-mail="${account_mail}" \
+  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" \
+  varbase_multilingual_configuration.enable_multilingual=1
+  varbase_extra_components.vmi=1
+  varbase_extra_components.varbase_heroslider_media=1
+  varbase_extra_components.varbase_carousels=1
+  varbase_extra_components.varbase_search=1
+  varbase_development_tools.varbase_development=1 -vvv;
+  
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";
   echo  "Go to ${base_url}";

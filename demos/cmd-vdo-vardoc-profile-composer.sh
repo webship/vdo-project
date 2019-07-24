@@ -6,13 +6,13 @@
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
 
-# Change with the version of  8.1.x-dev
-site_version="8.1.x-dev";
-# Change with the version of Varbase 81DEV, 8100, 8101
-site_version_code="81DEV";
+# Change with the version.
+site_version="8.2.x-dev";
+# Change with the version.
+site_version_code="82DEV";
 
 
-# Change to true if you want to install vardoc.
+# Change to true if you want to install.
 install_site=false;
 
 
