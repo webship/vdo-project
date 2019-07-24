@@ -52,8 +52,8 @@ echo "${doc_name} ${project_name} is ready to install!!!!";
 echo "Go to ${base_url}";
 
 if $install_site ; then
-  # Change directory to the docroot.
-  cd ${vdo_root}/${doc_name}/${project_name}/docroot;
+  # Change directory to web.
+  cd ${vdo_root}/${doc_name}/${project_name}/web/;
 
   # Install Webship with Drush.
   drush site-install webship --yes \
