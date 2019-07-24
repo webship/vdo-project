@@ -19,21 +19,23 @@ sudo chmod 775 -R .;sudo chown www-data:${USER} -R .;
 # echo "| Varbase VERSION";
 # echo "*-----------------------------------------------------*";
 # cd ${vdo_root}/test/vVERSION_CODE;
-# composer require drupal/varbase_faqs:~6.0;
-# composer require drupal/varbase_reports:~6.0;
-# composer require drupal/varbase_media_header:~6.0;
-# composer require vardot/varbase_vmi_demo:dev-8.x-6.x;
-# composer require vardot/varbase_story_demo:dev-8.x-6.x;
+# composer require 'drupal/varbase_reports:~6.0' \
+#                  'drupal/varbase_media_header:~7.0' \
+#                  'vardot/varbase_vmi_demo:dev-8.x-7.x' \
+#                  'vardot/varbase_story_demo:dev-8.x-7.x' \
+#                  'drupal/varbase_faqs:~6.0' \
+#                  'drupal/varbase_layout_builder:1.x-dev' ;
 
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.7.0";
 echo "*-----------------------------------------------------*";
 cd ${vdo_root}/test/v80700;
-composer require 'drupal/varbase_faqs:~6.0' \
-                  'drupal/varbase_reports:~6.0' \
+composer require 'drupal/varbase_reports:~6.0' \
                   'drupal/varbase_media_header:~7.0' \
                   'vardot/varbase_vmi_demo:dev-8.x-7.x' \
-                  'vardot/varbase_story_demo:dev-8.x-7.x' ;
+                  'vardot/varbase_story_demo:dev-8.x-7.x' \
+                  'drupal/varbase_faqs:~6.0' \
+                  'drupal/varbase_layout_builder:1.x-dev' ;
 
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.6.12";

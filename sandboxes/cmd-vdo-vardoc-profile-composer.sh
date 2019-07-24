@@ -41,7 +41,7 @@ if [ "$2" != "" ]; then
 fi
 
 # Change directory to the workspace for this full operation.
-cd ${doc_path}/${doc_name};
+cd ${vdo_root}/${doc_name};
 
 if [ -d "${project_name}" ]; then
   sudo rm -rf ${project_name} -vvv
@@ -61,7 +61,7 @@ echo "Go to ${base_url}";
 
 if $install_site ; then
   # Change directory to the docroot.
-  cd ${doc_path}/${doc_name}/${project_name}/docroot;
+  cd ${vdo_root}/${doc_name}/${project_name}/docroot;
   # Install Varbase with Drush.
   drush site-install vardoc --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url=mysql://${database_username}:${database_password}@${database_host}/${full_database_name} vardoc_extra_components.vardoc_demo=true varbase_development_tools.varbase_development=true
   drush config-set system.performance css.preprocess 0 --yes
@@ -71,7 +71,7 @@ if $install_site ; then
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";
   echo  "Go to ${base_url}";
-  cd ${doc_path}/${doc_name};
+  cd ${vdo_root}/${doc_name};
   sudo chmod 775 -R ${project_name};
   sudo chown www-data:${user_name} -R ${project_name};
 fi
