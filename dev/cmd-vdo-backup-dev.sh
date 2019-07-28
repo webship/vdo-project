@@ -16,5 +16,5 @@ fi
 
 full_database_name="${database_prefix}${project_name}";
 
-tar -cvzf ${vdo_root}/backups/${doc_name}_${project_name}--$( date '+%Y-%m-%d_%H-%M-%S' ).tar.gz ${project_name} ;
-mysqldump -u${database_username} -p${database_password} ${full_database_name} > ${vdo_root}/${doc_name}/backups/${database_prefix}${project_name}-db-$( date '+%Y-%m-%d_%H-%M-%S' ).sql ;
+tar -cvzf ${vdo_root}/backups/dev/${doc_name}_${project_name}--$( date '+%Y-%m-%d_%H-%M-%S' ).tar.gz ${project_name} ;
+mysqldump -u${database_username} -p${database_password} ${full_database_name} > ${vdo_root}/backups/dev/${database_prefix}${project_name}-db-$( date '+%Y-%m-%d_%H-%M-%S' ).sql ;
