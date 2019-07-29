@@ -4,13 +4,13 @@
 . ${vdo_scripts}/bootstrap.sh ;
 
 # Load workspace settings and extra lists.
-eval $(parse_yaml ${vdo_config}/workspace.products.settings.yml);
+eval $(parse_yaml ${vdo_config}/workspace.modules.settings.yml);
 
 # GET the Product name argument.
 if [ "$1" != "" ]; then
     project_name=$1;
 else
-  echo "Please add the name of your product.";
+  echo "Please add the name of your module.";
   exit 1;
 fi
 
