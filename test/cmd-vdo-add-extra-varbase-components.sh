@@ -1,62 +1,69 @@
 #!/bin/usr/env bash
 
-cd ${vdo_root}/test/varbase80600;
+# Bootstrap VDO.
+. ${vdo_scripts}/bootstrap.sh ;
+
+# Load workspace settings and extra lists.
+eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
+
+
+cd ${vdo_root}/${doc_name}/varbase80600;
 composer require drupal/varbase_faqs:~6.0 \
                  drupal/varbase_reports:~6.0 \
                  drupal/varbase_media_header:~6.0 \
                  vardot/varbase_vmi_demo:dev-8.x-6.x \
                  vardot/varbase_story_demo:dev-8.x-6.x ;
 
-cd ${vdo_root}/test/varbase80601;
+cd ${vdo_root}/${doc_name}/varbase80601;
 composer require drupal/varbase_faqs:~6.0 \
                  drupal/varbase_reports:~6.0 \
                  drupal/varbase_media_header:~6.0 \
                  vardot/varbase_vmi_demo:dev-8.x-6.x \
                  vardot/varbase_story_demo:dev-8.x-6.x;
 
-cd ${vdo_root}/test/varbase80602;
+cd ${vdo_root}/${doc_name}/varbase80602;
 composer require drupal/varbase_faqs:~6.0 \
                  drupal/varbase_reports:~6.0 \
                  drupal/varbase_media_header:~6.0 \
                  vardot/varbase_vmi_demo:dev-8.x-6.x \
                  vardot/varbase_story_demo:dev-8.x-6.x;
 
-cd ${vdo_root}/test/varbase80603;
+cd ${vdo_root}/${doc_name}/varbase80603;
 composer require drupal/varbase_faqs:~6.0 \
                  drupal/varbase_reports:~6.0 \
                  drupal/varbase_media_header:~6.0 \
                  vardot/varbase_vmi_demo:dev-8.x-6.x \
                  vardot/varbase_story_demo:dev-8.x-6.x;
 
-cd ${vdo_root}/test/varbase80604;
+cd ${vdo_root}/${doc_name}/varbase80604;
 composer require drupal/varbase_faqs:~6.0 \
                  drupal/varbase_reports:~6.0 \
                  drupal/varbase_media_header:~6.0 \
                  vardot/varbase_vmi_demo:dev-8.x-6.x \
                  vardot/varbase_story_demo:dev-8.x-6.x;
 
-cd ${vdo_root}/test/varbase80605;
+cd ${vdo_root}/${doc_name}/varbase80605;
 composer require drupal/varbase_faqs:~6.0 \
                  drupal/varbase_reports:~6.0 \
                  drupal/varbase_media_header:~6.0 \
                  vardot/varbase_vmi_demo:dev-8.x-6.x \
                  vardot/varbase_story_demo:dev-8.x-6.x;
 
-cd ${vdo_root}/test/varbase80606;
+cd ${vdo_root}/${doc_name}/varbase80606;
 composer require drupal/varbase_faqs:~6.0 \
                  drupal/varbase_reports:~6.0 \
                  drupal/varbase_media_header:~6.0 \
                  vardot/varbase_vmi_demo:dev-8.x-6.x \
                  vardot/varbase_story_demo:dev-8.x-6.x;
 
-cd ${vdo_root}/test/varbase80607;
+cd ${vdo_root}/${doc_name}/varbase80607;
 composer require drupal/varbase_faqs:~6.0 \
                  drupal/varbase_reports:~6.0 \
                  drupal/varbase_media_header:~6.0 \
                  vardot/varbase_vmi_demo:dev-8.x-6.x \
                  vardot/varbase_story_demo:dev-8.x-6.x;
 
-cd ${vdo_root}/test/varbase80608;
+cd ${vdo_root}/${doc_name}/varbase80608;
 composer require drupal/varbase_faqs:~6.0 \
                  drupal/varbase_reports:~6.0 \
                  drupal/varbase_media_header:~6.0 \

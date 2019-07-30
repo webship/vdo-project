@@ -14,9 +14,9 @@ else
   exit 1;
 fi
 
-cd ${vdo_root}/dev/
+cd ${vdo_root}/${doc_name}/
 composer create-project vardot/varbase-project:8.7.x-dev varbase6c --stability dev --no-interaction
-cd ${vdo_root}/dev/varbase6c/
+cd ${vdo_root}/${doc_name}/varbase6c/
 composer require 'drupal/varbase_reports:6.x-dev' \
                   'drupal/varbase_media_header:7.x-dev' \
                   'vardot/varbase_vmi_demo:dev-8.x-7.x' \
@@ -26,7 +26,7 @@ composer require 'drupal/varbase_reports:6.x-dev' \
 
 
 sudo chmod 775 -R .;sudo chown www-data:${user} -R .;
-cd ${vdo_root}/dev/varbase6c/docroot
+cd ${vdo_root}/${doc_name}/varbase6c/docroot
 
 drush site-install varbase --yes \
   --site-name="dev Varbase7" \

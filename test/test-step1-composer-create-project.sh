@@ -14,24 +14,24 @@ echo "*-----------------------------------------------------*";
 echo "| Delete test Varbase folders";
 echo "*-----------------------------------------------------*";
 
-sudo rm -rf ${vdo_root}/test/v80700 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80700 ;
 
-sudo rm -rf ${vdo_root}/test/v80612 ;
-sudo rm -rf ${vdo_root}/test/v80611 ;
-sudo rm -rf ${vdo_root}/test/v80610 ;
-sudo rm -rf ${vdo_root}/test/v80609 ;
-sudo rm -rf ${vdo_root}/test/v80609 ;
-sudo rm -rf ${vdo_root}/test/v80608 ;
-sudo rm -rf ${vdo_root}/test/v80607 ;
-sudo rm -rf ${vdo_root}/test/v80606 ;
-sudo rm -rf ${vdo_root}/test/v80605 ;
-sudo rm -rf ${vdo_root}/test/v80604 ;
-sudo rm -rf ${vdo_root}/test/v80603 ;
-sudo rm -rf ${vdo_root}/test/v80602 ;
-sudo rm -rf ${vdo_root}/test/v80601 ;
-sudo rm -rf ${vdo_root}/test/v80600 ;
-sudo rm -rf ${vdo_root}/test/v80505 ;
-sudo rm -rf ${vdo_root}/test/v80428 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80612 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80611 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80610 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80609 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80609 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80608 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80607 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80606 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80605 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80604 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80603 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80602 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80601 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80600 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80505 ;
+sudo rm -rf ${vdo_root}/${doc_name}/v80428 ;
 
 cd ${vdo_root}/test;
 

@@ -13,7 +13,7 @@ echo "*-----------------------------------------------------*";
 # echo "*-----------------------------------------------------*";
 # echo "| Varbase VERSION";
 # echo "*-----------------------------------------------------*";
-# cd ${vdo_root}/test/vVERSION_CODE/docroot/;
+# cd ${vdo_root}/${doc_name}/vVERSION_CODE/docroot/;
 # drush pm-enable varbase_development --yes ;
 # drush pm-enable devel_generate --yes ;
 #
@@ -45,7 +45,7 @@ echo "*-----------------------------------------------------*";
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.7.0";
 echo "*-----------------------------------------------------*";
-cd ${vdo_root}/test/v80700/docroot/;
+cd ${vdo_root}/${doc_name}/v80700/docroot/;
 drush pm-enable varbase_development --yes ;
 drush pm-enable devel_generate --yes ;
 
@@ -78,7 +78,7 @@ drush cr ;
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.6.12";
 echo "*-----------------------------------------------------*";
-cd ${vdo_root}/test/v80612/docroot/;
+cd ${vdo_root}/${doc_name}/v80612/docroot/;
 drush pm-enable varbase_development --yes ;
 drush pm-enable devel_generate --yes ;
 
@@ -110,7 +110,7 @@ drush cr ;
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.6.11";
 echo "*-----------------------------------------------------*";
-cd ${vdo_root}/test/v80611/docroot/;
+cd ${vdo_root}/${doc_name}/v80611/docroot/;
 drush pm-enable varbase_development --yes ;
 drush pm-enable devel_generate --yes ;
 
@@ -141,7 +141,7 @@ drush cr ;
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.6.10";
 echo "*-----------------------------------------------------*";
-cd ${vdo_root}/test/v80610/docroot/;
+cd ${vdo_root}/${doc_name}/v80610/docroot/;
 drush pm-enable varbase_development --yes ;
 drush pm-enable devel_generate --yes ;
 
@@ -172,7 +172,7 @@ drush cr ;
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.6.9";
 echo "*-----------------------------------------------------*";
-cd ${vdo_root}/test/v80609/docroot/;
+cd ${vdo_root}/${doc_name}/v80609/docroot/;
 drush pm-enable varbase_development --yes ;
 drush pm-enable devel_generate --yes ;
 
@@ -204,7 +204,7 @@ drush cr ;
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.6.8";
 echo "*-----------------------------------------------------*";
-cd ${vdo_root}/test/v80608/docroot/;
+cd ${vdo_root}/${doc_name}/v80608/docroot/;
 drush pm-enable varbase_development --yes ;
 drush pm-enable devel_generate --yes ;
 
@@ -235,7 +235,7 @@ drush cr ;
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.6.7";
 echo "*-----------------------------------------------------*";
-cd ${vdo_root}/test/v80607/docroot/;
+cd ${vdo_root}/${doc_name}/v80607/docroot/;
 drush pm-enable varbase_development --yes ;
 drush pm-enable devel_generate --yes ;
 
@@ -266,7 +266,7 @@ drush cr ;
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.6.6";
 echo "*-----------------------------------------------------*";
-cd ${vdo_root}/test/v80606/docroot/;
+cd ${vdo_root}/${doc_name}/v80606/docroot/;
 drush pm-enable varbase_development --yes ;
 drush pm-enable devel_generate --yes ;
 
@@ -297,7 +297,7 @@ drush cr ;
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.6.5";
 echo "*-----------------------------------------------------*";
-cd ${vdo_root}/test/v80605/docroot/;
+cd ${vdo_root}/${doc_name}/v80605/docroot/;
 drush pm-enable varbase_development --yes ;
 drush pm-enable devel_generate --yes ;
 
@@ -328,7 +328,7 @@ drush cr ;
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.6.4";
 echo "*-----------------------------------------------------*";
-cd ${vdo_root}/test/v80604/docroot/;
+cd ${vdo_root}/${doc_name}/v80604/docroot/;
 drush pm-enable varbase_development --yes ;
 drush pm-enable devel_generate --yes ;
 
@@ -359,7 +359,7 @@ drush cr ;
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.6.3";
 echo "*-----------------------------------------------------*";
-cd ${vdo_root}/test/v80603/docroot/;
+cd ${vdo_root}/${doc_name}/v80603/docroot/;
 drush pm-enable varbase_development --yes ;
 drush pm-enable devel_generate --yes ;
 
@@ -389,7 +389,7 @@ drush cr ;
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.6.2";
 echo "*-----------------------------------------------------*";
-cd ${vdo_root}/test/v80602/docroot/;
+cd ${vdo_root}/${doc_name}/v80602/docroot/;
 drush pm-enable varbase_development --yes ;
 drush pm-enable devel_generate --yes ;
 
@@ -420,7 +420,7 @@ drush cr ;
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.6.1";
 echo "*-----------------------------------------------------*";
-cd ${vdo_root}/test/v80601/docroot/;
+cd ${vdo_root}/${doc_name}/v80601/docroot/;
 drush pm-enable varbase_development --yes ;
 drush pm-enable devel_generate --yes ;
 
@@ -451,7 +451,7 @@ drush cr ;
 echo "*-----------------------------------------------------*";
 echo "| Varbase 8.6.0";
 echo "*-----------------------------------------------------*";
-cd ${vdo_root}/test/v80600/docroot/;
+cd ${vdo_root}/${doc_name}/v80600/docroot/;
 drush pm-enable varbase_development --yes ;
 drush pm-enable devel_generate --yes ;
 
