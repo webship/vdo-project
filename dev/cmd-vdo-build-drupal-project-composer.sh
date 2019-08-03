@@ -6,27 +6,12 @@
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.dev.settings.yml);
 
-# Change with the version of Varbase 8.5.x-dev, 8.5.
-site_version="~8.7.0";
-# Change with the version of Varbase 85DEV
-site_version_code="870DEV";
-
+echo "*----------------------------------------------------------------------*";
+echo "|  Build Drupal Project                                                |";
+echo "*----------------------------------------------------------------------*";
 
 # Change to true if you want to install varbase.
 install_site=false;
-
-# The user name and password for the installed varbase sites.
-varbase_username=${account_name};
-varbase_password="${account_pass}";
-
-# Change with true or false, if you want to install the feature.
-enable_multilingual=true;
-vmi=true;
-varbase_heroslider_media=true;
-varbase_carousels=true;
-varbase_search=true;
-varbase_development=true;
-
 
 base_url="${web_url}/${project_name}";
 
@@ -56,7 +41,7 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name};" -vvv
 
-composer create-project drupal/drupal:${site_version} ${project_name} --stability dev --no-interaction -vvv
+composer create-project drupal-composer/drupal-project:8.x-dev ${project_name} --no-interaction ;
 
 sudo chmod 775 -R ${project_name}
 sudo chown www-data:${user_name} -R ${project_name}
@@ -66,9 +51,16 @@ echo "Go to ${base_url}";
 
 if $install_site ; then
   # Change directory to the docroot.
-  cd ${vdo_root}/${doc_name}/${project_name}/docroot;
-  # Install Varbase with Drush.
-  drush site-install standard --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url=mysql://${database_username}:${database_password}@${database_host}/${full_database_name}  -vvv;
+  cd ${vdo_root}/${doc_name}/${project_name}/web;
+
+  # Install Drupal with Drush.
+  drush site-install standard --yes \
+  --site-name="${doc_name} ${project_name}" \
+  --account-name="${account_name}" \
+  --account-pass="${account_pass}" \
+  --account-mail="${account_mail}" \
+  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}"  -vvv;
+
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";
   echo  "Go to ${base_url}";
