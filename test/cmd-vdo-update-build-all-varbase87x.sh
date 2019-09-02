@@ -29,12 +29,19 @@ for version in {0..1..1}
     composer create-project vardot/varbase-project:${drupal_version}.${major_version}.${version} ${project_path} --no-dev --no-interaction ;
   done
 
-sudo chmod 775 -R ${doc_path}
-sudo chown www-data:${user_name} -R ${doc_path}
-
-for version in {0..2..1}
+for version in {0..1..1}
   do
-    progress_bar ${version} 2 ;
+    progress_bar ${version} 1 ;
+    project_name="varbase${drupal_version}${major_version}${version}";
+    project_path="${doc_path}/${project_name}";
+
+    sudo chmod 775 -R ${project_path}
+    sudo chown www-data:${user_name} -R ${project_path}
+  done
+
+for version in {0..1..1}
+  do
+    progress_bar ${version} 1 ;
     project_name="varbase${drupal_version}${major_version}${version}";
     project_path="${doc_path}/${project_name}";
     full_database_name="${database_prefix}${project_name}";
@@ -69,5 +76,12 @@ for version in {0..2..1}
     drush cr
   done
 
-sudo chmod 775 -R ${doc_path}
-sudo chown www-data:${user_name} -R ${doc_path}
+for version in {0..1..1}
+  do
+    progress_bar ${version} 1 ;
+    project_name="varbase${drupal_version}${major_version}${version}";
+    project_path="${doc_path}/${project_name}";
+
+    sudo chmod 775 -R ${project_path}
+    sudo chown www-data:${user_name} -R ${project_path}
+  done
