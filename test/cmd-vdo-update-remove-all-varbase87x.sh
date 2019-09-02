@@ -11,9 +11,9 @@ eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 
 
-for version in {0..2..1}
+for version in {0..1..1}
   do
-    progress_bar ${version} 2 ;
+    progress_bar ${version} 1 ;
     project_name="varbase${drupal_version}${major_version}${version}";
     project_path="${doc_path}/${doc_name}/${project_name}";
 

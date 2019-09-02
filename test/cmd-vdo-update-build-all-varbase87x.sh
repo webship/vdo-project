@@ -12,10 +12,9 @@ major_version="7";
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 
-
-for version in {0..2..1}
+for version in {0..1..1}
   do
-    progress_bar ${version} 2 ;
+    progress_bar ${version} 1 ;
     project_name="varbase${drupal_version}${major_version}${version}";
     project_path="${doc_path}/${doc_name}/${project_name}";
 
@@ -58,7 +57,6 @@ for version in {0..2..1}
     varbase_development_tools.varbase_development=true ;
 
     drush pm-enable varbase_styleguide --yes
-    drush pm-enable vbp_text_and_image --yes
     drush pm-enable varbase_media_instagram --yes
     drush pm-enable varbase_media_twitter --yes
     drush pm-enable social_auth_google --yes
