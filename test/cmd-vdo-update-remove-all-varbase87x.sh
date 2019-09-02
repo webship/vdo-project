@@ -9,13 +9,11 @@ major_version="7";
 # Load the workspace settings extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
-
-
 for version in {0..1..1}
   do
     progress_bar ${version} 1 ;
     project_name="varbase${drupal_version}${major_version}${version}";
-    project_path="${doc_path}/${doc_name}/${project_name}";
+    project_path="${doc_path}/${project_name}";
 
     if [ -d "${project_path}" ]; then
       sudo rm -rf ${project_path}

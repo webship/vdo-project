@@ -15,7 +15,7 @@ for version in {20..28..1}
   do
     progress_bar ${version} 28 ;
     project_name="varbase${drupal_version}${major_version}${version}";
-    project_path="${doc_path}/${doc_name}/${project_name}";
+    project_path="${doc_path}/${project_name}";
 
     if [ -d "${project_path}" ]; then
       sudo rm -rf ${project_path}

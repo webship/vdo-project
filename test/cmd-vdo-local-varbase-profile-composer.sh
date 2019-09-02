@@ -55,7 +55,7 @@ if [ "$3" != "" ]; then
 fi
 
 # Change directory to the workspace for this full operation.
-cd ${doc_path}/${doc_name};
+cd ${doc_path};
 
 if [ -d "${project_name}" ]; then
   sudo rm -rf ${project_name} -vvv
@@ -65,21 +65,21 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name};" -vvv
 
-cp -r ${vdo_root}/products/varbase ${doc_path}/${doc_name}/${project_name}
+cp -r ${vdo_root}/products/varbase ${doc_path}/${project_name}
 
-rm -rf ${doc_path}/${doc_name}/${project_name}/.git
-cd ${doc_path}/${doc_name}/${project_name}
+rm -rf ${doc_path}/${project_name}/.git
+cd ${doc_path}/${project_name}
 composer install --no-interaction
 
-sudo chmod 775 -R ${doc_path}/${doc_name}/${project_name}
-sudo chown www-data:${user_name} -R ${doc_path}/${doc_name}/${project_name}
+sudo chmod 775 -R ${doc_path}/${project_name}
+sudo chown www-data:${user_name} -R ${doc_path}/${project_name}
 
 echo "${doc_name} ${project_name} is ready to install!!!!";
 echo "Go to ${base_url}";
 
 if $install_site ; then
   # Change directory to the docroot.
-  cd ${doc_path}/${doc_name}/${project_name}/docroot;
+  cd ${doc_path}/${project_name}/docroot;
   # Install Varbase with Drush.
   drush site-install varbase --yes \
     --site-name="${doc_name} ${project_name}" \
@@ -97,7 +97,7 @@ if $install_site ; then
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";
   echo  "Go to ${base_url}";
-  cd ${doc_path}/${doc_name};
+  cd ${doc_path};
   sudo chmod 775 -R ${project_name};
   sudo chown www-data:${user_name} -R ${project_name};
 fi

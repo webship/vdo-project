@@ -55,7 +55,7 @@ if [ "$3" != "" ]; then
 fi
 
 # Change directory to the workspace for this full operation.
-cd ${doc_path}/${doc_name};
+cd ${doc_path};
 
 if [ -d "${project_name}" ]; then
   sudo rm -rf ${project_name} -vvv
@@ -65,14 +65,14 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name};" -vvv
 
-cp -r ${vdo_root}/products/uber_publisher ${doc_path}/${doc_name}/${project_name}
+cp -r ${vdo_root}/products/uber_publisher ${doc_path}/${project_name}
 
-rm -rf ${doc_path}/${doc_name}/${project_name}/.git
-cd ${doc_path}/${doc_name}/${project_name}
+rm -rf ${doc_path}/${project_name}/.git
+cd ${doc_path}/${project_name}
 composer install --no-interaction -vvv
 
-sudo chmod 775 -R ${doc_path}/${doc_name}/${project_name}
-sudo chown www-data:${user_name} -R ${doc_path}/${doc_name}/${project_name}
+sudo chmod 775 -R ${doc_path}/${project_name}
+sudo chown www-data:${user_name} -R ${doc_path}/${project_name}
 
 echo "${doc_name} ${project_name} is ready to install!!!!";
 echo "Go to ${base_url}";

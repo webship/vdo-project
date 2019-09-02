@@ -47,7 +47,7 @@ if [ "$3" != "" ]; then
 fi
 
 # Change directory to the workspace for this full operation.
-cd ${doc_path}/${doc_name};
+cd ${doc_path};
 
 if [ -d "${project_name}" ]; then
   sudo rm -rf ${project_name} -vvv
@@ -67,7 +67,7 @@ echo "Go to ${base_url}";
 
 if $install_site ; then
   # Change directory to the docroot.
-  cd ${doc_path}/${doc_name}/${project_name}/docroot;
+  cd ${doc_path}/${project_name}/docroot;
 
   # Install Varbase with Drush.
   drush site-install varbase --yes \
@@ -100,7 +100,7 @@ if $install_site ; then
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";
   echo  "Go to ${base_url}";
-  cd ${doc_path}/${doc_name};
+  cd ${doc_path};
   sudo chmod 775 -R ${project_name};
   sudo chown www-data:${user_name} -R ${project_name};
 fi
