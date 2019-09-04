@@ -13,11 +13,11 @@ echo "*---------------------------------------------------*";
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
 
-composer create-project thunder/thunder-project thunder --no-interaction --no-install ;
-cd ${vdo_root}/${doc_name}/thunder ;
-composer install ;
-composer drupal:scaffold ;
-cd ${vdo_root}/${doc_name} ;
+if [ -d "${vdo_root}/${doc_name}/thunder" ]; then
+  sudo rm -rf ${vdo_root}/${doc_name}/thunder;
+fi
+
+composer create-project thunder/thunder-project thunder --no-interaction;
 
 full_database_name="${database_prefix}thunder";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};"
