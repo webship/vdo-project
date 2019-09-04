@@ -6,6 +6,12 @@ echo "*---------------------------------------------------*";
 echo "| https://www.drupal.org/project/connect_profile    |";
 echo "*---------------------------------------------------*";
 
+# Bootstrap VDO.
+. ${vdo_scripts}/bootstrap.sh ;
+
+# Load workspace settings and extra lists.
+eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
+
 drush dl connect_profile --drupal-project-rename=connect_profile;
 
 full_database_name="${database_prefix}connect_profile";

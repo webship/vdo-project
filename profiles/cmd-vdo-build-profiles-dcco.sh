@@ -6,6 +6,12 @@ echo "*---------------------------------------------------*";
 echo "| https://www.drupal.org/project/dcco               |";
 echo "*---------------------------------------------------*";
 
+# Bootstrap VDO.
+. ${vdo_scripts}/bootstrap.sh ;
+
+# Load workspace settings and extra lists.
+eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
+
 drush dl dcco-8.x-2.x-dev --drupal-project-rename=dcco;
 
 full_database_name="${database_prefix}dcco";

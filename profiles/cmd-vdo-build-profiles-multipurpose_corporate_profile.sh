@@ -6,6 +6,12 @@ echo "*---------------------------------------------------*";
 echo "| https://www.drupal.org/project/multipurpose_corporate_profile |";
 echo "*---------------------------------------------------*";
 
+# Bootstrap VDO.
+. ${vdo_scripts}/bootstrap.sh ;
+
+# Load workspace settings and extra lists.
+eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
+
 drush dl multipurpose_corporate_profile --drupal-project-rename=multipurpose_corporate_profile;
 
 full_database_name="${database_prefix}multipurpose_corporate_profile";

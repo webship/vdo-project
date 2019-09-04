@@ -6,6 +6,12 @@ echo "*---------------------------------------------------*";
 echo "| https://www.drupal.org/project/splashawards       |";
 echo "*---------------------------------------------------*";
 
+# Bootstrap VDO.
+. ${vdo_scripts}/bootstrap.sh ;
+
+# Load workspace settings and extra lists.
+eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
+
 composer create-project drupalnl/splashawards-project splashawards --no-interaction ;
 
 full_database_name="${database_prefix}splashawards";

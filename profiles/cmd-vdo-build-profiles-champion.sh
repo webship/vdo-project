@@ -6,6 +6,12 @@ echo "*---------------------------------------------------*";
 echo "| https://www.drupal.org/project/champion           |";
 echo "*---------------------------------------------------*";
 
+# Bootstrap VDO.
+. ${vdo_scripts}/bootstrap.sh ;
+
+# Load workspace settings and extra lists.
+eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
+
 drush dl champion --drupal-project-rename=champion;
 
 full_database_name="${database_prefix}champion";

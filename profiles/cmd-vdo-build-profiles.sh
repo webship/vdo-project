@@ -11,12 +11,14 @@ eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
 # Delete old profiles.
 for profile_name in "${profiles[@]}"
 do
+  cd ${vdo_root}/${doc_name} ;
   sudo rm -rf ${vdo_root}/profiles/${profile_name};
 done
 
 # Build all profiles in the profiles list.
 for profile_name in "${profiles[@]}"
 do
+  cd ${vdo_root}/${doc_name} ;
   . cmd-vdo-build-profiles-${profile_name}.sh;
 done
 
