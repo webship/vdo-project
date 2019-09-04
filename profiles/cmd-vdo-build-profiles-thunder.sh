@@ -6,7 +6,7 @@ echo "*---------------------------------------------------*";
 echo "| https://www.drupal.org/project/thunder            |";
 echo "*---------------------------------------------------*";
 
-composer create-project burdamagazinorg/thunder-project thunder --no-interaction;
+composer create-project thunder/thunder-project thunder --no-interaction --no-install ;
 
 full_database_name="${database_prefix}thunder";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};"
