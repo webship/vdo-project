@@ -10,7 +10,7 @@ major_version="7";
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 
-for version in {0..1..4}
+for version in {0..4..1}
   do
     progress_bar ${version} 4 ;
     project_name="varbase${drupal_version}${major_version}${version}";

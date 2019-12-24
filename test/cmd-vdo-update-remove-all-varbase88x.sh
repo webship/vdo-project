@@ -9,7 +9,7 @@ major_version="8";
 # Load the workspace settings extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
-for version in {0..1..0}
+for version in {0..0..1}
   do
     progress_bar ${version} 0 ;
     project_name="varbase${drupal_version}${major_version}${version}";

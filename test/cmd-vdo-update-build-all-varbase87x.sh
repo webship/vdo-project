@@ -12,7 +12,7 @@ major_version="7";
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 
-for version in {0..1..4}
+for version in {0..4..1}
   do
     progress_bar ${version} 4 ;
     project_name="varbase${drupal_version}${major_version}${version}";
@@ -29,7 +29,7 @@ for version in {0..1..4}
     composer create-project vardot/varbase-project:${drupal_version}.${major_version}.${version} ${project_path} --no-dev --no-interaction ;
   done
 
-for version in {0..1..4}
+for version in {0..4..1}
   do
     progress_bar ${version} 4 ;
     project_name="varbase${drupal_version}${major_version}${version}";
@@ -39,7 +39,7 @@ for version in {0..1..4}
     sudo chown www-data:${user_name} -R ${project_path}
   done
 
-for version in {0..1..4}
+for version in {0..4..1}
   do
     progress_bar ${version} 4 ;
     project_name="varbase${drupal_version}${major_version}${version}";
@@ -76,7 +76,7 @@ for version in {0..1..4}
     drush cr
   done
 
-for version in {0..1..4}
+for version in {0..4..1}
   do
     progress_bar ${version} 4 ;
     project_name="varbase${drupal_version}${major_version}${version}";
