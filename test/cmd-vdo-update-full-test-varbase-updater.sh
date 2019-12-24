@@ -8,6 +8,17 @@ eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 # Full test varbase updater for all varbase versions.
 
+# Full test update all varbase 8.8.x to the latest
+# We run 1 time.
+# one from 8.8.* to 8.8.latest
+# This will test if the site is the latest. 
+. cmd-vdo-update-remove-all-varbase88x.sh
+cd ${doc_path} ;
+. cmd-vdo-update-build-all-varbase88x.sh
+cd ${doc_path} ;
+. cmd-vdo-update-varbase-sh-to-all-varbase88x.sh
+cd ${doc_path} ;
+
 # Full test update all varbase 8.7.x to the latest
 # We run 1 time.
 # one from 8.7.* to 8.7.latest
