@@ -24,10 +24,21 @@
       "composer/installers": "^1.0",
       "cweagans/composer-patches": "^1.0",
       "drupal/core-composer-scaffold": "^8.8",
-      "drupal/core-project-message": "^8.8",
+      "drupal/core-recommended": "^8.8",
+      "webship/vdo": "8.1.x-dev"
+    },
+    "require-dev": {
       "drupal/console": "^1.0",
       "drush/drush": "^9.0",
-      "webship/vdo": "8.1.x-dev"
+      "drupal/drupal-extension": "~3.0",
+      "behat/behat": "~3.0",
+      "behat/mink": "~1.0",
+      "behat/mink-extension": "~2.0",
+      "behat/mink-goutte-driver": "~1.0",
+      "behat/mink-zombie-driver": "~1.0",
+      "behat/mink-selenium2-driver": "~1.0",
+      "behatch/contexts": "~3.0",
+      "emuse/behat-html-formatter": "^0.2.0"
     },
     "conflict": {
       "drupal/drupal": "*"
