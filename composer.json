@@ -25,12 +25,7 @@
         "cweagans/composer-patches": "^1.0",
         "drupal/core-composer-scaffold": "^8.8",
         "drupal/core-project-message": "^8.8",
-        "drupal/core-recommended": "^8.8",
-        "drupal/console": "^1.0",
-        "drush/drush": "^9.0",
         "webship/vdo": "8.1.x-dev"
-    },
-    "require-dev": {
     },
     "conflict": {
         "drupal/drupal": "*"
