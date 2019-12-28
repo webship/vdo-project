@@ -1,51 +1,98 @@
-language: php
 dist: trusty
-sudo: false
+
+language: php
+cache:
+  bundler: true
+  directories:
+    - "$HOME/.composer/cache"
+    - "$HOME/.drush/cache"
+    - "$HOME/.npm"
+    - "$HOME/.selenium/cache"
 
 php:
-  - 5.6
-  - 7.0
   - 7.1
   - 7.2
+  - 7.3
 
-env:
-  global:
-    - SIMPLETEST_DB=sqlite://tmp/site.sqlite
-    - SIMPLETEST_BASE_URL="http://127.0.0.1:8080"
-  matrix:
-    - RELEASE=stable COMPOSER_CHANNEL=stable
-    - RELEASE=dev COMPOSER_CHANNEL=stable
-    - RELEASE=stable COMPOSER_CHANNEL=snapshot
-
-matrix:
-  exclude:
-    - php: 5.6
-      env: RELEASE=dev COMPOSER_CHANNEL=stable
-    - php: 5.6
-      env: RELEASE=stable COMPOSER_CHANNEL=snapshot
+mysql:
+  database: test_vdo
+  username: root
+  encoding: utf8
 
 before_install:
-  - if [[ $TRAVIS_PHP_VERSION = 5.6 ]]; then export COMPOSER_MEMORY_LIMIT=-1; fi;
-  - echo 'sendmail_path = /bin/true' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-  - phpenv config-rm xdebug.ini
-  - composer --verbose self-update --$COMPOSER_CHANNEL
+  - composer self-update
   - composer --version
 
-install:
-  - composer --verbose validate
-  - composer --verbose install
+  # Composer Configurations.
+  - export PATH="$HOME/.composer/vendor/bin:$TRAVIS_BUILD_DIR/bin:$PATH"
+  - export COMPOSER_EXIT_ON_PATCH_FAILURE=1
 
+  # MySQL Configurations.
+  - mysql -e 'SET GLOBAL wait_timeout = 5400;'
+  - mysql -e "SHOW VARIABLES LIKE 'wait_timeout'"
+
+  # PHP Configurations.
+  - echo 'max_execution_time = 1200' >> vdo.php.ini;
+  - echo 'max_input_time = 180' >> vdo.php.ini;
+  - echo 'max_input_vars = 10000' >> vdo.php.ini;
+  - echo 'memory_limit = 2000M' >> vdo.php.ini;
+  - echo 'error_reporting = E_ALL' >> vdo.php.ini;
+  - echo 'post_max_size = 64M' >> vdo.php.ini;
+  - echo 'upload_max_filesize = 32M' >> vdo.php.ini;
+  - echo 'max_file_uploads = 40' >> vdo.php.ini;
+  - echo 'sendmail_path = /bin/true' >> vdo.php.ini;
+  - phpenv config-add vdo.php.ini
+  - phpenv rehash
+
+  # Configure and run the virtual display.
+  - export DISPLAY=:99
+  - sh -e /etc/init.d/xvfb start
+  - Xvfb :99 -ac -screen 0 1366x768x24 &>/dev/null &
+  - sleep 3
+
+  # Download Latest Chrome Driver.
+  - CHROME_DRIVER_VERSION=$(wget -qO- chromedriver.storage.googleapis.com/LATEST_RELEASE);
+  - echo $CHROME_DRIVER_VERSION;
+  - wget http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
+  - unzip chromedriver_linux64.zip
+  - chmod +x chromedriver
+  - mkdir -p $HOME/.composer/vendor/bin
+  - mv -f chromedriver $HOME/.composer/vendor/bin/
+  - rm chromedriver_linux64.zip
+
+  # Update to latest Chrome browser.
+  - export CHROME_BIN=/usr/bin/google-chrome
+  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo apt-get clean
+  - sudo apt-get update
+  - sudo apt-get install dpkg
+  - sudo dpkg -i google-chrome-stable_current_amd64.deb
+  - rm google-chrome-stable_current_amd64.deb
+  - google-chrome --version
+
+  # Run selenium standalone server.
+  - SELENIUM="$HOME/.selenium/cache/selenium-server-standalone-2.53.1.jar";
+  - if [[ ! -f $SELENIUM ]]; then wget -O $SELENIUM http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar; fi
+  - java -jar $SELENIUM -port 4445 > /dev/null 2>&1 &
+  - echo "[  OK  ] Starting Selenium on the 4445 port ..."
+install:
+  - git checkout $TRAVIS_COMMIT
+  ## Build with the composer.
+  - composer install --no-interaction
+
+  ## Install with drush.
+  - cd web
+  - drush site-install vdo --yes --site-name='VDO' --account-name=admin --account-pass=dD.123123ddd --account-mail=vdo@webship.org --db-url="mysql://root:@localhost/test_vdo" 
+  - drush config-set system.performance css.preprocess 0 --yes
+  - drush config-set system.performance js.preprocess 0 --yes
+  - drush config-set system.logging error_level all --yes
+  - drush cr
+before_script:
+  - drush runserver --default-server=builtin 8080 &>/dev/null &
+  - sleep 5
 script:
-  - if [[ $RELEASE = dev ]]; then composer --verbose remove --no-update drupal/console; fi;
-  - if [[ $RELEASE = dev ]]; then composer --verbose require --no-update drupal/core:8.7.x-dev webflo/drupal-core-require-dev:8.7.x-dev; fi;
-  - if [[ $RELEASE = dev ]]; then composer --verbose update; fi;
-  - cd $TRAVIS_BUILD_DIR/web
-  - ./../vendor/bin/drush site-install --verbose --yes --db-url=sqlite://tmp/site.sqlite
-  - ./../vendor/bin/drush runserver $SIMPLETEST_BASE_URL &
-  - until curl -s $SIMPLETEST_BASE_URL; do true; done > /dev/null
-  # Skip core/tests/Drupal/Tests/ComposerIntegrationTest.php because web/ has no composer.json
-  # Ignore PageCache group temporarily, @see https://www.drupal.org/node/2770673
-  # Ignore Setup group temporarily, @see https://www.drupal.org/node/2962157
-  - ./../vendor/bin/phpunit -c core --testsuite unit --exclude-group Composer,DependencyInjection,PageCache,Setup
-  - ./../vendor/bin/drush
-  - if [[ $RELEASE = stable ]]; then ./../vendor/bin/drupal; fi;
+  - cd ./profiles/vdo
+  - behat --strict tests/features/vdo
+
+matrix:
+  fast_finish: true
