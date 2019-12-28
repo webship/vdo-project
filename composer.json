@@ -4,73 +4,73 @@
     "type": "project",
     "license": "GPL-2.0-or-later",
     "authors": [
-        {
-          "name": "Webship",
-          "homepage": "https://github.com/webship",
-          "role": "Maintainer"
-        }
+      {
+        "name": "Webship",
+        "homepage": "https://github.com/webship",
+        "role": "Maintainer"
+      }
     ],
     "support": {
       "issues": "http://drupal.org/project/issues/vdo",
       "source": "http://cgit.drupalcode.org/vdo"
     },
     "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        }
+      {
+        "type": "composer",
+        "url": "https://packages.drupal.org/8"
+      }
     ],
     "require": {
-        "composer/installers": "^1.0",
-        "cweagans/composer-patches": "^1.0",
-        "drupal/core-composer-scaffold": "^8.8",
-        "drupal/core-project-message": "^8.8",
-        "drupal/console": "^1.0",
-        "drush/drush": "^9.0",
-        "webship/vdo": "8.1.x-dev"
+      "composer/installers": "^1.0",
+      "cweagans/composer-patches": "^1.0",
+      "drupal/core-composer-scaffold": "^8.8",
+      "drupal/core-project-message": "^8.8",
+      "drupal/console": "^1.0",
+      "drush/drush": "^9.0",
+      "webship/vdo": "8.1.x-dev"
     },
     "conflict": {
-        "drupal/drupal": "*"
+      "drupal/drupal": "*"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "bin-dir": "bin/",
-        "secure-http": false,
-        "preferred-install": {
-          "drupal/core": "dist"
-        },
-        "sort-packages": true
+      "bin-dir": "bin/",
+      "secure-http": false,
+      "preferred-install": {
+        "drupal/core": "dist"
+      },
+      "sort-packages": true
     },
     "extra": {
-        "drupal-scaffold": {
-            "locations": {
-                "web-root": "web/"
-            }
-        },
-        "enable-patching": true,
-        "composer-exit-on-patch-failure": true,
-        "patchLevel": {
-          "drupal/core": "-p2"
-        },
-        "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/profiles/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
-            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
-            "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
-        },
-        "drupal-core-project-message": {
-            "include-keys": ["homepage", "support"],
-            "post-create-project-cmd-message": [
-                "<bg=blue;fg=white>                                                                                </>",
-                "<bg=blue;fg=white>  Congratulations, you’ve installed the VDO codebase                            </>",
-                "<bg=blue;fg=white>  from the webship/vdo-project template!                                        </>",
-                "<bg=blue;fg=white>                                                                                </>"
-            ]
-        }
+      "drupal-scaffold": {
+          "locations": {
+              "web-root": "web/"
+          }
+      },
+      "enable-patching": true,
+      "composer-exit-on-patch-failure": true,
+      "patchLevel": {
+        "drupal/core": "-p2"
+      },
+      "installer-paths": {
+          "web/core": ["type:drupal-core"],
+          "web/libraries/{$name}": ["type:drupal-library"],
+          "web/modules/contrib/{$name}": ["type:drupal-module"],
+          "web/profiles/{$name}": ["type:drupal-profile"],
+          "web/themes/contrib/{$name}": ["type:drupal-theme"],
+          "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+          "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+          "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
+      },
+      "drupal-core-project-message": {
+          "include-keys": ["homepage", "support"],
+          "post-create-project-cmd-message": [
+              "<bg=blue;fg=white>                                                                                </>",
+              "<bg=blue;fg=white>  Congratulations, you’ve installed the VDO codebase                            </>",
+              "<bg=blue;fg=white>  from the webship/vdo-project template!                                        </>",
+              "<bg=blue;fg=white>                                                                                </>"
+          ]
+      }
     }
 }
