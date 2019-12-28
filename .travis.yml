@@ -79,6 +79,7 @@ install:
   - git checkout $TRAVIS_COMMIT
   ## Build with the composer.
   - composer install --no-interaction
+  - echo $PWD
 
   ## Install with drush.
   - cd web
@@ -91,7 +92,8 @@ before_script:
   - drush runserver --default-server=builtin 8080 &>/dev/null &
   - sleep 5
 script:
-  - cd web/profiles/vdo
+  - echo $PWD
+  - cd $HOME/web/profiles/vdo
   - behat --strict tests/features/vdo
 
 matrix:
