@@ -91,8 +91,8 @@ before_script:
   - drush runserver --default-server=builtin 8080 &>/dev/null &
   - sleep 5
 script:
-  - cd /home/travis/build/webship/vdo-project/web/profiles/vdo
-  - ../../../bin/behat --strict tests/features/vdo
+  - cd /home/travis/build/webship/vdo-project/web/profiles/vdo/
+  - ../../../bin/behat tests/features/vdo/
 
 matrix:
   fast_finish: true
