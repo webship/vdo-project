@@ -79,6 +79,7 @@ install:
   - git checkout $TRAVIS_COMMIT
   ## Build with the composer.
   - composer install --no-interaction
+  - composer require "drush/drush:@stable" "drupal/coder:@stable" "drupal/drupal-extension:@stable" "phing/phing:@stable" "behat/behat:@stable" "behat/mink:@stable" "behat/mink-extension:@stable" "behat/mink-goutte-driver:@stable" "behat/mink-zombie-driver:@stable" "behat/mink-selenium2-driver:@stable" "behatch/contexts:@stable" "emuse/behat-html-formatter:@stable"
 
   ## Install with drush.
   - cd web
@@ -92,7 +93,7 @@ before_script:
   - sleep 5
 script:
   - cd /home/travis/build/webship/vdo-project/web/profiles/vdo/
-  - /home/travis/build/webship/vdo-project/bin/behat tests/features/vdo/
+  - ../../../bin/behat tests/features/vdo/
 
 matrix:
   fast_finish: true
