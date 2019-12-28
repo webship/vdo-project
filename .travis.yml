@@ -80,8 +80,8 @@ install:
   - git checkout $TRAVIS_COMMIT
   ## Build with the composer.
   - composer install --no-interaction
-  - composer require "drupal/coder:@stable" "drupal/drupal-extension:@stable" "behat/behat:@stable" "behat/mink:@stable" "behat/mink-extension:@stable" "behat/mink-goutte-driver:@stable" "behat/mink-zombie-driver:@stable" "behat/mink-selenium2-driver:@stable" "behatch/contexts:@stable" "emuse/behat-html-formatter:@stable"
-
+  - composer require "drupal/console:^1.0" "drush/drush:^9.0" "drupal/coder:@stable" "drupal/drupal-extension:@stable" "behat/behat:@stable" "behat/mink:@stable" "behat/mink-extension:@stable" "behat/mink-goutte-driver:@stable" "behat/mink-zombie-driver:@stable" "behat/mink-selenium2-driver:@stable" "behatch/contexts:@stable" "emuse/behat-html-formatter:@stable"
+        
   ## Install with drush.
   - cd web
   - drush site-install vdo --yes --site-name='VDO' --account-name=admin --account-pass=dD.123123ddd --account-mail=vdo@webship.org --db-url="mysql://root:@localhost/test_vdo" 
