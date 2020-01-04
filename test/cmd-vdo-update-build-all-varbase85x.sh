@@ -48,21 +48,9 @@ for version in {0..5..1}
     full_database_name="${database_prefix}${project_name}";
 
     cd ${project_path}/docroot ;
-    drush site-install varbase --yes \
-    --site-name=${project_name} \
-    --account-name=${account_name} \
-    --account-pass="${account_pass}" \
-    --account-mail="${account_mail}" \
-    --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" \
-    varbase_multilingual_configuration.enable_multilingual=true \
-    varbase_extra_components.vmi=true \
-    varbase_extra_components.varbase_heroslider_media=true \
-    varbase_extra_components.varbase_carousels=true \
-    varbase_extra_components.varbase_search=true \
-    varbase_extra_components.varbase_blog=true \
-    varbase_extra_components.varbase_auth=true \
-    varbase_development_tools.varbase_development=true ;
+    drush site-install varbase --yes --site-name=${project_name} --account-name=${account_name} --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider_media=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true
 
+    drush pm-enable varbase_development --yes 
     drush pm-enable varbase_styleguide --yes
     drush pm-enable vbp_text_and_image --yes
     drush pm-enable varbase_media_instagram --yes
