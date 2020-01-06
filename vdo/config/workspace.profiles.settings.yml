@@ -6,6 +6,10 @@ web:
 database:
   prefix: profiles_
 profiles:
+  - drupal_standard
+  - drupal_minimal
+  - drupal_demo_umami
+  - varbase
   - lightning
   - thunder
   - social
