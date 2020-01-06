@@ -10,14 +10,16 @@ profiles:
   - drupal_minimal
   - drupal_demo_umami
   - varbase
+  - vardoc
+  - uber_publisher
+  - webship
+  - cucumber
+  - vdo
   - lightning
   - thunder
   - social
   - opigno_lms
   - panopoly
-  - webship
-  - cucumber
-  - vdo
   - droopler
   - openedu
   - openfed
