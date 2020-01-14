@@ -41,7 +41,7 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name};" -vvv
 
-composer create-project drupal-composer/drupal-project:8.x-dev ${project_name} --no-interaction ;
+composer create-project drupal/recommended-project ${project_name} --no-interaction ;
 
 sudo chmod 775 -R ${project_name}
 sudo chown www-data:${user_name} -R ${project_name}
