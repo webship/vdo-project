@@ -21,24 +21,13 @@
       }
     ],
     "require": {
-      "composer/installers": "^1.0",
-      "cweagans/composer-patches": "^1.0",
-      "drupal/core-composer-scaffold": "^8.8",
-      "drupal/core-recommended": "^8.8",
-      "webship/vdo": "8.1.x-dev"
+      "composer/installers": "^1.2",
+      "drupal/core-composer-scaffold": "^9",
+      "drupal/core-project-message": "^9",
+      "drupal/core-recommended": "^9"
     },
     "require-dev": {
-      "drupal/console": "^1.0",
-      "drush/drush": "^9.0",
-      "drupal/drupal-extension": "~3.0",
-      "behat/behat": "~3.0",
-      "behat/mink": "~1.0",
-      "behat/mink-extension": "~2.0",
-      "behat/mink-goutte-driver": "~1.0",
-      "behat/mink-zombie-driver": "~1.0",
-      "behat/mink-selenium2-driver": "~1.0",
-      "behatch/contexts": "~3.0",
-      "emuse/behat-html-formatter": "^0.2.0"
+      "drupal/core-dev": "^9"
     },
     "conflict": {
       "drupal/drupal": "*"
@@ -55,24 +44,22 @@
     },
     "extra": {
       "drupal-scaffold": {
-          "locations": {
-              "web-root": "web/"
-          }
+        "locations": {
+          "web-root": "web/"
+        }
       },
-      "enable-patching": true,
-      "composer-exit-on-patch-failure": true,
-      "patchLevel": {
-        "drupal/core": "-p2"
+      "branch-alias": {
+        "dev-8.x-1.x": "8.1.x-dev"
       },
       "installer-paths": {
-          "web/core": ["type:drupal-core"],
-          "web/libraries/{$name}": ["type:drupal-library"],
-          "web/modules/contrib/{$name}": ["type:drupal-module"],
-          "web/profiles/{$name}": ["type:drupal-profile"],
-          "web/themes/contrib/{$name}": ["type:drupal-theme"],
-          "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
-          "web/modules/custom/{$name}": ["type:drupal-custom-module"],
-          "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
+        "web/core": ["type:drupal-core"],
+        "web/libraries/{$name}": ["type:drupal-library"],
+        "web/modules/contrib/{$name}": ["type:drupal-module"],
+        "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+        "web/themes/contrib/{$name}": ["type:drupal-theme"],
+        "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+        "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+        "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
       },
       "drupal-core-project-message": {
         "include-keys": ["homepage", "support"],
