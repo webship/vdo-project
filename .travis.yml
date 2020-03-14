@@ -92,7 +92,7 @@ before_script:
   - sleep 5
 script:
   - cd /home/travis/build/webship/vdo-project/web/profiles/contrib/vdo/
-  - ../../../bin/behat tests/features/vdo/
+  - ../../../../bin/behat tests/features/vdo/
 
 matrix:
   fast_finish: true
