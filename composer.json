@@ -28,7 +28,6 @@
       "webship/vdo": "8.1.x-dev"
     },
     "require-dev": {
-      "drupal/core-dev": "^8.8.0",
       "drupal/console": "^1.0",
       "drush/drush": "^9.0",
       "drupal/drupal-extension": "~3.0",
