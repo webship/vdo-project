@@ -78,11 +78,11 @@ before_install:
 install:
   - git checkout $TRAVIS_COMMIT
   ## Build with the composer.
-  - composer install --no-interaction
+  - composer install --no-interaction --vvv
 
   ## Install with drush.
   - cd web
-  - drush site-install vdo --yes --site-name='VDO' --account-name=admin --account-pass=dD.123123ddd --account-mail=vdo@webship.org --db-url="mysql://root:@localhost/test_vdo" 
+  - drush site-install vdo --yes --site-name='VDO' --account-name=admin --account-pass=dD.123123ddd --account-mail=admin@webship.org --db-url="mysql://root:@localhost/test_vdo" 
   - drush config-set system.performance css.preprocess 0 --yes
   - drush config-set system.performance js.preprocess 0 --yes
   - drush config-set system.logging error_level all --yes
@@ -91,7 +91,7 @@ before_script:
   - drush runserver --default-server=builtin 8080 &>/dev/null &
   - sleep 5
 script:
-  - cd /home/travis/build/webship/vdo-project/web/profiles/vdo/
+  - cd /home/travis/build/webship/vdo-project/web/profiles/contrib/vdo/
   - ../../../bin/behat tests/features/vdo/
 
 matrix:
