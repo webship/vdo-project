@@ -5,21 +5,30 @@
     "license": "GPL-2.0-or-later",
     "authors": [
       {
+        "name": "Vardot",
+        "homepage": "https://www.drupal.org/vardot",
+        "role": "Initial building, ongoing maintenance and development"
+      },
+      {
         "name": "Webship",
-        "homepage": "https://github.com/webship",
-        "role": "Maintainer"
+        "homepage": "https://www.drupal.org/webship",
+        "role": "Volunteer contributions"
       }
     ],
     "support": {
       "issues": "http://drupal.org/project/issues/vdo",
       "source": "http://cgit.drupalcode.org/vdo"
     },
-    "repositories": [
-      {
+    "repositories": {
+      "drupal": {
         "type": "composer",
         "url": "https://packages.drupal.org/8"
+      },
+      "assets": {
+        "type": "composer",
+        "url": "https://asset-packagist.org"
       }
-    ],
+    },
     "require": {
       "composer/installers": "^1.2",
       "drupal/core-composer-scaffold": "^8.8.0",
@@ -27,12 +36,8 @@
       "drupal/core-recommended": "^8.8.0",
       "webship/vdo": "8.1.x-dev"
     },
-    "require-dev": {
-      "drupal/core-dev": "^8.8.0",
-      "drupal/console": "^1.0",
-      "drush/drush": "^9.0",
-      "behat/behat": "~3.0",
-      "drupal/drupal-extension": "^3.2"
+    "replace": {
+      "ajaxorg/ace-builds": "*"
     },
     "conflict": {
       "drupal/drupal": "*"
@@ -53,18 +58,30 @@
           "web-root": "web/"
         }
       },
-      "branch-alias": {
-        "dev-8.x-1.x": "8.1.x-dev"
-      },
+      "installer-types": [
+        "bower-asset",
+        "npm-asset"
+      ],
       "installer-paths": {
         "web/core": ["type:drupal-core"],
-        "web/libraries/{$name}": ["type:drupal-library"],
+        "web/profiles/{$name}": ["type:drupal-profile"],
         "web/modules/contrib/{$name}": ["type:drupal-module"],
-        "web/profiles/contrib/{$name}": ["type:drupal-profile"],
         "web/themes/contrib/{$name}": ["type:drupal-theme"],
-        "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+        "web/libraries/ace": ["npm-asset/ace-builds"],
+        "web/libraries/{$name}": [
+          "type:drupal-library",
+          "type:bower-asset",
+          "type:npm-asset"
+        ],
         "web/modules/custom/{$name}": ["type:drupal-custom-module"],
-        "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
+        "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
+        "drush/contrib/{$name}": ["type:drupal-drush"]
+      },
+      "drupal-libraries": {
+        "library-directory": "web/libraries",
+        "libraries": [
+          {"name": "ace", "package": "npm-asset/ace-builds"}
+        ]
       },
       "drupal-core-project-message": {
         "include-keys": ["homepage", "support"],
