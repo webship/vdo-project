@@ -15,8 +15,8 @@ else
 fi
 
 cd ${vdo_root}/${doc_name}/
-composer create-project vardot/varbase-project:8.7.x-dev varbase6c --stability dev --no-interaction
-cd ${vdo_root}/${doc_name}/varbase6c/
+composer create-project vardot/varbase-project:9.0.x-dev varbase9c --stability dev --no-interaction
+cd ${vdo_root}/${doc_name}/varbase8c/
 composer require 'drupal/varbase_reports:6.x-dev' \
                   'drupal/varbase_media_header:7.x-dev' \
                   'vardot/varbase_vmi_demo:dev-8.x-7.x' \
@@ -26,14 +26,14 @@ composer require 'drupal/varbase_reports:6.x-dev' \
 
 
 sudo chmod 775 -R .;sudo chown www-data:${user} -R .;
-cd ${vdo_root}/${doc_name}/varbase6c/docroot
+cd ${vdo_root}/${doc_name}/varbase9c/docroot
 
 drush site-install varbase --yes \
-  --site-name="dev Varbase7" \
+  --site-name="dev Varbase9" \
   --account-name="${account_name}" \
   --account-pass="${account_pass}" \
   --account-mail="${account_mail}" \
-  --db-url="mysql://${database_username}:${database_passeord}@${database_host}/dev_varbase6c" \
+  --db-url="mysql://${database_username}:${database_passeord}@${database_host}/dev_varbase9c" \
   varbase_multilingual_configuration.enable_multilingual=1 \
   varbase_extra_components.vmi=1 \
   varbase_extra_components.varbase_heroslider_media=1 \

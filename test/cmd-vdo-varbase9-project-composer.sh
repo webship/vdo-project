@@ -4,17 +4,16 @@
 . ${vdo_scripts}/bootstrap.sh ;
 
 # Load workspace settings and extra lists.
-eval $(parse_yaml ${vdo_config}/workspace.dev.settings.yml);
+eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
-# Change with the version of Varbase 8.5.x-dev
-site_version="8.6.x-dev";
-# Change with the version of Varbase 85DEV
-site_version_code="86DEV";
+# Change with the version of Varbase 9.0.x-dev, 9.0.0
+site_version="9.0.x-dev";
+# Change with the version of Varbase 90DEV
+site_version_code="90DEV";
 
 
 # Change to true if you want to install varbase.
 install_site=false;
-
 
 base_url="${web_url}/${project_name}";
 
@@ -31,15 +30,6 @@ if [ "$2" != "" ]; then
   if [ "$2" == "install" ]; then
     install_site=true;
   fi
-
-  if [ "$2" == "no-install" ]; then
-    install_site=false;
-  fi
-fi
-
-# Get varbase version;
-if [ "$3" != "" ]; then
-  site_version="$3";
 fi
 
 # Change directory to the workspace for this full operation.
@@ -53,7 +43,7 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name};" -vvv
 
-composer create-project vardot/varbase:${site_version} ${project_name} --stability dev --no-interaction -vvv
+composer create-project vardot/varbase-project:${site_version} ${project_name} --stability dev --no-interaction -vvv
 
 sudo chmod 775 -R ${project_name}
 sudo chown www-data:${user_name} -R ${project_name}

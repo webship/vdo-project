@@ -6,15 +6,14 @@
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.dev.settings.yml);
 
-# Change with the version of Varbase 8.5.x-dev, 8.5.
-site_version="8.6.x-dev";
-# Change with the version of Varbase 85DEV
-site_version_code="86DEV";
+# Change with the version of Varbase 9.0.x-dev, 9.0.0
+site_version="9.0.x-dev";
+# Change with the version of Varbase 90DEV
+site_version_code="90DEV";
 
 
 # Change to true if you want to install varbase.
 install_site=false;
-
 
 base_url="${web_url}/${project_name}";
 
