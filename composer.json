@@ -31,9 +31,8 @@
     },
     "require": {
       "composer/installers": "^1.2",
-      "drupal/core-composer-scaffold": "^8.8.0",
-      "drupal/core-project-message": "^8.8.0",
-      "drupal/core-recommended": "^8.8.0",
+      "drupal/core-composer-scaffold": "^9",
+      "drupal/core-project-message": "^9",
       "webship/vdo": "8.1.x-dev"
     },
     "replace": {
