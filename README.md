@@ -1,7 +1,7 @@
 # VDO Project
 
 The Visual Distribution Operator (VDO) management system helps
- Drupal 8 distribution maintainers manage the base code and logic
+ distribution maintainers manage the base code and logic
  for the work cycle of development with number of workspaces for
  custom profiles, sub-profiles on local development machines or servers.
 
@@ -21,7 +21,7 @@ for your setup.
 After that you can create the project:
 
 ```
-composer create-project webship/vdo-project:8.1.x-dev /var/www/html --stability dev --no-interaction
+composer create-project webship/vdo-project:9.0.x-dev /var/www/html --stability dev --no-interaction
 ```
 
 ## Constructing your Linux development computer or servers with:
