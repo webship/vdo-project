@@ -4,7 +4,7 @@
 . ${vdo_scripts}/bootstrap.sh ;
 
 # Load workspace settings and extra lists.
-eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
+eval $(parse_yaml ${vdo_config}/workspace.dev.settings.yml);
 
 # Change with the version of Varbase 9.0.x-dev, 9.0.0
 site_version="9.0.x-dev";
