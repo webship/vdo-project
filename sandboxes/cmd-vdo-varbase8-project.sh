@@ -7,13 +7,14 @@
 eval $(parse_yaml ${vdo_config}/workspace.sandboxes.settings.yml);
 
 # Change with the version of Varbase 8.4.x-dev, 8.4.05, 8.4.06, 8.4.07
-site_version="8.6.x-dev";
+site_version="8.8.x-dev";
 # Change with the version of Varbase 84DEV, 8405, 8406, 8407
-site_version_code="86DEV";
+site_version_code="88DEV";
 
 
 # Change to true if you want to install varbase.
 install_site=false;
+
 
 
 base_url="${web_url}";

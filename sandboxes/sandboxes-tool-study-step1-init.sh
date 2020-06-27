@@ -13,26 +13,26 @@ echo "-----------------------------------------------------";
 cd ${vdo_backups}/${doc_name}/;
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test1";
+echo "Varbase 8.x-8.x-dev varbase8c1";
 echo "-----------------------------------------------------";
-bash cmd-vdo-varbase7-project-composer.sh varbase7test1;
+bash cmd-vdo-varbase8-project.sh varbase8c1;
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test2";
+echo "Varbase 8.x-8.x-dev varbase8c2";
 echo "-----------------------------------------------------";
-bash cmd-vdo-varbase7-project-composer.sh varbase7test2;
+bash cmd-vdo-varbase8-project.sh varbase8c2;
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test3";
+echo "Varbase 8.x-8.x-dev varbase8c3";
 echo "-----------------------------------------------------";
-bash cmd-vdo-varbase7-project-composer.sh varbase7test3;
+bash cmd-vdo-varbase7-project.sh varbase8c3;
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test4";
+echo "Varbase 8.x-8.x-dev varbase8c4";
 echo "-----------------------------------------------------";
-bash cmd-vdo-varbase7-project-composer.sh varbase7test4;
+bash cmd-vdo-varbase7-project.sh varbase8c4;
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test5";
+echo "Varbase 8.x-7.x-dev varbase8c5";
 echo "-----------------------------------------------------";
-bash cmd-vdo-varbase7-project-composer.sh varbase7test5;
+bash cmd-vdo-varbase8-project.sh varbase8c5;

@@ -7,31 +7,31 @@
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test1";
+echo "Varbase 8.x-7.x-dev varbase8c1";
 echo "-----------------------------------------------------";
-cd ${vdo_root}/${doc_name}/varbase7test1/docroot/;
+cd ${vdo_root}/${doc_name}/varbase8c1/docroot/;
 drush updb;
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test2";
+echo "Varbase 8.x-7.x-dev varbase8c2";
 echo "-----------------------------------------------------";
-cd ${vdo_root}/${doc_name}/varbase7test2/docroot/;
+cd ${vdo_root}/${doc_name}/varbase8c2/docroot/;
 drush updb;
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test3";
+echo "Varbase 8.x-7.x-dev varbase8c3";
 echo "-----------------------------------------------------";
-cd ${vdo_root}/${doc_name}/varbase7test3/docroot/;
+cd ${vdo_root}/${doc_name}/varbase8c3/docroot/;
 drush updb;
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test4";
+echo "Varbase 8.x-7.x-dev varbase8c4";
 echo "-----------------------------------------------------";
-cd ${vdo_root}/${doc_name}/varbase7test4/docroot/;
+cd ${vdo_root}/${doc_name}/varbase8c4/docroot/;
 drush updb;
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test5";
+echo "Varbase 8.x-7.x-dev varbase8c5";
 echo "-----------------------------------------------------";
-cd ${vdo_root}/${doc_name}/varbase7test5/docroot/;
+cd ${vdo_root}/${doc_name}/varbase8c5/docroot/;
 drush updb;

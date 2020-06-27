@@ -7,62 +7,57 @@
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test1";
+echo "Varbase 8.x-7.x-dev varbase8c1";
 echo "-----------------------------------------------------";
-cd ${vdo_root}/${doc_name}/varbase7test1;
+cd ${vdo_root}/${doc_name}/varbase8c1;
 composer require 'drupal/varbase_reports:6.x-dev' \
                   'drupal/varbase_media_header:7.x-dev' \
-                  'vardot/varbase_vmi_demo:dev-8.x-7.x' \
-                  'vardot/varbase_story_demo:dev-8.x-7.x' \
-                  'drupal/varbase_faqs:6.x-dev' \
-                  'drupal/varbase_layout_builder:1.x-dev' ;
+                  'vardot/varbase_vmi_demo:dev-8.x-8.x' \
+                  'vardot/varbase_story_demo:dev-8.x-8.x' \
+                  'drupal/varbase_faqs:6.x-dev' ;
 
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test2";
+echo "Varbase 8.x-7.x-dev varbase8c2";
 echo "-----------------------------------------------------";
-cd ${vdo_root}/${doc_name}/varbase7test2;
+cd ${vdo_root}/${doc_name}/varbase8c2;
 composer require 'drupal/varbase_reports:6.x-dev' \
                   'drupal/varbase_media_header:7.x-dev' \
-                  'vardot/varbase_vmi_demo:dev-8.x-7.x' \
-                  'vardot/varbase_story_demo:dev-8.x-7.x' \
-                  'drupal/varbase_faqs:6.x-dev' \
-                  'drupal/varbase_layout_builder:1.x-dev' ;
+                  'vardot/varbase_vmi_demo:dev-8.x-8.x' \
+                  'vardot/varbase_story_demo:dev-8.x-8.x' \
+                  'drupal/varbase_faqs:6.x-dev' ;
 
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test3";
+echo "Varbase 8.x-7.x-dev varbase8c3";
 echo "-----------------------------------------------------";
-cd ${vdo_root}/${doc_name}/varbase7test3;
+cd ${vdo_root}/${doc_name}/varbase8c3;
 composer require 'drupal/varbase_reports:6.x-dev' \
                   'drupal/varbase_media_header:7.x-dev' \
-                  'vardot/varbase_vmi_demo:dev-8.x-7.x' \
-                  'vardot/varbase_story_demo:dev-8.x-7.x' \
-                  'drupal/varbase_faqs:6.x-dev' \
-                  'drupal/varbase_layout_builder:1.x-dev' ;
+                  'vardot/varbase_vmi_demo:dev-8.x-8.x' \
+                  'vardot/varbase_story_demo:dev-8.x-8.x' \
+                  'drupal/varbase_faqs:6.x-dev' ;
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test4";
+echo "Varbase 8.x-7.x-dev varbase8c4";
 echo "-----------------------------------------------------";
-cd ${vdo_root}/${doc_name}/varbase7test4;
+cd ${vdo_root}/${doc_name}/varbase8c4;
 composer require 'drupal/varbase_reports:6.x-dev' \
                   'drupal/varbase_media_header:7.x-dev' \
-                  'vardot/varbase_vmi_demo:dev-8.x-7.x' \
-                  'vardot/varbase_story_demo:dev-8.x-7.x' \
-                  'drupal/varbase_faqs:6.x-dev' \
-                  'drupal/varbase_layout_builder:1.x-dev' ;
+                  'vardot/varbase_vmi_demo:dev-8.x-8.x' \
+                  'vardot/varbase_story_demo:dev-8.x-8.x' \
+                  'drupal/varbase_faqs:6.x-dev' ;
 
 
 echo "-----------------------------------------------------";
-echo "Varbase 8.x-7.x-dev test5";
+echo "Varbase 8.x-7.x-dev varbase8c5";
 echo "-----------------------------------------------------";
-cd ${vdo_root}/${doc_name}/varbase7test5;
+cd ${vdo_root}/${doc_name}/varbase8c5;
 composer require 'drupal/varbase_reports:6.x-dev' \
                   'drupal/varbase_media_header:7.x-dev' \
-                  'vardot/varbase_vmi_demo:dev-8.x-7.x' \
-                  'vardot/varbase_story_demo:dev-8.x-7.x' \
-                  'drupal/varbase_faqs:6.x-dev' \
-                  'drupal/varbase_layout_builder:1.x-dev' ;
+                  'vardot/varbase_vmi_demo:dev-8.x-8.x' \
+                  'vardot/varbase_story_demo:dev-8.x-8.x' \
+                  'drupal/varbase_faqs:6.x-dev' ;
 
 
 
