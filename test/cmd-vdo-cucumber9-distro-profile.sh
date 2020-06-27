@@ -7,9 +7,9 @@
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 # Change with the version.
-site_version="8.1.x-dev";
+site_version="9.0.x-dev";
 # Change with the version
-site_version_code="81DEV";
+site_version_code="90DEV";
 
 
 # Change to true if you want to install.
@@ -43,7 +43,7 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name};" -vvv
 
-composer create-project webship/cucumber-project:${site_version} ${project_name} --stability dev --no-interaction -vvv
+composer create-project webship/cucumber:${site_version} ${project_name} --stability dev --no-interaction -vvv
 
 sudo chmod 775 -R ${project_name}
 sudo chown www-data:${user_name} -R ${project_name}

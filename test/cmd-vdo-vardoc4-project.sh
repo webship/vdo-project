@@ -3,17 +3,22 @@
 # Bootstrap VDO.
 . ${vdo_scripts}/bootstrap.sh ;
 
-# Load workspace settings and extra lists.
-eval $(parse_yaml ${vdo_config}/workspace.dev.settings.yml);
+# Load the workspace settings extra lists.
+eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
-# Change with the version.
-site_version="8.2.x-dev";
-# Change with the version.
-site_version_code="82DEV";
+# Change with the version of Varbase 8.4.x-dev, 8.4.06, 8.4.07, 8.4.08
+site_version="8.4.x-dev";
+# Change with the version of Varbase 84DEV, 8405, 8406, 8407, 8408
+site_version_code="84DEV";
 
 
-# Change to true if you want to install.
+# Change to true if you want to install varbase.
 install_site=false;
+
+# The user name and password for the installed varbase sites.
+varbase_username=${account_name};
+varbase_password="${account_pass}";
+
 
 base_url="${web_url}/${project_name}";
 
@@ -33,7 +38,7 @@ if [ "$2" != "" ]; then
 fi
 
 # Change directory to the workspace for this full operation.
-cd ${vdo_root}/${doc_name};
+cd ${doc_path};
 
 if [ -d "${project_name}" ]; then
   sudo rm -rf ${project_name} -vvv
@@ -43,7 +48,7 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name};" -vvv
 
-composer create-project webship/webship:${site_version} ${project_name} --stability dev --no-interaction -vvv
+composer create-project vardot/vardoc-project:${site_version} ${project_name} --stability dev --no-interaction -vvv
 
 sudo chmod 775 -R ${project_name}
 sudo chown www-data:${user_name} -R ${project_name}
@@ -52,26 +57,27 @@ echo "${doc_name} ${project_name} is ready to install!!!!";
 echo "Go to ${base_url}";
 
 if $install_site ; then
-  # Change directory to web.
-  cd ${vdo_root}/${doc_name}/${project_name}/web/;
+  # Change directory to the docroot.
+  cd ${doc_path}/${project_name}/docroot;
 
-  # Install Webship with Drush.
-  drush site-install webship --yes \
+  # Install Varbase with Drush.
+  drush site-install vardoc --yes \
   --site-name="${doc_name} ${project_name}" \
   --account-name="${account_name}" \
   --account-pass="${account_pass}" \
   --account-mail="${account_mail}" \
-  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" ;
-
-  drush config-set system.performance css.preprocess 0 --yes ;
-  drush config-set system.performance js.preprocess 0 --yes ;
-  drush config-set system.logging error_level all --yes ;
-  drush cr ;
+  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" \
+  varbase_multilingual_configuration.enable_multilingual=1 \
+  varbase_extra_components.vmi=1 \
+  varbase_extra_components.varbase_heroslider_media=1 \
+  varbase_extra_components.varbase_carousels=1 \
+  varbase_extra_components.varbase_search=1 \
+  varbase_development_tools.varbase_development=1 -vvv;
 
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";
   echo  "Go to ${base_url}";
-  cd ${vdo_root}/${doc_name};
+  cd ${doc_path};
   sudo chmod 775 -R ${project_name};
   sudo chown www-data:${user_name} -R ${project_name};
 fi

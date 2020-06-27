@@ -7,9 +7,9 @@
 eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
 
 # Change with the version.
-site_version="8.2.x-dev";
-# Change with the version.
-site_version_code="82DEV";
+site_version="9.0.x-dev";
+# Change with the version
+site_version_code="90DEV";
 
 
 # Change to true if you want to install.
@@ -43,7 +43,7 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name};" -vvv
 
-composer create-project webship/webship-project:${site_version} ${project_name} --stability dev --no-interaction -vvv
+composer create-project webship/cucumber:${site_version} ${project_name} --stability dev --no-interaction -vvv
 
 sudo chmod 775 -R ${project_name}
 sudo chown www-data:${user_name} -R ${project_name}
@@ -55,14 +55,13 @@ if $install_site ; then
   # Change directory to web.
   cd ${vdo_root}/${doc_name}/${project_name}/web/;
 
-  # Install Webship with Drush.
-  drush site-install webship --yes \
+  # Install Cucumber with Drush.
+  drush site-install cucumber --yes \
   --site-name="${doc_name} ${project_name}" \
   --account-name="${account_name}" \
   --account-pass="${account_pass}" \
   --account-mail="${account_mail}" \
   --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" ;
-
   drush config-set system.performance css.preprocess 0 --yes ;
   drush config-set system.performance js.preprocess 0 --yes ;
   drush config-set system.logging error_level all --yes ;
