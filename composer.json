@@ -20,6 +20,10 @@
       "source": "http://cgit.drupalcode.org/vdo"
     },
     "repositories": {
+      "packagist.org": {
+        "type": "composer",
+        "url": "https://packagist.org"
+      },
       "drupal": {
         "type": "composer",
         "url": "https://packages.drupal.org/8"
@@ -54,7 +58,10 @@
       },
       "sort-packages": true,
       "process-timeout": 1800,
-      "vendor-dir": "web/vendor"
+      "vendor-dir": "web/vendor",
+      "github-protocols": [
+        "https,ssh"
+      ]
     },
     "extra": {
       "drupal-scaffold": {
