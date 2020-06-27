@@ -3,27 +3,19 @@
 # Bootstrap VDO.
 . ${vdo_scripts}/bootstrap.sh ;
 
-# Load the workspace settings extra lists.
-eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
+# Load workspace settings and extra lists.
+eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
 
-# Change with the version of  8.1.x-dev
-site_version="8.1.x-dev";
-# Change with the version of Varbase 81DEV, 8100, 8101
-site_version_code="81DEV";
+# Change with the version.
+site_version="8.4.x-dev";
+# Change with the version.
+site_version_code="84DEV";
 
 
-# Change to true if you want to install vardoc.
+# Change to true if you want to install.
 install_site=false;
 
-# The user name and password for the installed vardoc sites.
-vardoc_username=${account_name};
-vardoc_password="${account_pass}";
-
-# Change with true or false, if you want to install the feature.
-vardoc_development=true;
-
-
-base_url="${web_url}";
+base_url="${web_url}/${project_name}";
 
 # GET the project name argument.
 if [ "$1" != "" ]; then
@@ -41,7 +33,7 @@ if [ "$2" != "" ]; then
 fi
 
 # Change directory to the workspace for this full operation.
-cd ${doc_path};
+cd ${vdo_root}/${doc_name};
 
 if [ -d "${project_name}" ]; then
   sudo rm -rf ${project_name} -vvv
@@ -61,7 +53,7 @@ echo "Go to ${base_url}";
 
 if $install_site ; then
   # Change directory to the docroot.
-  cd ${doc_path}/${project_name}/docroot;
+  cd ${vdo_root}/${doc_name}/${project_name}/docroot;
 
   # Install Varbase with Drush.
   drush site-install vardoc --yes \
@@ -70,17 +62,12 @@ if $install_site ; then
   --account-pass="${account_pass}" \
   --account-mail="${account_mail}" \
   --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" \
-  vardoc_extra_components.vardoc_demo=1 \
-  varbase_development_tools.varbase_development=1 ;
+  varbase_development_tools.varbase_development=1 -vvv;
 
-  drush config-set system.performance css.preprocess 0 --yes
-  drush config-set system.performance js.preprocess 0 --yes
-  drush config-set system.logging error_level all --yes
-  drush cr
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";
   echo  "Go to ${base_url}";
-  cd ${doc_path};
+  cd ${vdo_root}/${doc_name};
   sudo chmod 775 -R ${project_name};
   sudo chown www-data:${user_name} -R ${project_name};
 fi

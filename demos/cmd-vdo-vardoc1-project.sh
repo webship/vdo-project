@@ -62,11 +62,6 @@ if $install_site ; then
   --account-pass="${account_pass}" \
   --account-mail="${account_mail}" \
   --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" \
-  varbase_multilingual_configuration.enable_multilingual=1 \
-  varbase_extra_components.vmi=1 \
-  varbase_extra_components.varbase_heroslider_media=1 \
-  varbase_extra_components.varbase_carousels=1 \
-  varbase_extra_components.varbase_search=1 \
   varbase_development_tools.varbase_development=1 -vvv;
 
   # Send a notification.
