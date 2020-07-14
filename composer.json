@@ -20,7 +20,7 @@
       "source": "http://cgit.drupalcode.org/vdo"
     },
     "repositories": {
-      "packagist.org": {
+      "packagist": {
         "type": "composer",
         "url": "https://packagist.org"
       },
