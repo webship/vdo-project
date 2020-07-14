@@ -53,10 +53,6 @@
     "config": {
       "bin-dir": "bin/",
       "secure-http": false,
-      "preferred-install": {
-        "drupal/core": "dist"
-      },
-      "sort-packages": true,
       "process-timeout": 1800,
       "vendor-dir": "web/vendor",
       "github-protocols": [
