@@ -7,9 +7,9 @@
 eval $(parse_yaml ${vdo_config}/workspace.dev.settings.yml);
 
 # Change with the version of Varbase 8.4.x-dev, 8.4.06, 8.4.07, 8.4.08
-site_version="8.4.x-dev";
+site_version="4.0.x-dev";
 # Change with the version of Varbase 84DEV, 8405, 8406, 8407, 8408
-site_version_code="84DEV";
+site_version_code="40DEV";
 
 
 # Change to true if you want to install varbase.

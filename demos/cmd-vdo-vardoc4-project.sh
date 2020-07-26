@@ -7,9 +7,9 @@
 eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
 
 # Change with the version.
-site_version="8.4.x-dev";
+site_version="4.0.x-dev";
 # Change with the version.
-site_version_code="84DEV";
+site_version_code="40DEV";
 
 
 # Change to true if you want to install.
