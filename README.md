@@ -18,11 +18,17 @@ for your setup.
 ### Please backup your /var/www/html and your mysql databases;
 ### Try VDO with new systems only.
 
-After that you can create the project:
+To install the most recent stable release of VDO 9.0.x run this command:
+```
+composer create-project webship/vdo-project:^9.0.0-alpha1 /var/www/html --no-dev --no-interaction
+```
 
+To install the dev version of VDO 9.0.x run this command:
 ```
 composer create-project webship/vdo-project:9.0.x-dev /var/www/html --stability dev --no-interaction
 ```
+
+### After that delete the composer.josn and composer.lock file from your /var/www/html folder
 
 ## Constructing your Linux development computer or servers with:
 
