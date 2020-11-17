@@ -10,7 +10,7 @@ user_name="$USER";
 . ../libs/progress-bar.sh
 
 # Load VDO settings.
-eval $(parse_yaml ../config/vdo.settings.yml);
+eval $(parse_yaml ../../config/vdo.settings.yml);
 
 
 echo '*--------------------------------------------------*';
@@ -39,7 +39,7 @@ echo '# VDO path where we keep all Configs and scripts'>> $HOME/.bashrc ;
 echo "${vdo_path}" ;
 vdo_path=${vdo_path} ;
 export vdo_path=${vdo_path} ;
-printf "vdo_path=="%s";\n" "$vdo_path" >> $HOME/.bashrc ;
+printf "vdo_path="%s";\n" "$vdo_path" >> $HOME/.bashrc ;
 printf "export vdo_path="%s";\n" "$vdo_path" >> $HOME/.bashrc ;
 
 # ------------------------------------------------------------------------------
