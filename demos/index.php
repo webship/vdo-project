@@ -10,14 +10,29 @@
     <link rel="canonical" href="https://startbootstrap.com/">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css" integrity="sha384-ekOryaXPbeCpWQNxMwSWVvQ0+1VrStoPJq54shlYhR8HzQgig1v5fas6YgOqLoKz" crossorigin="anonymous">
+    <style>
+     a {
+       color: #292961;
+     }
+     a:hover,
+     a:focus,
+     a:active {
+       color: #292961;
+       opacity: 0.8;
+     }
+     .display-1 {
+       color: #292961;
+       font-weight: bold !important;
+     }
 
+    </style>
     <title>VDO Demos</title>
   </head>
   <body>
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col col-12 py-5">
-            <h1 class="mb-4 display-1 text-center"><a href="/">VDO</a> <i class="fas fa-laptop-code fa-1x mr-2"></i> Demos</h1>
+            <h1 class="mb-4 display-1 text-center"><a href="/"><img alt="VDO" style="height: 1em;" src="https://www.drupal.org/files/project-images/VDO-logo_0.png"> VDO</a> <i class="fas fa-laptop-code fa-1x mr-2"></i> Demos</h1>
           </div>
         </div>
       </div>
