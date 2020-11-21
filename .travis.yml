@@ -83,7 +83,7 @@ before_script:
   - sleep 5
 script:
   - cd profiles/contrib/vdo
-  - ../../../bin/behat tests/features/vdo/
+  - ../../../../bin/behat tests/features/vdo/
 
 matrix:
   fast_finish: true
