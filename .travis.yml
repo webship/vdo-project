@@ -82,7 +82,7 @@ before_script:
   - drush runserver --default-server=builtin 8080 &>/dev/null &
   - sleep 5
 script:
-  - cd profiles/contrib/vdo/
+  - cd profiles/contrib/vdo
   - ../../../bin/behat tests/features/vdo/
 
 matrix:

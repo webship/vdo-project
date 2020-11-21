@@ -33,6 +33,10 @@ composer create-project webship/vdo-project:9.0.x-dev /var/www/html --stability 
 ## Constructing your Linux development computer or servers with:
 
 
+
+![VDO index view](https://www.drupal.org/files/issues/2020-11-22/VDO-index-view_0.png)
+
+
 ### Products:
 
 Where we do maintain our custom distributions/profiles base code.
@@ -49,6 +53,7 @@ Where we do development, enhancements, and optimization work rounds
 ```
     /var/www/html/dev
 ```
+![VDO DEV view](https://www.drupal.org/files/issues/2020-11-22/VDO-Development-index-view_0.png)
 
 ### TEST:
 
@@ -57,6 +62,7 @@ Where we do testing and functional automated testing.
 ```
     /var/www/html/test
 ```
+![VDO Test view](https://www.drupal.org/files/issues/2020-11-22/VDO-Test-index-view.png)
 
 ### Demos:
 
@@ -65,6 +71,7 @@ Where we do all demos templates, and default content work on
 ```
     /var/www/html/demos
 ```
+![VDO Demos view](https://www.drupal.org/files/issues/2020-11-22/VDO-Demos-index-view_0.png)
 
 ### Sandboxes:
 
@@ -73,6 +80,7 @@ Where we do all sandbox templates, and private custom content work.
 ```
     /var/www/html/sandboxes
 ```
+![VDO index view](https://www.drupal.org/files/issues/2020-11-22/VDO-Sandboxes-index-view_0.png)
 
 ### Projects:
 
