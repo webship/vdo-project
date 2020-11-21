@@ -5,7 +5,7 @@ The Visual Distribution Operator (VDO) management system helps
  for the work cycle of development with number of workspaces for
  custom profiles, sub-profiles on local development machines or servers.
 
-[![VDO](https://www.drupal.org/files/project-images/VDO-logo.png)](https://www.drupal.org/project/vdo)
+[![VDO](https://raw.githubusercontent.com/webship/vdo/9.0.x/images/logo.svg](https://www.drupal.org/project/vdo)
 
 ## Usage
 
