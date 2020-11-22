@@ -42,7 +42,7 @@
     "drupal/core-project-message": "~9.0",
     "drupal/drupal-library-installer-plugin": "^0.3",
     "cweagans/composer-patches": "~1.0",
-    "webship/vdo": "~9.0"
+    "webship/vdo": "9.0.x-dev"
   },
   "replace": {
     "ajaxorg/ace-builds": "*"
