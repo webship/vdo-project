@@ -1,5 +1,5 @@
 # VDO Project
-[![Build Status](https://travis-ci.org/webship/vdo.svg?branch=9.0.x)](https://travis-ci.org/webship/vdo) vdo-project 9.0.x
+[![Build Status](https://travis-ci.org/webship/vdo.svg?branch=9.0.0-alpha2)](https://travis-ci.com/github/webship/vdo/builds/203356106) VDO 9.0.0-alpha2
 
 The Visual Distribution Operator (VDO) management system helps
  distribution maintainers manage the base code and logic
@@ -21,7 +21,7 @@ for your setup.
 
 To install the most recent stable release of VDO 9.0.x run this command:
 ```
-composer create-project webship/vdo-project:^9.0.0-alpha1 /var/www/html --no-dev --no-interaction
+composer create-project webship/vdo-project:^9.0.0-alpha2 /var/www/html --no-dev --no-interaction
 ```
 
 To install the dev version of VDO 9.0.x run this command:
