@@ -1,7 +1,8 @@
 dist: xenial
+sudo: true
 language: php
 php:
-  - 7.3
+  - 7.4
 services:
   - mysql
   - xvfb
@@ -18,11 +19,21 @@ cache:
     - "$HOME/.selenium/cache"
 
 before_install:
+  # Upgrade to MySQL 8.0.X
+  - wget https://repo.mysql.com//mysql-apt-config_0.8.16-1_all.deb
+  - sudo dpkg -i mysql-apt-config_0.8.16-1_all.deb
+  - sudo apt-get update -q
+  - sudo apt-get install -q -y --allow-unauthenticated -o Dpkg::Options::=--force-confnew mysql-server
+  - sudo systemctl restart mysql
+  - sudo mysql_upgrade
+  - mysql --version 
+
+  # Update the composer.
   - phpenv config-rm xdebug.ini
   - phpenv rehash
   - COMPOSER_AUTH_PATH="$HOME/.composer/auth.json"
   - if [[ -f $COMPOSER_AUTH_PATH ]]; then rm $COMPOSER_AUTH_PATH; fi
-  - composer self-update --1
+  - composer self-update --2
   - composer --version
 
   # Composer Configurations.
@@ -82,7 +93,7 @@ before_script:
   - drush runserver --default-server=builtin 8080 &>/dev/null &
   - sleep 5
 script:
-  - cd profiles/contrib/vdo
+  - cd profiles/contrib/vdo/
   - ../../../../bin/behat tests/features/vdo/
 
 matrix:
