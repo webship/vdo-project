@@ -29,10 +29,6 @@
     "drupal": {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
-    },
-    "assets": {
-      "type": "composer",
-      "url": "https://asset-packagist.org"
     }
   },
   "require": {
@@ -42,9 +38,6 @@
     "drupal/core-project-message": "~9.0",
     "cweagans/composer-patches": "~1.0",
     "webship/vdo": "9.0.x-dev"
-  },
-  "replace": {
-    "ajaxorg/ace-builds": "*"
   },
   "conflict": {
     "drupal/drupal": "*"
@@ -64,21 +57,12 @@
         "web-root": "web/"
       }
     },
-    "installer-types": [
-      "bower-asset",
-      "npm-asset"
-    ],
     "installer-paths": {
       "web/core": ["type:drupal-core"],
       "web/profiles/contrib/{$name}": ["type:drupal-profile"],
       "web/modules/contrib/{$name}": ["type:drupal-module"],
       "web/themes/contrib/{$name}": ["type:drupal-theme"],
-      "web/libraries/ace": ["npm-asset/ace-builds"],
-      "web/libraries/{$name}": [
-        "type:drupal-library",
-        "type:bower-asset",
-        "type:npm-asset"
-      ],
+      "web/libraries/{$name}": ["type:drupal-library"],
       "web/modules/custom/{$name}": ["type:drupal-custom-module"],
       "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
       "drush/contrib/{$name}": ["type:drupal-drush"]
