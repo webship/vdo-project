@@ -36,11 +36,10 @@
     }
   },
   "require": {
-    "composer/installers": "~1.0 || ~2.0",
-    "oomphinc/composer-installers-extender": "~1.0 || ~2.0",
+    "composer/installers": "^1 || ^2",
+    "oomphinc/composer-installers-extender": "^1 || ^2",
     "drupal/core-composer-scaffold": "~9.0",
     "drupal/core-project-message": "~9.0",
-    "drupal/drupal-library-installer-plugin": "^0.3",
     "cweagans/composer-patches": "~1.0",
     "webship/vdo": "9.0.x-dev"
   },
@@ -83,12 +82,6 @@
       "web/modules/custom/{$name}": ["type:drupal-custom-module"],
       "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
       "drush/contrib/{$name}": ["type:drupal-drush"]
-    },
-    "drupal-libraries": {
-      "library-directory": "web/libraries",
-      "libraries": [
-        {"name": "ace", "package": "npm-asset/ace-builds"}
-      ]
     },
     "enable-patching": true,
     "composer-exit-on-patch-failure": true,
