@@ -37,7 +37,7 @@
     "drupal/core-composer-scaffold": "~9.0",
     "drupal/core-project-message": "~9.0",
     "cweagans/composer-patches": "~1.0",
-    "webship/vdo": "~9.0"
+    "webship/vdo": "9.0.x-dev"
   },
   "conflict": {
     "drupal/drupal": "*"
