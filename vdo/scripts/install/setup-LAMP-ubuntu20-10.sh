@@ -43,7 +43,7 @@ apt install -y php7.3-mysql;
 apt install -y php7.3-xml;
 apt install -y php7.3-cgi;
 apt install -y php7.3-cli;
-apt install -y php7.3-common
+apt install -y php7.3-common;
 apt install -y php7.3-curl;
 apt install -y php7.3-gd;
 apt install -y php7.3-imap;
