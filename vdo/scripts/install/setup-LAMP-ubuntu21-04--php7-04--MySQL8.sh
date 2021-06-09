@@ -3,14 +3,9 @@
 current_path=$(pwd);
 user_name="$USER";
 
-# Include Bash YAML library.
-. ../libs/bash-yaml.sh
-
-# Include Bash Progress Bar library.
-. ../libs/progress-bar.sh
-
-# Load VDO settings.
-eval $(parse_yaml ../../config/vdo.settings.yml);
+database_username="root";
+database_host="localhost";
+database_password="123___";
 
 # Switch to root user
 sudo su -
@@ -112,8 +107,8 @@ npm install -g yarn
 npm install gulp-cli -g ;
 npm install gulp -D ;
 
-# Install composer ~1.0.
-sudo curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin/ --filename=composer --1;
+# Install composer ~2.0.
+sudo curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin/ --filename=composer --2;
 
 # Drush install latest (10.x).
 # ------------------------------------------------------------------------------
