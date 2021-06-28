@@ -107,8 +107,6 @@ echo "${doc_name} ${project_name} is ready to install!!!!";
 echo "Go to ${base_url}";
 
 if $install_site ; then
-  cd ${vdo_root}/${doc_name}/${project_name};
-  composer require drush/drush:~10;
 
   # Change directory to the docroot.
   cd ${vdo_root}/${doc_name}/${project_name}/docroot;
