@@ -8,7 +8,7 @@ database_host="localhost";
 database_password="123___";
 
 # Switch to root user
-sudo su -
+sudo -s
 
 # Usefull must have utils.
 apt install -y vim;
