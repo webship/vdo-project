@@ -56,6 +56,7 @@ mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_d
 composer create-project vardot/varbase:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
 
 git clone --branch 9.0.x git@github.com:Vardot/varbase.git ${vdo_root}/${doc_name}/${project_name}/docroot/profiles/varbase;
+sudo rm -rf ${vdo_root}/${doc_name}/${project_name}/config ${vdo_root}/${doc_name}/${project_name}/configbit ${vdo_root}/${doc_name}/${project_name}/css ${vdo_root}/${doc_name}/${project_name}/images ${vdo_root}/${doc_name}/${project_name}/libraries ${vdo_root}/${doc_name}/${project_name}/scripts ${vdo_root}/${doc_name}/${project_name}/src ${vdo_root}/${doc_name}/${project_name}/tests ${vdo_root}/${doc_name}/${project_name}/traslations ${vdo_root}/${doc_name}/${project_name}/varbase.info.yml ${vdo_root}/${doc_name}/${project_name}/varbase.install ${vdo_root}/${doc_name}/${project_name}/varbase.libraries.yml ${vdo_root}/${doc_name}/${project_name}/varbase.profile ${vdo_root}/${doc_name}/${project_name}/varbase.services.yml ${vdo_root}/${doc_name}/${project_name}/yarn.lock
 
 cp ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 echo "\$databases['default']['default'] = array (
