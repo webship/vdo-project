@@ -8,7 +8,7 @@ database_host="localhost";
 database_password="123___";
 
 # Switch to root user
-sudo su -
+sudo -s
 
 # Usefull must have utils.
 apt install -y vim;
@@ -147,18 +147,15 @@ drupal self-update ;
 # ------------------------------------------------------------------------------
 apt install mysql-client mysql-server ;
 
-# To change the password for root user.
-sudo mysql -u ${database_username} ;
-
-use mysql;
-SET PASSWORD FOR '${database_username}'@'${database_host}' = '${database_password}';
-update user set plugin="mysql_native_password" where User='${database_username}';
-flush privileges;
-quit
-
 echo "[mysqld]" >> /etc/mysql/my.cnf
 echo "default-authentication-plugin=mysql_native_password" >> /etc/mysql/my.cnf ;
 echo "max_allowed_packet = 32M" >> /etc/mysql/my.cnf ;
+
+# Restart MySQL service.
+service mysql restart ;
+
+# To change the password for root user.
+sudo mysql -u ${database_username} -e "use mysql;SET PASSWORD FOR '${database_username}'@'${database_host}' = '${database_password}';update user set plugin=\"mysql_native_password\" where User='${database_username}';flush privileges;quit" ;
 
 # Restart MySQL service.
 service mysql restart ;
