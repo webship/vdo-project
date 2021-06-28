@@ -55,6 +55,8 @@ mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_d
 
 composer create-project vardot/varbase:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
 
+git clone --branch 9.0.x git@github.com:Vardot/varbase.git ${vdo_root}/${doc_name}/${project_name}/docroot/profiles/varbase;
+
 cp ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 echo "\$databases['default']['default'] = array (
   'database' => '${full_database_name}',
