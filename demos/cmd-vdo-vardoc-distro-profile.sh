@@ -6,21 +6,17 @@
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
 
-# Change with the version.
-site_version="8.2.x-dev";
-# Change with the version.
-site_version_code="82DEV";
+# Change with the version of Varbase 9.0.x-dev
+site_version="9.0.x-dev";
+# Change with the version of Varbase 90DEV
+site_version_code="90DEV";
 
 
-# Change to true if you want to install.
+# Change to true if you want to install varbase.
 install_site=false;
 
 
-# Change with true or false, if you want to install the feature.
-vardoc_development=true;
-
-
-base_url="${web_url}";
+base_url="${web_url}/${project_name}";
 
 # GET the project name argument.
 if [ "$1" != "" ]; then
@@ -35,6 +31,15 @@ if [ "$2" != "" ]; then
   if [ "$2" == "install" ]; then
     install_site=true;
   fi
+
+  if [ "$2" == "no-install" ]; then
+    install_site=false;
+  fi
+fi
+
+# Get varbase version;
+if [ "$3" != "" ]; then
+  site_version="$3";
 fi
 
 # Change directory to the workspace for this full operation.
@@ -44,11 +49,13 @@ if [ -d "${project_name}" ]; then
   sudo rm -rf ${project_name} -vvv
 fi
 
-full_database_name="${database_prefix}vardoc_${project_name}";
+full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name};" -vvv
 
-composer create-project vardot/vardoc:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
+composer create-project vardot/varbase:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
+
+git clone 9.0.x git@github.com:Vardot/varbase.git ${vdo_root}/${doc_name}/${project_name}/docroot/profiles/varbase;
 
 cp ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 echo "\$databases['default']['default'] = array (
@@ -100,23 +107,27 @@ echo "${doc_name} ${project_name} is ready to install!!!!";
 echo "Go to ${base_url}";
 
 if $install_site ; then
+  cd ${vdo_root}/${doc_name}/${project_name};
+  composer require drush/drush:~10;
+
   # Change directory to the docroot.
   cd ${vdo_root}/${doc_name}/${project_name}/docroot;
 
   # Install Varbase with Drush.
-  drush site-install vardoc --yes \
-  --site-name="${doc_name} ${project_name}" \
-  --account-name="${account_name}" \
-  --account-pass="${account_pass}" \
-  --account-mail="${account_mail}" \
-  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" \
-  vardoc_extra_components.vardoc_demo=true \
-  varbase_development_tools.varbase_development=true ;
+  drush site-install varbase --yes  --site-name="${doc_name} ${project_name}"  --account-name="${account_name}"  --account-pass="${account_pass}"  --account-mail="${account_mail}"  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" --locale="en" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider_media=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true varbase_development_tools.varbase_development=true install_configure_form.enable_update_status_emails=NULL --debug -vvv;
 
-  drush config-set system.performance css.preprocess 0 --yes
-  drush config-set system.performance js.preprocess 0 --yes
-  drush config-set system.logging error_level all --yes
-  drush cr
+  drush pm-enable varbase_styleguide --yes ;
+  drush pm-enable varbase_media_instagram --yes ;
+  drush pm-enable varbase_media_twitter --yes ;
+  drush pm-enable social_auth_google --yes ;
+  drush pm-enable social_auth_facebook --yes ;
+  drush pm-enable social_auth_twitter --yes ;
+  drush pm-enable social_auth_linkedin --yes ;
+  drush config-set system.performance css.preprocess 0 --yes ;
+  drush config-set system.performance js.preprocess 0 --yes ;
+  drush config-set system.logging error_level all --yes ;
+  drush cr ;
+
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";
   echo  "Go to ${base_url}";

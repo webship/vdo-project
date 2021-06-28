@@ -7,16 +7,15 @@
 eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
 
 # Change with the version.
-site_version="~8.7.0";
+site_version="~9.0";
 # Change with the version.
-site_version_code="80700xDEV";
+site_version_code="90xDEV";
 
 
-# Change to true if you want to install.
+# Change to true if you want to install varbase.
 install_site=false;
 
-
-base_url="${web_url}";
+base_url="${web_url}/${project_name}";
 
 # GET the project name argument.
 if [ "$1" != "" ]; then
@@ -40,7 +39,7 @@ if [ -d "${project_name}" ]; then
   sudo rm -rf ${project_name} -vvv
 fi
 
-full_database_name="${database_prefix}varbase_${project_name}";
+full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name};" -vvv
 
@@ -92,27 +91,31 @@ echo "// VDO Built time: ${vdo_build_time}" >> ${vdo_root}/${doc_name}/${project
 sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name}
 sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name}
 
-
 echo "${doc_name} ${project_name} is ready to install!!!!";
 echo "Go to ${base_url}";
 
 if $install_site ; then
+  cd ${vdo_root}/${doc_name}/${project_name};
+  composer require drush/drush:~10;
+
   # Change directory to the docroot.
   cd ${vdo_root}/${doc_name}/${project_name}/docroot;
+
   # Install Varbase with Drush.
-  drush site-install varbase --yes \
-  --site-name="${doc_name} ${project_name}" \
-  --account-name="${account_name}" \
-  --account-pass="${account_pass}" \
-  --account-mail="${account_mail}" \
-  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" \
-  varbase_multilingual_configuration.enable_multilingual=1
-  varbase_extra_components.vmi=1
-  varbase_extra_components.varbase_heroslider_media=1
-  varbase_extra_components.varbase_carousels=1
-  varbase_extra_components.varbase_search=1
-  varbase_development_tools.varbase_development=1 -vvv;
-  
+  drush site-install varbase --yes  --site-name="${doc_name} ${project_name}"  --account-name="${account_name}"  --account-pass="${account_pass}"  --account-mail="${account_mail}"  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" --locale="en" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider_media=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true varbase_development_tools.varbase_development=true install_configure_form.enable_update_status_emails=NULL --debug -vvv;
+
+  drush pm-enable varbase_styleguide --yes ;
+  drush pm-enable varbase_media_instagram --yes ;
+  drush pm-enable varbase_media_twitter --yes ;
+  drush pm-enable social_auth_google --yes ;
+  drush pm-enable social_auth_facebook --yes ;
+  drush pm-enable social_auth_twitter --yes ;
+  drush pm-enable social_auth_linkedin --yes ;
+  drush config-set system.performance css.preprocess 0 --yes ;
+  drush config-set system.performance js.preprocess 0 --yes ;
+  drush config-set system.logging error_level all --yes ;
+  drush cr ;
+
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";
   echo  "Go to ${base_url}";
