@@ -12,26 +12,38 @@ else
   exit 1;
 fi
 
+if [ ! -d "${vdo_root}/${doc_name}/${project_name}/vendor/drush/drush" ]; then
+  cd ${vdo_root}/${doc_name}/${project_name};
+  composer require drush/drush:~10;
+fi
+
+# Load the list of default users for Varbase.
+eval $(parse_yaml ${vdo_config}/users/varbase.users.yml);
+
 cd ${vdo_root}/${doc_name}/${project_name}/docroot/;
 
-drush user:create "Normal user" --mail="test.authenticated@vardot.com" --password="dD.123123ddd" ;
+for user in "${varbase_users[@]}"
+do
+    user_name="user_${user}_name";
+    user_mail="user_${user}_mail";
+    user_password="user_${user}_password";
+    user_role="user_${user}_role";
 
-drush user:create "Editor" --mail="test.editor@vardot.com" --password="dD.123123ddd" ;
-drush user-add-role "editor" "Editor" ;
+    echo " ---------------------------------------------------------------- ";
+    echo "      User name: ${!user_name}";
+    echo "      User mail: ${!user_mail}";
+    echo "  User password: ${!user_password}";
+    echo "      User role: ${!user_role}";
+    echo " ================================================================= ";
 
-drush user:create "Content admin" --mail="test.content_admin@vardot.com" --password="dD.123123ddd" ;
-drush user-add-role "content_admin" "Content admin" ;
+    ../bin/drush user:create "${!user_name}" --mail="${!user_mail}" --password="${!user_password}" ;
+  if [ -z "${!user_role}" ]; then
+      ../bin/drush user:role:add "${!user_role}" "${!user_name}" ;
+  fi
+done
 
-drush user:create "SEO admin" --mail="test.seo_admin@vardot.com" --password="dD.123123ddd" ;
-drush user-add-role "seo_admin" "SEO admin" ;
+echo "Start Cache rebuilding ...";
+../bin/drush cache:rebuild ;
 
-drush user:create "Site admin" --mail="test.site_admin@vardot.com" --password="dD.123123ddd" ;
-drush user-add-role "site_admin" "Site admin" ;
-
-drush user:create "Super admin" --mail="test.super_admin@vardot.com" --password="dD.123123ddd" ;
-drush user-add-role "administrator" "Super admin" ;
-
-echo "Cache rebuild";
-drush cr ;
 
 cd ${vdo_root}/${doc_name};

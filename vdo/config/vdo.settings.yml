@@ -10,10 +10,15 @@ database:
   username: DATABASE_USERNAME
   password: DATABASE_PASSWORD
   host: DATABASE_HOST
+  port: 3306
+  namespace: Drupal\\Core\\Database\\Driver\\mysql
+  driver: mysql
+  collation: utf8mb4_general_ci
 account:
   name: DRUPAL_WEBMASTER_NAME
   pass: DRUPAL_WEBMASTER_PASSWORD
   mail: DRUPAL_WEBMASTER_EMIL
+config_sync_directory: '../config/sync'
 workspaces:
   - products
   - dev

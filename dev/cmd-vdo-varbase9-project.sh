@@ -12,8 +12,9 @@ site_version="9.0.x-dev";
 site_version_code="90DEV";
 
 
-# Change to true if you want to install varbase.
+# Default value for arguments.
 install_site=false;
+add_users=false;
 
 base_url="${web_url}/${project_name}";
 
@@ -25,10 +26,17 @@ else
   exit 1;
 fi
 
-# GET install argument to install;
+# GET install argument.
 if [ "$2" != "" ]; then
-  if [ "$2" == "install" ]; then
+  if [ "$2" == "--install" ]; then
     install_site=true;
+  fi
+fi
+
+# GET add users argument to add them to the site.
+if [ "$3" != "" ]; then
+  if [ "$3" == "--add-users" ]; then
+    add_users=true;
   fi
 fi
 
@@ -46,77 +54,62 @@ mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_d
 composer create-project vardot/varbase-project:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
 
 cp ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
-echo "\$databases['default']['default'] = array (
+echo "\$databases['default']['default'] = [
   'database' => '${full_database_name}',
   'username' => '${database_username}',
   'password' => '${database_password}',
+  'host' => '${database_host}',
+  'port' => '${database_port}',
+  'namespace' => '${database_namespace}',
+  'driver' => '${database_driver}',
   'prefix' => '',
-  'host' => 'localhost',
-  'port' => '3306',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
-);" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
+  'collation' => '${database_collation}',
+];" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 
 mkdir ${vdo_root}/${doc_name}/${project_name}/config ;
 mkdir ${vdo_root}/${doc_name}/${project_name}/config/sync ;
-echo "# Deny all requests from Apache 2.4+.
-<IfModule mod_authz_core.c>
-  Require all denied
-</IfModule>
-
-# Deny all requests from Apache 2.0-2.2.
-<IfModule !mod_authz_core.c>
-  Deny from all
-</IfModule>
-
-# Turn off all options we don't need.
-Options -Indexes -ExecCGI -Includes -MultiViews
-
-# Set the catch-all handler to prevent scripts from being executed.
-SetHandler Drupal_Security_Do_Not_Remove_See_SA_2006_006
-<Files *>
-  # Override the handler again if we're run later in the evaluation list.
-  SetHandler Drupal_Security_Do_Not_Remove_See_SA_2013_003
-</Files>
-
-# If we know how to do it safely, disable the PHP engine entirely.
-<IfModule mod_php7.c>
-  php_flag engine off
-</IfModule>" >> ${vdo_root}/${doc_name}/${project_name}/config/sync/.htaccess;
-echo "\$settings['config_sync_directory'] = '../config/sync';" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
+echo "\$settings['config_sync_directory'] = '${config_sync_directory}';" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 
 vdo_build_time=$( date '+%Y-%m-%d %H-%M-%S' );
 echo "// VDO Built time: ${vdo_build_time}" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 
-sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name}
-sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name}
+sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name} ;
+sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name} ;
 
 echo "${doc_name} ${project_name} is ready to install!!!!";
 echo "Go to ${base_url}";
 
+## Install the site.
 if $install_site ; then
-  cd ${vdo_root}/${doc_name}/${project_name};
-  composer require drush/drush:~10;
+
+  if [ ! -d "${vdo_root}/${doc_name}/${project_name}/vendor/drush/drush" ]; then
+    cd ${vdo_root}/${doc_name}/${project_name};
+    composer require drush/drush:~10;
+
+    sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name} ;
+    sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name} ;
+
+  fi
 
   # Change directory to the docroot.
   cd ${vdo_root}/${doc_name}/${project_name}/docroot;
 
   # Install Varbase with Drush.
-  ../bin/drush site-install varbase --yes --site-name="${doc_name} ${project_name}"  --account-name="${account_name}"  --account-pass="${account_pass}"  --account-mail="${account_mail}"  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" --locale="en" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider_media=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true  install_configure_form.enable_update_status_emails=NULL --debug -vvv;
-  ../bin/drush pm-enable varbase_development --yes ;
-  ../bin/drush pm-enable varbase_styleguide --yes ;
-  ../bin/drush pm-enable varbase_api --yes ;
-  ../bin/drush pm-enable varbase_content_planner --yes ;
-  ../bin/drush pm-enable varbase_media_instagram --yes ;
-  ../bin/drush pm-enable varbase_media_twitter --yes ;
-  ../bin/drush pm-enable social_auth_google --yes ;
-  ../bin/drush pm-enable social_auth_facebook --yes ;
-  ../bin/drush pm-enable social_auth_twitter --yes ;
-  ../bin/drush pm-enable social_auth_linkedin --yes ;
-  ../bin/drush config-set system.performance css.preprocess 0 --yes ;
-  ../bin/drush config-set system.performance js.preprocess 0 --yes ;
-  ../bin/drush config-set system.logging error_level all --yes ;
-  ../bin/drush cr ;
+  ../bin/drush site:install varbase --yes --site-name="${doc_name} ${project_name}"  --account-name="${account_name}"  --account-pass="${account_pass}"  --account-mail="${account_mail}"  --db-url="mysql://${database_username}:${database_password}@${database_host}:${database_port}/${full_database_name}" --locale="en" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider_media=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true  install_configure_form.enable_update_status_emails=NULL -vvv;
+  ../bin/drush pm:install varbase_development --yes ;
+  ../bin/drush pm:install varbase_styleguide --yes ;
+  ../bin/drush pm:install varbase_api --yes ;
+  ../bin/drush pm:install varbase_content_planner --yes ;
+  ../bin/drush pm:install varbase_media_instagram --yes ;
+  ../bin/drush pm:install varbase_media_twitter --yes ;
+  ../bin/drush pm:install social_auth_google --yes ;
+  ../bin/drush pm:install social_auth_facebook --yes ;
+  ../bin/drush pm:install social_auth_twitter --yes ;
+  ../bin/drush pm:install social_auth_linkedin --yes ;
+  ../bin/drush config:set system.performance css.preprocess 0 --yes ;
+  ../bin/drush config:set system.performance js.preprocess 0 --yes ;
+  ../bin/drush config:set system.logging error_level all --yes ;
+  ../bin/drush cache:rebuild ;
 
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";
@@ -124,4 +117,38 @@ if $install_site ; then
   cd ${vdo_root}/${doc_name};
   sudo chmod 775 -R ${project_name};
   sudo chown www-data:${user_name} -R ${project_name};
+fi
+
+## Add default set of users.
+if $add_users ; then
+
+  # Load the list of default users for Varbase.
+  eval $(parse_yaml ${vdo_config}/users/varbase.users.yml);
+
+  cd ${vdo_root}/${doc_name}/${project_name}/docroot/;
+
+  for user in "${varbase_users[@]}"
+  do
+      user_name="user_${user}_name";
+      user_mail="user_${user}_mail";
+      user_password="user_${user}_password";
+      user_role="user_${user}_role";
+
+      echo " ---------------------------------------------------------------- ";
+      echo "      User name: ${!user_name}";
+      echo "      User mail: ${!user_mail}";
+      echo "  User password: ${!user_password}";
+      echo "      User role: ${!user_role}";
+      echo " ================================================================= ";
+
+      ../bin/drush user:create "${!user_name}" --mail="${!user_mail}" --password="${!user_password}" ;
+    if [ -z "${!user_role}" ]; then
+        ../bin/drush user:role:add "${!user_role}" "${!user_name}" ;
+    fi
+  done
+
+  echo "Start Cache rebuilding ...";
+  ../bin/drush cache:rebuild ;
+
+  cd ${vdo_root}/${doc_name};
 fi
