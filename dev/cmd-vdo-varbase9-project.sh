@@ -85,10 +85,6 @@ if $install_site ; then
   if [ ! -d "${vdo_root}/${doc_name}/${project_name}/vendor/drush/drush" ]; then
     cd ${vdo_root}/${doc_name}/${project_name};
     composer require drush/drush:~10;
-
-    sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name} ;
-    sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name} ;
-
   fi
 
   # Change directory to the docroot.
@@ -115,8 +111,6 @@ if $install_site ; then
   echo "${doc_name} ${project_name} has been installed!!!!";
   echo  "Go to ${base_url}";
   cd ${vdo_root}/${doc_name};
-  sudo chmod 775 -R ${project_name};
-  sudo chown www-data:${user_name} -R ${project_name};
 fi
 
 ## Add default set of users.

@@ -108,8 +108,6 @@ if $install_site ; then
   echo "${doc_name} ${project_name} has been installed!!!!";
   echo  "Go to ${base_url}";
   cd ${vdo_root}/${doc_name};
-  sudo chmod 775 -R ${project_name};
-  sudo chown www-data:${user_name} -R ${project_name};
 fi
 
 
@@ -143,7 +141,6 @@ if $add_users ; then
 
   echo "Start Cache rebuilding ...";
   ../bin/drush cache:rebuild ;
-
 
   cd ${vdo_root}/${doc_name};
 fi
