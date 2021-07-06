@@ -136,8 +136,8 @@ if $add_users ; then
       echo " ================================================================= ";
 
       ../bin/drush user:create "${!user_name}" --mail="${!user_mail}" --password="${!user_password}" ;
-    if [ -z "${!user_role}" ]; then
-        ../bin/drush user:role:add "${!user_role}" "${!user_name}" ;
+    if [ ! -z "${!user_role}" ]; then
+      ../bin/drush user:role:add "${!user_role}" "${!user_name}" ;
     fi
   done
 

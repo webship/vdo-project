@@ -18,7 +18,7 @@ account:
   name: DRUPAL_WEBMASTER_NAME
   pass: DRUPAL_WEBMASTER_PASSWORD
   mail: DRUPAL_WEBMASTER_EMIL
-config_sync_directory: '../config/sync'
+config_sync_directory: ../config/sync
 workspaces:
   - products
   - dev

@@ -57,44 +57,21 @@ git clone --branch 9.0.x git@github.com:Vardot/varbase.git ${vdo_root}/${doc_nam
 sudo rm -rf ${vdo_root}/${doc_name}/${project_name}/config ${vdo_root}/${doc_name}/${project_name}/configbit ${vdo_root}/${doc_name}/${project_name}/css ${vdo_root}/${doc_name}/${project_name}/images ${vdo_root}/${doc_name}/${project_name}/libraries ${vdo_root}/${doc_name}/${project_name}/scripts ${vdo_root}/${doc_name}/${project_name}/src ${vdo_root}/${doc_name}/${project_name}/tests ${vdo_root}/${doc_name}/${project_name}/traslations ${vdo_root}/${doc_name}/${project_name}/varbase.info.yml ${vdo_root}/${doc_name}/${project_name}/varbase.install ${vdo_root}/${doc_name}/${project_name}/varbase.libraries.yml ${vdo_root}/${doc_name}/${project_name}/varbase.profile ${vdo_root}/${doc_name}/${project_name}/varbase.services.yml ${vdo_root}/${doc_name}/${project_name}/yarn.lock
 
 cp ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
-echo "\$databases['default']['default'] = array (
+echo "\$databases['default']['default'] = [
   'database' => '${full_database_name}',
   'username' => '${database_username}',
   'password' => '${database_password}',
+  'host' => '${database_host}',
+  'port' => '${database_port}',
+  'namespace' => '${database_namespace}',
+  'driver' => '${database_driver}',
   'prefix' => '',
-  'host' => 'localhost',
-  'port' => '3306',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
-);" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
+  'collation' => '${database_collation}',
+];" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 
 mkdir ${vdo_root}/${doc_name}/${project_name}/config ;
 mkdir ${vdo_root}/${doc_name}/${project_name}/config/sync ;
-echo "# Deny all requests from Apache 2.4+.
-<IfModule mod_authz_core.c>
-  Require all denied
-</IfModule>
-
-# Deny all requests from Apache 2.0-2.2.
-<IfModule !mod_authz_core.c>
-  Deny from all
-</IfModule>
-
-# Turn off all options we don't need.
-Options -Indexes -ExecCGI -Includes -MultiViews
-
-# Set the catch-all handler to prevent scripts from being executed.
-SetHandler Drupal_Security_Do_Not_Remove_See_SA_2006_006
-<Files *>
-  # Override the handler again if we're run later in the evaluation list.
-  SetHandler Drupal_Security_Do_Not_Remove_See_SA_2013_003
-</Files>
-
-# If we know how to do it safely, disable the PHP engine entirely.
-<IfModule mod_php7.c>
-  php_flag engine off
-</IfModule>" >> ${vdo_root}/${doc_name}/${project_name}/config/sync/.htaccess;
-echo "\$settings['config_sync_directory'] = '../config/sync';" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
+echo "\$settings['config_sync_directory'] = '${config_sync_directory}';" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 
 vdo_build_time=$( date '+%Y-%m-%d %H-%M-%S' );
 echo "// VDO Built time: ${vdo_build_time}" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
