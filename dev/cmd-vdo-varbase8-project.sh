@@ -6,7 +6,7 @@
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.dev.settings.yml);
 
-# Change with the version of Varbase 8.5.x-dev, 8.5.
+# Change with the version of Varbase 8.8.x-dev
 site_version="8.8.x-dev";
 # Change with the version of Varbase 88DEV
 site_version_code="88DEV";
@@ -14,8 +14,6 @@ site_version_code="88DEV";
 
 # Change to true if you want to install varbase.
 install_site=false;
-
-base_url="${web_url}/${project_name}";
 
 # GET the project name argument.
 if [ "$1" != "" ]; then
@@ -69,6 +67,7 @@ sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name}
 sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name}
 
 echo "${doc_name} ${project_name} is ready to install!!!!";
+base_url="${web_url}/${project_name}/docroot";
 echo "Go to ${base_url}";
 
 if $install_site ; then
@@ -76,21 +75,7 @@ if $install_site ; then
   cd ${vdo_root}/${doc_name}/${project_name}/docroot;
 
   # Install Varbase with Drush.
-  drush site-install varbase --yes \
-  --site-name="${doc_name} ${project_name}" \
-  --account-name="${account_name}" \
-  --account-pass="${account_pass}" \
-  --account-mail="${account_mail}" \
-  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" \
-  varbase_multilingual_configuration.enable_multilingual=true \
-  varbase_extra_components.vmi=true \
-  varbase_extra_components.varbase_heroslider_media=true \
-  varbase_extra_components.varbase_carousels=true \
-  varbase_extra_components.varbase_search=true \
-  varbase_extra_components.varbase_blog=true \
-  varbase_extra_components.varbase_auth=true \
-  varbase_development_tools.varbase_development=true -vvv;
-
+  drush site-install varbase --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider_media=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true varbase_development_tools.varbase_development=true -vvv;
   drush pm-enable varbase_styleguide --yes ;
   drush pm-enable vbp_text_and_image --yes ;
   drush pm-enable varbase_media_instagram --yes ;

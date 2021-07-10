@@ -1,12 +1,12 @@
 varbase:
   title: "Varbase"
-  users:
-    - authenticated
-    - editor
-    - content_admin
-    - seo_admin
-    - site_admin
-    - super_admin
+users:
+  - authenticated
+  - editor
+  - content_admin
+  - seo_admin
+  - site_admin
+  - super_admin
 user:
   authenticated:
     name: Normal user

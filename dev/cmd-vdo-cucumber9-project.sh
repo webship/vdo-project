@@ -16,8 +16,6 @@ site_version_code="90DEV";
 install_site=false;
 add_users=false;
 
-base_url="${web_url}/${project_name}";
-
 # GET the project name argument.
 if [ "$1" != "" ]; then
     project_name=$1;
@@ -74,6 +72,7 @@ sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name}
 sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name}
 
 echo "${doc_name} ${project_name} is ready to install!!!!";
+base_url="${web_url}/${project_name}/web";
 echo "Go to ${base_url}";
 
 if $install_site ; then
@@ -93,12 +92,13 @@ if $install_site ; then
   drush config-set system.logging error_level all --yes ;
   drush cr ;
 
+  sudo chmod 775 -R ${project_name};
+  sudo chown www-data:${user_name} -R ${project_name};
+
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";
   echo  "Go to ${base_url}";
   cd ${vdo_root}/${doc_name};
-  sudo chmod 775 -R ${project_name};
-  sudo chown www-data:${user_name} -R ${project_name};
 fi
 
 ## Add default set of users.
@@ -109,7 +109,7 @@ if $add_users ; then
 
   cd ${vdo_root}/${doc_name}/${project_name}/web/;
 
-  for user in "${cucumber_users[@]}"
+  for user in ${users[@]}
   do
       user_name="user_${user}_name";
       user_mail="user_${user}_mail";

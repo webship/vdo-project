@@ -1,18 +1,18 @@
 cucumber:
   title: "Cucumber"
-  users:
-    - authenticated
-    - support
-    - system_admin
-    - programmer
-    - designer
-    - project_manager
-    - product_manager
-    - tester
-    - quality_analysts_manager
-    - analyst
-    - business_analysts_manager
-    - software_development_manager
+users:
+  - authenticated
+  - support
+  - system_admin
+  - programmer
+  - designer
+  - project_manager
+  - product_manager
+  - tester
+  - quality_analysts_manager
+  - analyst
+  - business_analysts_manager
+  - software_development_manager
 user:
   authenticated:
     name: Authenticated user

@@ -4,10 +4,10 @@
 . ${vdo_scripts}/bootstrap.sh ;
 
 # Load workspace settings and extra lists.
-eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
+eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
 
 # Change with the version.
-site_version="9.0.x-dev";
+site_version="~9.0";
 # Change with the version.
 site_version_code="90DEV";
 
@@ -43,7 +43,7 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name};" -vvv
 
-composer create-project webship/vdo:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
+composer create-project webship/webship-project:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
 
 cp ${vdo_root}/${doc_name}/${project_name}/web/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
 echo "\$databases['default']['default'] = [
@@ -75,8 +75,8 @@ if $install_site ; then
   # Change directory to web.
   cd ${vdo_root}/${doc_name}/${project_name}/web/;
 
-  # Install VDO with Drush.
-  drush site-install vdo --yes \
+  # Install Webship with Drush.
+  drush site-install webship --yes \
   --site-name="${doc_name} ${project_name}" \
   --account-name="${account_name}" \
   --account-pass="${account_pass}" \

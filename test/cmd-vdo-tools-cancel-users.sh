@@ -12,20 +12,25 @@ else
   exit 1;
 fi
 
-cd ${vdo_root}/${doc_name}/${project_name}/docroot/;
-
+# GET the user list name argument.
+if [ "$2" != "" ]; then
+    user_list_name=$2;
+else
+  echo "Please add the user list name for the project. And make sure that all user roles are in the project";
+  exit 1;
+fi
 
 if [ ! -d "${vdo_root}/${doc_name}/${project_name}/vendor/drush/drush" ]; then
   cd ${vdo_root}/${doc_name}/${project_name};
   composer require drush/drush:~10;
 fi
 
-# Load the list of default users for vardoc.
-eval $(parse_yaml ${vdo_config}/users/vardoc.users.yml);
+# Load the list of default users for the user list.
+eval $(parse_yaml ${vdo_config}/users/${user_list_name}.users.yml);
 
 cd ${vdo_root}/${doc_name}/${project_name}/docroot/;
 
-for user in "${vardoc_users[@]}"
+for user in ${users[@]}
 do
     user_name="user_${user}_name";
 

@@ -7,13 +7,14 @@
 eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
 
 # Change with the version.
-site_version="8.1.x-dev";
-# Change with the version.
-site_version_code="81DEV";
+site_version="~9.0";
+# Change with the version
+site_version_code="90DEV";
 
 
-# Change to true if you want to install.
+# Default value for arguments.
 install_site=false;
+add_users=false;
 
 base_url="${web_url}/${project_name}";
 
@@ -25,10 +26,17 @@ else
   exit 1;
 fi
 
-# GET install argument to install;
+# GET install argument.
 if [ "$2" != "" ]; then
-  if [ "$2" == "install" ]; then
+  if [ "$2" == "--install" ]; then
     install_site=true;
+  fi
+fi
+
+# GET add users argument to add them to the site.
+if [ "$3" != "" ]; then
+  if [ "$3" == "--add-users" ]; then
+    add_users=true;
   fi
 fi
 
@@ -43,7 +51,7 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name};" -vvv
 
-composer create-project webship/vdo-project:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
+composer create-project webship/cucumber-project:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
 
 cp ${vdo_root}/${doc_name}/${project_name}/web/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
 echo "\$databases['default']['default'] = [
@@ -62,9 +70,6 @@ mkdir ${vdo_root}/${doc_name}/${project_name}/config ;
 mkdir ${vdo_root}/${doc_name}/${project_name}/config/sync ;
 echo "\$settings['config_sync_directory'] = '${config_sync_directory}';" >> ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
 
-vdo_build_time=$( date '+%Y-%m-%d %H-%M-%S' );
-echo "// VDO Built time: ${vdo_build_time}" >> ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
-
 sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name}
 sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name}
 
@@ -72,17 +77,17 @@ echo "${doc_name} ${project_name} is ready to install!!!!";
 echo "Go to ${base_url}";
 
 if $install_site ; then
+
+  if [ ! -d "${vdo_root}/${doc_name}/${project_name}/vendor/drush/drush" ]; then
+    cd ${vdo_root}/${doc_name}/${project_name};
+    composer require drush/drush:~10;
+  fi
+
   # Change directory to web.
   cd ${vdo_root}/${doc_name}/${project_name}/web/;
 
-  # Install VDO with Drush.
-  drush site-install vdo --yes \
-  --site-name="${doc_name} ${project_name}" \
-  --account-name="${account_name}" \
-  --account-pass="${account_pass}" \
-  --account-mail="${account_mail}" \
-  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" ;
-
+  # Install Cucumber with Drush.
+  drush site-install cucumber --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" ;
   drush config-set system.performance css.preprocess 0 --yes ;
   drush config-set system.performance js.preprocess 0 --yes ;
   drush config-set system.logging error_level all --yes ;
@@ -94,4 +99,38 @@ if $install_site ; then
   cd ${vdo_root}/${doc_name};
   sudo chmod 775 -R ${project_name};
   sudo chown www-data:${user_name} -R ${project_name};
+fi
+
+## Add default set of users.
+if $add_users ; then
+
+  # Load the list of default users for cucumber.
+  eval $(parse_yaml ${vdo_config}/users/cucumber.users.yml);
+
+  cd ${vdo_root}/${doc_name}/${project_name}/web/;
+
+  for user in ${users[@]}
+  do
+      user_name="user_${user}_name";
+      user_mail="user_${user}_mail";
+      user_password="user_${user}_password";
+      user_role="user_${user}_role";
+
+      echo " ---------------------------------------------------------------- ";
+      echo "      User name: ${!user_name}";
+      echo "      User mail: ${!user_mail}";
+      echo "  User password: ${!user_password}";
+      echo "      User role: ${!user_role}";
+      echo " ================================================================= ";
+
+      ../bin/drush user:create "${!user_name}" --mail="${!user_mail}" --password="${!user_password}" ;
+    if [ ! -z "${!user_role}" ]; then
+      ../bin/drush user:role:add "${!user_role}" "${!user_name}" ;
+    fi
+  done
+
+  echo "Start Cache rebuilding ...";
+  ../bin/drush cache:rebuild ;
+
+  cd ${vdo_root}/${doc_name};
 fi

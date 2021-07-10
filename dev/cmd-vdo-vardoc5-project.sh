@@ -76,12 +76,7 @@ if $install_site ; then
   cd ${vdo_root}/${doc_name}/${project_name}/docroot;
 
   # Install Varbase with Drush.
-  drush site-install vardoc --yes \
-  --site-name="${doc_name} ${project_name}" \
-  --account-name="${account_name}" \
-  --account-pass="${account_pass}" \
-  --account-mail="${account_mail}" \
-  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" varbase_development_tools.varbase_development=1 -vvv;
+  drush site-install vardoc --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" varbase_development_tools.varbase_development=1 -vvv;
 
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";

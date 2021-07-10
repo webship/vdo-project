@@ -4,7 +4,7 @@
 . ${vdo_scripts}/bootstrap.sh ;
 
 # Load workspace settings and extra lists.
-eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
+eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
 
 echo "*----------------------------------------------------------------------*";
 echo "|  Build Drupal Project                                                |";
@@ -12,8 +12,6 @@ echo "*----------------------------------------------------------------------*";
 
 # Change to true if you want to install varbase.
 install_site=false;
-
-base_url="${web_url}/${project_name}";
 
 # GET the project name argument.
 if [ "$1" != "" ]; then
@@ -41,8 +39,7 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name};" -vvv
 
-composer create-project drupal/recommended-project:~8 ${project_name} --no-interaction ;
-
+composer create-project drupal/recommended-project:~9 ${project_name} --no-interaction ;
 
 cp ${vdo_root}/${doc_name}/${project_name}/web/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
 echo "\$databases['default']['default'] = [
@@ -60,6 +57,7 @@ echo "\$databases['default']['default'] = [
 mkdir ${vdo_root}/${doc_name}/${project_name}/config ;
 mkdir ${vdo_root}/${doc_name}/${project_name}/config/sync ;
 echo "\$settings['config_sync_directory'] = '${config_sync_directory}';" >> ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
+
 vdo_build_time=$( date '+%Y-%m-%d %H-%M-%S' );
 echo "// VDO Built time: ${vdo_build_time}" >> ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
 
@@ -67,19 +65,21 @@ sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name}
 sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name}
 
 echo "${doc_name} ${project_name} is ready to install!!!!";
+base_url="${web_url}/${project_name}";
 echo "Go to ${base_url}";
 
 if $install_site ; then
+
+  if [ ! -d "${vdo_root}/${doc_name}/${project_name}/vendor/drush/drush" ]; then
+    cd ${vdo_root}/${doc_name}/${project_name};
+    composer require drush/drush:~10;
+  fi
+
   # Change directory to the web.
   cd ${vdo_root}/${doc_name}/${project_name}/web;
 
   # Install Drupal with Drush.
-  drush site-install standard --yes \
-  --site-name="${doc_name} ${project_name}" \
-  --account-name="${account_name}" \
-  --account-pass="${account_pass}" \
-  --account-mail="${account_mail}" \
-  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}"  -vvv;
+  drush site-install standard --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}"  -vvv;
 
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";

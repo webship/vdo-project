@@ -13,8 +13,6 @@ echo "*----------------------------------------------------------------------*";
 # Change to true if you want to install varbase.
 install_site=false;
 
-base_url="${web_url}/${project_name}";
-
 # GET the project name argument.
 if [ "$1" != "" ]; then
     project_name=$1;
@@ -23,9 +21,9 @@ else
   exit 1;
 fi
 
-# GET install argument to install;
+# GET install argument.
 if [ "$2" != "" ]; then
-  if [ "$2" == "install" ]; then
+  if [ "$2" == "--install" ]; then
     install_site=true;
   fi
 fi
@@ -66,23 +64,43 @@ echo "// VDO Built time: ${vdo_build_time}" >> ${vdo_root}/${doc_name}/${project
 sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name}
 sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name}
 
-sudo chmod 775 -R ${project_name}
-sudo chown www-data:${user_name} -R ${project_name}
-
 echo "${doc_name} ${project_name} is ready to install!!!!";
+base_url="${web_url}/${project_name}/web";
 echo "Go to ${base_url}";
 
 if $install_site ; then
+
+  if [ ! -d "${vdo_root}/${doc_name}/${project_name}/vendor/drush/drush" ]; then
+    cd ${vdo_root}/${doc_name}/${project_name};
+    composer require drush/drush:~10;
+  fi
+
   # Change directory to the web.
   cd ${vdo_root}/${doc_name}/${project_name}/web;
 
   # Install Drupal with Drush.
-  drush site-install standard --yes \
-  --site-name="${doc_name} ${project_name}" \
-  --account-name="${account_name}" \
-  --account-pass="${account_pass}" \
-  --account-mail="${account_mail}" \
-  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}"  -vvv;
+  drush site-install standard --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}"  -vvv;
+
+  # Send a notification.
+  echo "${doc_name} ${project_name} has been installed!!!!";
+  echo  "Go to ${base_url}";
+  cd ${vdo_root}/${doc_name};
+  sudo chmod 775 -R ${project_name};
+  sudo chown www-data:${user_name} -R ${project_name};
+fi
+
+if $install_site ; then
+
+  if [ ! -d "${vdo_root}/${doc_name}/${project_name}/vendor/drush/drush" ]; then
+    cd ${vdo_root}/${doc_name}/${project_name};
+    composer require drush/drush:~10;
+  fi
+
+  # Change directory to the web.
+  cd ${vdo_root}/${doc_name}/${project_name}/web;
+
+  # Install Drupal with Drush.
+  ../bin/drush site-install standard --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}"  -vvv;
 
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";

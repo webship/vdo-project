@@ -16,8 +16,6 @@ site_version_code="90DEV";
 install_site=false;
 add_users=false;
 
-base_url="${web_url}/${project_name}";
-
 # GET the project name argument.
 if [ "$1" != "" ]; then
     project_name=$1;
@@ -77,6 +75,7 @@ sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name} ;
 sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name} ;
 
 echo "${doc_name} ${project_name} is ready to install!!!!";
+base_url="${web_url}/${project_name}/docroot";
 echo "Go to ${base_url}";
 
 ## Install the site.
@@ -121,7 +120,7 @@ if $add_users ; then
 
   cd ${vdo_root}/${doc_name}/${project_name}/docroot/;
 
-  for user in "${varbase_users[@]}"
+  for user in ${users[@]}
   do
       user_name="user_${user}_name";
       user_mail="user_${user}_mail";
