@@ -1,20 +1,9 @@
 # VDO Project
-[![Build Status](https://travis-ci.org/webship/vdo.svg?branch=9.0.0-alpha3)](https://travis-ci.com/github/webship/vdo/builds/233046847) VDO 9.0.0-alpha3
+[![Build Status](https://travis-ci.org/webship/vdo.svg?branch=9.0.0-alpha4)](https://travis-ci.com/github/webship/vdo/builds/233046847) VDO 9.0.0-alpha4
 
-The Visual Distribution Operator (VDO) management system helps
- distribution maintainers manage the base code and logic
- for the work cycle of development with number of workspaces for
- custom profiles, sub-profiles on local development machines or servers.
-
+Helps Drupal developers manage base code development work cycle for custom distributions/profiles.
 [![VDO](https://raw.githubusercontent.com/webship/vdo/9.0.x/images/logo.svg)](https://www.drupal.org/project/vdo)
 
-## Usage
-
-First you need to [install composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx).
-
-> Note: The instructions below refer to the [global composer installation](https://getcomposer.org/doc/00-intro.md#globally).
-You might need to replace `composer` with `php composer.phar` (or similar) 
-for your setup.
 
 ### Please backup your /var/www/html and your mysql databases;
 ### Try VDO with new systems only.
@@ -196,7 +185,7 @@ Or you could build by composer create project command
 Create a VDO Project 9.0.x with Composer
 To install the most recent stable release of VDO 9.0.x run this command:
 ```
-composer create-project webship/vdo-project:^9.0.0-alpha3 /var/www/html --no-dev --no-interaction
+composer create-project webship/vdo-project:^9.0.0-alpha4 /var/www/html --no-dev --no-interaction
 ```
 
 To install the dev version of VDO 9.0.x run this command:
