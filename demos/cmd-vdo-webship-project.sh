@@ -41,7 +41,7 @@ fi
 
 full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
-mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name};" -vvv
+mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" -vvv
 
 composer create-project webship/webship-project:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
 
