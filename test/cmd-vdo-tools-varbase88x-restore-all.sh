@@ -47,14 +47,38 @@ for version in {0..11..1}
     
   done
 
-for version in {0..11..1}
+sudo composer self-update --1 ;
+
+for version in {0..7..1}
+  do
+    progress_bar ${version} 7 ;
+
+    project_name="varbase${drupal_version}${major_version}${version}";
+
+    if [ ! -d "${vdo_root}/${doc_name}/${project_name}/vendor/drush/drush" ]; then
+      cd ${vdo_root}/${doc_name}/${project_name};
+      composer require drush/drush:~10;
+    fi
+
+    cd ${vdo_root}/${doc_name}/${project_name}/docroot ;
+    ../bin/drush cr ;
+  done
+
+sudo composer self-update --2 ;
+
+for version in {8..11..1}
   do
     progress_bar ${version} 11 ;
 
     project_name="varbase${drupal_version}${major_version}${version}";
 
+    if [ ! -d "${vdo_root}/${doc_name}/${project_name}/vendor/drush/drush" ]; then
+      cd ${vdo_root}/${doc_name}/${project_name};
+      composer require drush/drush:~10;
+    fi
+
     cd ${vdo_root}/${doc_name}/${project_name}/docroot ;
-    drush cr ;
+    ../bin/drush cr ;
   done
 
 cd ${vdo_root}/${doc_name} ;
