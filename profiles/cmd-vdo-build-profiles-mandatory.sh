@@ -13,8 +13,9 @@ echo "*---------------------------------------------------*";
 eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
 
 cd "${vdo_root}/${doc_name}"
-composer create-project drupal-composer/drupal-project:8.x-dev mandatory --stability dev --no-interaction
-cd mandatory
+composer create-project drupal/recommended-project:~9 mandatory --stability dev --no-interaction ;
+cd "${vdo_root}/${doc_name}/mandatory" ;
+composer config minimum-stability dev
 composer require drupal/mandatory ;
 cd "${vdo_root}/${doc_name}";
 

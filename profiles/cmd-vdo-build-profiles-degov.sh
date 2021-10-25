@@ -12,7 +12,7 @@ echo "*---------------------------------------------------*";
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
 
-drush dl degov --drupal-project-rename=degov;
+composer create-project degov/degov-project degov --no-interaction;
 
 full_database_name="${database_prefix}degov";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};"

@@ -12,7 +12,7 @@ echo "*---------------------------------------------------*";
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
 
-composer create-project drupalwxt/wxt-project:8.x-dev wxt --no-interaction;
+composer create-project drupalwxt/wxt-project wxt --no-interaction;
 
 full_database_name="${database_prefix}wxt";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};"

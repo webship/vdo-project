@@ -12,7 +12,7 @@ echo "*---------------------------------------------------*";
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
 
-composer create-project webship/vdo-project:8.1.x-dev vdo --stability dev --no-interaction ;
+composer create-project webship/vdo-project:9.0.x-dev vdo --stability dev --no-interaction ;
 
 full_database_name="${database_prefix}vdo";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};"
