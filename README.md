@@ -106,9 +106,17 @@ After Installing Ubuntu 21.04 for example you could run the following bash comma
 If you get the VDO bash files from
 
 ```
-git clone 9.0.x git@github.com:webship/vdo-project.git /var/www/html
-cd /var/ww/html/
-sudo rm -rf .git
+sudo -s
+rm -rf /var/www/html
+cd /var/www/
+git clone --branch '9.0.x' https://github.com/webship/vdo-project.git
+mv /var/www/vdo-project /var/www/html
+cd /var/www/html/
+rm -rf .git
+composer install -vvv
+rm -rf composer.lock composer.json
+chmod 775 -R .
+chown www-data:$USER -R .
 ```
 
 Then you could edit the VDO config file to work for your system:
