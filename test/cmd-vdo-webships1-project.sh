@@ -4,12 +4,12 @@
 . ${vdo_scripts}/bootstrap.sh ;
 
 # Load workspace settings and extra lists.
-eval $(parse_yaml ${vdo_config}/workspace.dev.settings.yml);
+eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 # Change with the version.
-site_version="9.0.x-dev";
+site_version="1.0.x-dev";
 # Change with the version.
-site_version_code="90DEV";
+site_version_code="10DEV";
 
 
 # Change to true if you want to install.
@@ -43,7 +43,7 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" -vvv
 
-composer create-project webship/vdo-project:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
+composer create-project webships/webships-project:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
 
 cp ${vdo_root}/${doc_name}/${project_name}/web/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
 echo "\$databases['default']['default'] = [
@@ -75,9 +75,8 @@ if $install_site ; then
   # Change directory to web.
   cd ${vdo_root}/${doc_name}/${project_name}/web/;
 
-  # Install VDO with Drush.
-  drush site-install vdo --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" ;
-
+  # Install Webships with Drush.
+  drush site-install webships --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" ;
   drush config-set system.performance css.preprocess 0 --yes ;
   drush config-set system.performance js.preprocess 0 --yes ;
   drush config-set system.logging error_level all --yes ;

@@ -76,12 +76,7 @@ if $install_site ; then
   cd ${vdo_root}/${doc_name}/${project_name}/web/;
 
   # Install VDO with Drush.
-  drush site-install vdo --yes \
-  --site-name="${doc_name} ${project_name}" \
-  --account-name="${account_name}" \
-  --account-pass="${account_pass}" \
-  --account-mail="${account_mail}" \
-  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" ;
+  drush site-install vdo --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" ;
 
   drush config-set system.performance css.preprocess 0 --yes ;
   drush config-set system.performance js.preprocess 0 --yes ;
