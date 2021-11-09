@@ -21,7 +21,7 @@ for project in *; do
         echo "  ${vdo_root}/${doc_name}/${project}/   ";
         echo "=======================================================";
         cd ${vdo_root}/${doc_name}/${project};
-        composer update -v;
+        yes | composer update -v;
     fi;
     cd ${vdo_root}/${doc_name}
 done;
