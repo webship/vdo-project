@@ -7,7 +7,7 @@
 eval $(parse_yaml ${vdo_config}/workspace.dev.settings.yml);
 
 echo "*----------------------------------------------------------------------*";
-echo "|  Build Drupal Project                                                |";
+echo "|  Build Drupal Project uisng the recommended project template         |";
 echo "*----------------------------------------------------------------------*";
 
 # Change to true if you want to install varbase.
@@ -39,7 +39,14 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" -vvv
 
+# Build Drupal using the recommended project template.
 composer create-project drupal/recommended-project:~9 ${project_name} --no-interaction ;
+
+# Go into the project folder.
+cd ${vdo_root}/${doc_name}/${project_name} ;
+
+# Change composer config to let it install dev packages.
+composer config minimum-stability dev ;
 
 cp ${vdo_root}/${doc_name}/${project_name}/web/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
 echo "\$databases['default']['default'] = [
@@ -79,28 +86,16 @@ if $install_site ; then
   cd ${vdo_root}/${doc_name}/${project_name}/web;
 
   # Install Drupal with Drush.
-  drush site-install standard --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}"  -vvv;
-
-  # Send a notification.
-  echo "${doc_name} ${project_name} has been installed!!!!";
-  echo  "Go to ${base_url}";
-  cd ${vdo_root}/${doc_name};
-  sudo chmod 775 -R ${project_name};
-  sudo chown www-data:${user_name} -R ${project_name};
-fi
-
-if $install_site ; then
-
-  if [ ! -d "${vdo_root}/${doc_name}/${project_name}/vendor/drush/drush" ]; then
-    cd ${vdo_root}/${doc_name}/${project_name};
-    composer require drush/drush:~10;
-  fi
-
-  # Change directory to the web.
-  cd ${vdo_root}/${doc_name}/${project_name}/web;
-
-  # Install Drupal with Drush.
-  ../bin/drush site-install standard --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}"  -vvv;
+  ../vendor/drush/drush/drush status ;
+  ../vendor/drush/drush/drush site:install standard --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" --locale="en" install_configure_form.enable_update_status_emails=NULL  --debug -vvv;
+  ../vendor/drush/drush/drush config:set system.performance css.preprocess 0 --yes ;
+  ../vendor/drush/drush/drush config:set system.performance js.preprocess 0 --yes ;
+  ../vendor/drush/drush/drush config:set system.logging error_level all --yes ;
+  ../vendor/drush/drush/drush theme:enable olivero --yes;
+  ../vendor/drush/drush/drush config:set system.theme default olivero --yes ;
+  ../vendor/drush/drush/drush theme:enable claro --yes;
+  ../vendor/drush/drush/drush config:set system.theme admin claro --yes ;
+  ../vendor/drush/drush/drush cache:rebuild ;
 
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";
