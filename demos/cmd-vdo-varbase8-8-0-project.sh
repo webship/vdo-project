@@ -4,20 +4,16 @@
 . ${vdo_scripts}/bootstrap.sh ;
 
 # Load workspace settings and extra lists.
-eval $(parse_yaml ${vdo_config}/workspace.sandboxes.settings.yml);
+eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
 
-# Change with the version of Varbase 8.4.x-dev, 8.4.05, 8.4.06, 8.4.07
-site_version="9.0.x-dev";
-# Change with the version of Varbase 84DEV, 8405, 8406, 8407
-site_version_code="90DEV";
+# Change with the version of Varbase 8.8.x-dev
+site_version="~8";
+# Change with the version of Varbase 88DEV
+site_version_code="88DEV";
 
 
 # Change to true if you want to install varbase.
 install_site=false;
-
-
-
-base_url="${web_url}";
 
 # GET the project name argument.
 if [ "$1" != "" ]; then
@@ -47,8 +43,6 @@ mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_d
 
 composer create-project vardot/varbase-project:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
 
-git clone --branch 9.0.x git@github.com:Vardot/varbase.git ${vdo_root}/${doc_name}/${project_name}/docroot/profiles/varbase;
-
 cp ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 echo "\$databases['default']['default'] = [
   'database' => '${full_database_name}',
@@ -73,31 +67,27 @@ sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name}
 sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name}
 
 echo "${doc_name} ${project_name} is ready to install!!!!";
+base_url="${web_url}/${project_name}/docroot";
 echo "Go to ${base_url}";
 
 if $install_site ; then
-  cd ${vdo_root}/${doc_name}/${project_name};
-  composer require drush/drush:~10;
-
   # Change directory to the docroot.
   cd ${vdo_root}/${doc_name}/${project_name}/docroot;
 
   # Install Varbase with Drush.
-  ../bin/drush site-install varbase --yes --site-name="${doc_name} ${project_name}"  --account-name="${account_name}"  --account-pass="${account_pass}"  --account-mail="${account_mail}"  --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" --locale="en" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider_media=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true  install_configure_form.enable_update_status_emails=NULL --debug -vvv;
-  ../bin/drush pm-enable varbase_development --yes ;
-  ../bin/drush pm-enable varbase_styleguide --yes ;
-  ../bin/drush pm-enable varbase_api --yes ;
-  ../bin/drush pm-enable varbase_content_planner --yes ;
-  ../bin/drush pm-enable varbase_media_instagram --yes ;
-  ../bin/drush pm-enable varbase_media_twitter --yes ;
-  ../bin/drush pm-enable social_auth_google --yes ;
-  ../bin/drush pm-enable social_auth_facebook --yes ;
-  ../bin/drush pm-enable social_auth_twitter --yes ;
-  ../bin/drush pm-enable social_auth_linkedin --yes ;
-  ../bin/drush config-set system.performance css.preprocess 0 --yes ;
-  ../bin/drush config-set system.performance js.preprocess 0 --yes ;
-  ../bin/drush config-set system.logging error_level all --yes ;
-  ../bin/drush cr ;
+  drush site-install varbase --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider_media=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true varbase_development_tools.varbase_development=true -vvv;
+  drush pm-enable varbase_styleguide --yes ;
+  drush pm-enable vbp_text_and_image --yes ;
+  drush pm-enable varbase_media_instagram --yes ;
+  drush pm-enable varbase_media_twitter --yes ;
+  drush pm-enable social_auth_google --yes ;
+  drush pm-enable social_auth_facebook --yes ;
+  drush pm-enable social_auth_twitter --yes ;
+  drush pm-enable social_auth_linkedin --yes ;
+  drush config-set system.performance css.preprocess 0 --yes ;
+  drush config-set system.performance js.preprocess 0 --yes ;
+  drush config-set system.logging error_level all --yes ;
+  drush cr ;
 
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";

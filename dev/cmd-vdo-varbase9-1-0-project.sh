@@ -6,10 +6,10 @@
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.dev.settings.yml);
 
-# Change with the version of Varbase 9.0.x-dev, 9.0.0
-site_version="9.0.x-dev";
-# Change with the version of Varbase 90DEV
-site_version_code="90DEV";
+# Change with the version of Varbase 9.1.x-dev, 9.1.0
+site_version="~9.1.0";
+# Change with the version of Varbase 91DEV
+site_version_code="910DEV";
 
 
 # Default value for arguments.

@@ -4,19 +4,17 @@
 . ${vdo_scripts}/bootstrap.sh ;
 
 # Load workspace settings and extra lists.
-eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
+eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
-# Change with the version.
-site_version="~9.0";
-# Change with the version
-site_version_code="90DEV";
+# Change with the version of Varbase 9.1.x-dev, 9.1.0
+site_version="~9.1.0";
+# Change with the version of Varbase 91DEV
+site_version_code="910DEV";
 
 
 # Default value for arguments.
 install_site=false;
 add_users=false;
-
-base_url="${web_url}/${project_name}";
 
 # GET the project name argument.
 if [ "$1" != "" ]; then
@@ -51,9 +49,9 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" -vvv
 
-composer create-project webship/cucumber-project:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
+composer create-project vardot/varbase-project:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
 
-cp ${vdo_root}/${doc_name}/${project_name}/web/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
+cp ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 echo "\$databases['default']['default'] = [
   'database' => '${full_database_name}',
   'username' => '${database_username}',
@@ -64,18 +62,23 @@ echo "\$databases['default']['default'] = [
   'driver' => '${database_driver}',
   'prefix' => '',
   'collation' => '${database_collation}',
-];" >> ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
+];" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 
 mkdir ${vdo_root}/${doc_name}/${project_name}/config ;
 mkdir ${vdo_root}/${doc_name}/${project_name}/config/sync ;
-echo "\$settings['config_sync_directory'] = '${config_sync_directory}';" >> ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
+echo "\$settings['config_sync_directory'] = '${config_sync_directory}';" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 
-sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name}
-sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name}
+vdo_build_time=$( date '+%Y-%m-%d %H-%M-%S' );
+echo "// VDO Built time: ${vdo_build_time}" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
+
+sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name} ;
+sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name} ;
 
 echo "${doc_name} ${project_name} is ready to install!!!!";
+base_url="${web_url}/${project_name}/docroot";
 echo "Go to ${base_url}";
 
+## Install the site.
 if $install_site ; then
 
   if [ ! -d "${vdo_root}/${doc_name}/${project_name}/vendor/drush/drush" ]; then
@@ -83,31 +86,39 @@ if $install_site ; then
     composer require drush/drush:~10;
   fi
 
-  # Change directory to web.
-  cd ${vdo_root}/${doc_name}/${project_name}/web/;
+  # Change directory to the docroot.
+  cd ${vdo_root}/${doc_name}/${project_name}/docroot;
 
-  # Install Cucumber with Drush.
-  drush site-install cucumber --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" ;
-  drush config-set system.performance css.preprocess 0 --yes ;
-  drush config-set system.performance js.preprocess 0 --yes ;
-  drush config-set system.logging error_level all --yes ;
-  drush cr ;
+  # Install Varbase with Drush.
+  ../bin/drush site:install varbase --yes --site-name="${doc_name} ${project_name}"  --account-name="${account_name}"  --account-pass="${account_pass}"  --account-mail="${account_mail}"  --db-url="mysql://${database_username}:${database_password}@${database_host}:${database_port}/${full_database_name}" --locale="en" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider_media=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true  install_configure_form.enable_update_status_emails=NULL -vvv;
+  ../bin/drush pm:enable varbase_development --yes ;
+  ../bin/drush pm:enable varbase_styleguide --yes ;
+  ../bin/drush pm:enable varbase_api --yes ;
+  ../bin/drush pm:enable varbase_content_planner --yes ;
+  ../bin/drush pm:enable varbase_media_instagram --yes ;
+  ../bin/drush pm:enable varbase_media_twitter --yes ;
+  ../bin/drush pm:enable social_auth_google --yes ;
+  ../bin/drush pm:enable social_auth_facebook --yes ;
+  ../bin/drush pm:enable social_auth_twitter --yes ;
+  ../bin/drush pm:enable social_auth_linkedin --yes ;
+  ../bin/drush config:set system.performance css.preprocess 0 --yes ;
+  ../bin/drush config:set system.performance js.preprocess 0 --yes ;
+  ../bin/drush config:set system.logging error_level all --yes ;
+  ../bin/drush cache:rebuild ;
 
   # Send a notification.
   echo "${doc_name} ${project_name} has been installed!!!!";
   echo  "Go to ${base_url}";
   cd ${vdo_root}/${doc_name};
-  sudo chmod 775 -R ${project_name};
-  sudo chown www-data:${user_name} -R ${project_name};
 fi
 
 ## Add default set of users.
 if $add_users ; then
 
-  # Load the list of default users for cucumber.
-  eval $(parse_yaml ${vdo_config}/users/cucumber.users.yml);
+  # Load the list of default users for Varbase.
+  eval $(parse_yaml ${vdo_config}/users/varbase.users.yml);
 
-  cd ${vdo_root}/${doc_name}/${project_name}/web/;
+  cd ${vdo_root}/${doc_name}/${project_name}/docroot/;
 
   for user in ${users[@]}
   do
