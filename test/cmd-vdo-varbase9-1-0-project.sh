@@ -7,7 +7,7 @@
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 # Change with the version of Varbase 9.1.x-dev, 9.1.0
-site_version="~9.1.0";
+site_version="^9.1.0";
 # Change with the version of Varbase 91DEV
 site_version_code="910DEV";
 
@@ -49,7 +49,7 @@ full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" -vvv
 
-composer create-project vardot/varbase-project:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
+composer create-project vardot/varbase-project:${site_version} ${project_name} --no-interaction -vvv ;
 
 cp ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 echo "\$databases['default']['default'] = [
