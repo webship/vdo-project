@@ -56,8 +56,8 @@ echo "\$databases['default']['default'] = [
   'collation' => '${database_collation}',
 ];" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 
-mkdir ${vdo_root}/${doc_name}/${project_name}/config ;
-mkdir ${vdo_root}/${doc_name}/${project_name}/config/sync ;
+# Create the config/sync folder.
+mkdir -p ${vdo_root}/${doc_name}/${project_name}/config/sync ;
 echo "\$settings['config_sync_directory'] = '${config_sync_directory}';" >> ${vdo_root}/${doc_name}/${project_name}/docroot/sites/default/settings.php ;
 
 vdo_build_time=$( date '+%Y-%m-%d %H-%M-%S' );
@@ -67,5 +67,5 @@ sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name}
 sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name}
 
 echo "${doc_name} ${project_name} is ready to install!!!!";
-base_url="${web_url}/${project_name}/docroot";
+base_url="${vdo_host}/${project_name}/docroot";
 echo "Go to ${base_url}";

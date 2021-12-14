@@ -73,7 +73,7 @@ if [ -d "${project_name}" ]; then
   sudo rm -rf ${project_name} -vvv
 fi
 
-base_url="${web_url}/${project_name}/docroot";
+base_url="${vdo_host}/${project_name}/docroot";
 
 full_database_name="${database_prefix}${project_name}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
