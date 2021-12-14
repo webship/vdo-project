@@ -60,11 +60,11 @@ if [ "$2" != "" ]; then
 fi
 
 # GET Testing path.
-if [ "$2" != "" ]; then
-  testing_path=$2;
+if [ "$3" != "" ]; then
+  testing_path=$3;
 fi
 
-
+shift 3;
 
 # Change directory to the workspace for this full operation.
 cd ${vdo_root}/${doc_name};
@@ -162,11 +162,5 @@ cd ${vdo_root}/${doc_name};
 ## Run the full automated test.
 if $run_automated_testing ; then
   cd ${vdo_root}/${doc_name}/${project_name}/docroot/profiles/varbase;
-
-  full_testing_path="${vdo_root}/${doc_name}/${project_name}/docroot/profiles/varbase/${testing_path}";
-  if [ -d "${full_testing_path}" ]; then
-    ../../../bin/behat ${testing_path} ;
-  else
-    echo "The testing path is not right. Please provide an existing testing feature or directory";
-  fi
+  ../../../bin/behat ${testing_path} ;
 fi
