@@ -72,7 +72,7 @@ sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name}
 sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name}
 
 echo "${doc_name} ${project_name} is ready to install!!!!";
-base_url="${vdo_host}/${doc_name}/${project_name}";
+base_url="http://${vdo_host}/${doc_name}/${project_name}";
 echo "Go to ${base_url}";
 
 if $install_site ; then

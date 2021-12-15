@@ -15,7 +15,7 @@ site_version_code="91DEV";
 # Change to true if you want to install.
 install_site=false;
 
-base_url="${vdo_host}/${doc_name}/${project_name}";
+base_url="http://${vdo_host}/${doc_name}/${project_name}";
 
 # GET the project name argument.
 if [ "$1" != "" ]; then
