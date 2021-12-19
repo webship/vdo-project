@@ -4,10 +4,13 @@ current_path=$(pwd);
 user_name="$USER";
 
 # Include Bash YAML library.
-. ${vdo_scripts}/libs/bash-yaml.sh
+source ${vdo_scripts}/libs/bash-yaml.sh || exit 1 ;
+
+# Include the arguments parser
+source ${vdo_scripts}/libs/argparse.sh || exit 1 ;
 
 # Include Bash Progress Bar library.
-. ${vdo_scripts}/libs/progress-bar.sh
+source ${vdo_scripts}/libs/progress-bar.sh || exit 1 ;
 
 # Load VDO settings.
 eval $(parse_yaml ${vdo_config}/vdo.settings.yml);

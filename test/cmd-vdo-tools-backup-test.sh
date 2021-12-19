@@ -3,7 +3,7 @@
 
 
 # Bootstrap VDO.
-. ${vdo_scripts}/bootstrap.sh ;
+source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 
 # Load the workspace settings extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);

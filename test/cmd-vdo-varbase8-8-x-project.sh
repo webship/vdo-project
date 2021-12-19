@@ -4,15 +4,15 @@
 source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 
 # Load workspace settings and extra lists.
-eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
+eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 # Change with the version of Varbase 8.8.x-dev
-site_version="^8.8.0";
+site_version="8.8.x-dev";
 # Change with the version of Varbase 88DEV
 site_version_code="88DEV";
 
 
-ARGPARSE_DESCRIPTION="Build a Varbase ~8.0 project"
+ARGPARSE_DESCRIPTION="Build a Varbase 8.8.x-dev project"
 argparse "$@" <<EOF || exit 1
 parser.add_argument('PROJECT_NAME',
                     help='The name of the project.')

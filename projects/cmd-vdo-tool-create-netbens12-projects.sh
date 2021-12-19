@@ -1,7 +1,7 @@
 #!/bin/usr/env bash
 
 # Bootstrap VDO.
-. ${vdo_scripts}/bootstrap.sh ;
+source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.projects.settings.yml);

@@ -30,50 +30,50 @@ apt install -y python3;
 add-apt-repository ppa:ondrej/php ;
 apt update;
 apt install -y apache2;
-apt install -y php8.0;
-apt install -y libapache2-mod-php8.0;
-apt install -y php8.0-mbstring;
-apt install -y php8.0-mysql;
-apt install -y php8.0-xml;
-apt install -y php8.0-cgi;
-apt install -y php8.0-cli;
-apt install -y php8.0-common;
-apt install -y php8.0-curl;
-apt install -y php8.0-gd;
-apt install -y php8.0-imap;
-apt install -y php8.0-intl;
-apt install -y php8.0-pspell;
-apt install -y php8.0-sqlite3;
-apt install -y php8.0-tidy;
-apt install -y php8.0-opcache;
-apt install -y php8.0-json;
-apt install -y php8.0-bz2;
-apt install -y php8.0-readline;
-apt install -y php8.0-xmlrpc;
-apt install -y php8.0-enchant;
-apt install -y php8.0-xsl;
+apt install -y php8.1;
+apt install -y libapache2-mod-php8.1;
+apt install -y php8.1-mbstring;
+apt install -y php8.1-mysql;
+apt install -y php8.1-xml;
+apt install -y php8.1-cgi;
+apt install -y php8.1-cli;
+apt install -y php8.1-common;
+apt install -y php8.1-curl;
+apt install -y php8.1-gd;
+apt install -y php8.1-imap;
+apt install -y php8.1-intl;
+apt install -y php8.1-pspell;
+apt install -y php8.1-sqlite3;
+apt install -y php8.1-tidy;
+apt install -y php8.1-opcache;
+apt install -y php8.1-json;
+apt install -y php8.1-bz2;
+apt install -y php8.1-readline;
+apt install -y php8.1-xmlrpc;
+apt install -y php8.1-enchant;
+apt install -y php8.1-xsl;
 apt install -y php-all-dev;
-apt install -y php8.0-zip;
-apt install -y php8.0-bcmath;
+apt install -y php8.1-zip;
+apt install -y php8.1-bcmath;
 apt install -y php-pear;
 
-# Set the Apache2 enable mode to php8.0
-a2enmod php8.0 ;
-update-alternatives --set php /usr/bin/php8.0 ;
+# Set the Apache2 enable mode to php8.1
+a2enmod php8.1 ;
+update-alternatives --set php /usr/bin/php8.1 ;
 service apache2 restart ;
 
 # Make sure important apache modules are enabled.
 a2enmod headers rewrite env mime expires ssl;
 
 # Change PHP variables.
-echo 'max_execution_time = 1200' >> /etc/php/8.0/apache2/php.ini ;
-echo 'max_input_time = 180' >> /etc/php/8.0/apache2/php.ini ;
-echo 'max_input_vars = 10000' >> /etc/php/8.0/apache2/php.ini ;
-echo 'memory_limit = -1' >> /etc/php/8.0/apache2/php.ini ;
-echo 'error_reporting = E_ALL' >> /etc/php/8.0/apache2/php.ini ;
-echo 'post_max_size = 64M' >> /etc/php/8.0/apache2/php.ini ;
-echo 'upload_max_filesize = 32M' >> /etc/php/8.0/apache2/php.ini ;
-echo 'max_file_uploads = 40' >> /etc/php/8.0/apache2/php.ini ;
+echo 'max_execution_time = 1200' >> /etc/php/8.1/apache2/php.ini ;
+echo 'max_input_time = 180' >> /etc/php/8.1/apache2/php.ini ;
+echo 'max_input_vars = 10000' >> /etc/php/8.1/apache2/php.ini ;
+echo 'memory_limit = -1' >> /etc/php/8.1/apache2/php.ini ;
+echo 'error_reporting = E_ALL' >> /etc/php/8.1/apache2/php.ini ;
+echo 'post_max_size = 64M' >> /etc/php/8.1/apache2/php.ini ;
+echo 'upload_max_filesize = 32M' >> /etc/php/8.1/apache2/php.ini ;
+echo 'max_file_uploads = 40' >> /etc/php/8.1/apache2/php.ini ;
 
 service apache2 restart ;
 

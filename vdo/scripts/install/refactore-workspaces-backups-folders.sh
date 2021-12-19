@@ -14,7 +14,7 @@ fi
 current_path=$(pwd);
 
 # Bootstrap VDO.
-. ${vdo_scripts}/bootstrap.sh ;
+source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 
 # Delete old workspace backups.
 for workspace_name in "${workspaces[@]}"

@@ -1,7 +1,7 @@
 #!/bin/usr/env bash
 
 # Bootstrap VDO.
-. ${vdo_scripts}/bootstrap.sh ;
+source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
@@ -65,7 +65,7 @@ if [ "$3" != "" ]; then
   testing_path=$3;
 fi
 
-shift 3;
+shift $#;
 
 
 # Change directory to the workspace for this full operation.

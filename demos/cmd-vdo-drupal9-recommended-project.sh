@@ -4,7 +4,7 @@
 source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 
 # Load workspace settings and extra lists.
-eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
+eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
 
 echo "*----------------------------------------------------------------------*";
 echo "|  Build Drupal Project uisng the recommended project template         |";

@@ -7,9 +7,6 @@ database_username="root";
 database_host="localhost";
 database_password="123___";
 
-# Switch to root user
-sudo -s
-
 # Usefull must have utils.
 apt install -y vim;
 apt install -y links;
@@ -26,6 +23,8 @@ apt install -y sed;
 apt install -y gcc;
 apt install -y g++;
 apt install -y make;
+apt install -y python;
+apt install -y python3;
 
 # PHP
 add-apt-repository ppa:ondrej/php ;
