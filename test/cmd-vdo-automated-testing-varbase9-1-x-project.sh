@@ -6,13 +6,13 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
-# Change with the version of Varbase 9.1.x-dev, 9.1.0
+# Change with the version of Varbase 9.1.x-dev
 site_version="9.1.x-dev";
 # Change with the version of Varbase 91DEV
 site_version_code="91DEV";
 
 
-ARGPARSE_DESCRIPTION="Add new Varbase ~9.0.0 ready Automated testing builds, and install. Then run tests using a real browser or headless browser"
+ARGPARSE_DESCRIPTION="Add new Varbase 9.1.x-dev ready Automated testing builds, and install. Then run tests using a real browser or headless browser"
 argparse "$@" <<EOF || exit 1
 parser.add_argument('PROJECT_NAME',
                     help='The name of the project.')
@@ -58,30 +58,32 @@ base_url="http://${vdo_host}/${doc_name}/${PROJECT_NAME}/docroot";
 run_automated_testing=false;
 headless=true;
 
-if [ ${RUN} == 'yes' ]; then
+if [ "$RUN" == 'yes' ]; then
   run_automated_testing=true;
   headless=false;
 fi
 
-if [ ${RUN_NO_HEADLESS} == 'yes' ]; then
+if [ "$RUN_NO_HEADLESS" == 'yes' ]; then
   run_automated_testing=true;
   headless=false;
 fi
 
-if [ ${RUN_HEADLESS} == 'yes' ]; then
+if [ "$RUN_HEADLESS" == 'yes' ]; then
   run_automated_testing=true;
   headless=true;
 fi
 
-if [ ${HEADLESS} == 'yes' ]; then
+if [ "$HEADLESS" == 'yes' ]; then
   headless=true;
 fi
 
-if [ ${NO_HEADLESS} == 'yes' ]; then
+if [ "$NO_HEADLESS" == 'yes' ]; then
   headless=false;
 fi
 
 shift $#;
+
+base_url="http://${vdo_host}/${doc_name}/${PROJECT_NAME}/docroot";
 
 
 # Change directory to the workspace for this full operation.
