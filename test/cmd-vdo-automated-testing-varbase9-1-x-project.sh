@@ -157,13 +157,17 @@ cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot;
 ../bin/drush config:set system.performance css.preprocess 0 --yes ;
 ../bin/drush config:set system.performance js.preprocess 0 --yes ;
 ../bin/drush config:set system.logging error_level all --yes ;
-../bin/drush cache:rebuild ;
 
 # Enable the Drush Language Command module and add RTL language
 ../bin/drush pm:enable drush_language --yes
 ../bin/drush language-add ar
 ../bin/drush language-info
-../bin/drush cr
+
+## Uninstall Antibot module to let the selenium bot work  
+../bin/drush pm:uninstall antibot --yes
+
+## Rebuild the cache.
+../bin/drush cache:rebuild ;
 
 # Add testing users.
 cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/scripts
