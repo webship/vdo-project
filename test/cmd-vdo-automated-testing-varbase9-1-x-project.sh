@@ -104,6 +104,7 @@ composer require --dev drupal/core-dev:~9.0 ;
 composer require --dev drush/drush:~10;
 composer require --dev drupal/drupal-extension:~4.0 ;
 composer require --dev emuse/behat-html-formatter:^0.2.0 ;
+composer require drupal/drush_language:~1.0 ;
 
 cp ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
 echo "\$databases['default']['default'] = [
@@ -124,15 +125,15 @@ echo "\$settings['config_sync_directory'] = '${config_sync_directory}';" >> ${vd
 vdo_build_time=$( date '+%Y-%m-%d %H-%M-%S' );
 echo "// VDO Built time: ${vdo_build_time}" >> ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
 
-sed -i "s,127.0.0.1:4445/wd/hub,${automated_testing_wd_host},g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/behat.varbase.yml ;
-sed -i "s,http://varbase.test,${base_url},g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/behat.varbase.yml ;
+sed -i "s,127.0.0.1:4445/wd/hub,${automated_testing_wd_host},g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/behat.yml ;
+sed -i "s,http://varbase.test,${base_url},g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/behat.yml ;
 
 webmaster_testing_user_target="webmaster: { email: '${account_mail}', password: '${account_pass}' }" ;
 
-sed -i "s/webmaster: { email: 'webmaster@vardot.com', password: 'dD.123123ddd' }/${webmaster_testing_user_target}/g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/behat.varbase.yml ;
+sed -i "s/webmaster: { email: 'webmaster@vardot.com', password: 'dD.123123ddd' }/${webmaster_testing_user_target}/g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/behat.yml ;
 
 if ! $headless ; then
-  sed -i "s,- \"--headless\",#- \"--headless\",g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/behat.varbase.yml ;
+  sed -i "s,- \"--headless\",#- \"--headless\",g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/behat.yml ;
 fi
 
 sudo chmod 775 -R ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
@@ -158,6 +159,16 @@ cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot;
 ../bin/drush config:set system.logging error_level all --yes ;
 ../bin/drush cache:rebuild ;
 
+# Enable the Drush Language Command module and add RTL language
+../bin/drush pm:enable drush_language --yes
+../bin/drush language-add ar
+../bin/drush language-info
+../bin/drush cr
+
+# Add testing users.
+cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/scripts
+bash add-testing-users.sh
+
 # Send a notification.
 echo "${doc_name} ${PROJECT_NAME} has been installed!!!!";
 echo "-----------------------------------------";
@@ -167,13 +178,15 @@ echo "-----------------------------------------";
 echo " To run the full test with one command:";
 echo " ../../../bin/behat tests/features/varbase"
 echo "-----------------------------------------";
-echo " To run tests in steps";
-echo " ../../../bin/behat tests/features/varbase/step1-init-tests";
-echo " ../../../bin/behat tests/features/varbase/step2-apply-tests";
-echo " ../../../bin/behat tests/features/varbase/step3-cleanup-tests";
+echo " To run tests in Automated Functional Acceptance Testing group";
+echo " ../../../bin/behat tests/features/varbase/01-website-base-requirements/";
+echo " ../../../bin/behat tests/features/varbase/02-user-management/";
+echo " ../../../bin/behat tests/features/varbase/03-admin-management/";
+echo " ../../../bin/behat tests/features/varbase/04-content-structure/";
+echo " ../../../bin/behat tests/features/varbase/05-content-management/";
 echo "-----------------------------------------";
 echo " To run only one feature ";
-echo " ../../../bin/behat tests/features/varbase/step2-apply-tests/01-website-base-requirements/01-01-user-registration_only-admins-login.feature"
+echo " ../../../bin/behat tests/features/varbase/01-website-base-requirements/01-01-user-registration_only-admins-login.feature"
 echo "-----------------------------------------";
 cd ${vdo_root}/${doc_name};
 
