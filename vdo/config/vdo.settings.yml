@@ -20,7 +20,7 @@ account:
   mail: DRUPAL_WEBMASTER_EMIL
 config_sync_directory: ../config/sync
 automated_testing:
-  wd_host: 127.0.0.1:4445/wd/hub
+  wd_host: 127.0.0.1:4444/wd/hub
 workspaces:
   - products
   - dev

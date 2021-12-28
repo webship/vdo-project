@@ -7,11 +7,9 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 # Change with the version of Varbase 9.0.x-dev, 9.0.0
-site_version="^9.0.0";
-# Change with the version of Varbase 90DEV
-site_version_code="900DEV";
+site_version="~9.0";
 
-ARGPARSE_DESCRIPTION="Build a Varbase ~9.0.0 project"
+ARGPARSE_DESCRIPTION="Build a Varbase ${site_version} project"
 argparse "$@" <<EOF || exit 1
 parser.add_argument('PROJECT_NAME',
                     help='The name of the project.')
@@ -120,35 +118,9 @@ if [ "$INSTALL" == 'yes' ] ; then
 
   ## Add default set of users.
   if [ "$ADD_USERS" == 'yes' ] ; then
-
-    # Load the list of default users for Varbase.
-    eval $(parse_yaml ${vdo_config}/users/varbase.users.yml);
-
-    cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/;
-
-    for user in ${users[@]}
-    do
-        user_name="user_${user}_name";
-        user_mail="user_${user}_mail";
-        user_password="user_${user}_password";
-        user_role="user_${user}_role";
-
-        echo " ---------------------------------------------------------------- ";
-        echo "      User name: ${!user_name}";
-        echo "      User mail: ${!user_mail}";
-        echo "  User password: ${!user_password}";
-        echo "      User role: ${!user_role}";
-        echo " ================================================================= ";
-
-        ../bin/drush user:create "${!user_name}" --mail="${!user_mail}" --password="${!user_password}" ;
-      if [ ! -z "${!user_role}" ]; then
-        ../bin/drush user:role:add "${!user_role}" "${!user_name}" ;
-      fi
-    done
-
-    echo "Start Cache rebuilding ...";
-    ../bin/drush cache:rebuild ;
-
+    source ${vdo_scripts}/functions/fun-vdo-users.sh || exit 1 ;
+    USER_LIST_NAME="varbase";
+    add_users ${PROJECT_NAME} ${USER_LIST_NAME};
   fi
 
   # Send a notification.

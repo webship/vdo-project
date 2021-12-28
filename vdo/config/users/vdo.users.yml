@@ -1,0 +1,17 @@
+vdo:
+  title: VDO
+webroot: web
+users:
+  - authenticated
+  - administrator
+user:
+  authenticated:
+    name: Authenticated user
+    mail: test.authenticated@webship.org
+    password: dD.123123ddd
+    role: null
+  administrator:
+    name: Administrator
+    mail: test.administrator@webship.org
+    password: dD.123123ddd
+    role: administrator

@@ -6,16 +6,16 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.projects.settings.yml);
 
-# GET the project name argument.
-if [ "$1" != "" ]; then
-    project_name=$1;
-else
-  echo "Please add the name of your project.";
-  exit 1;
-fi
+ARGPARSE_DESCRIPTION="Backup a project"
+argparse "$@" <<EOF || exit 1
+parser.add_argument('PROJECT_NAME',
+                    help='The name of the project.')
+EOF
 
-full_database_name="${database_prefix}${project_name}";
+shift $#;
+
+full_database_name="${database_prefix}${PROJECT_NAME}";
 
 backup_time=$( date '+%Y-%m-%d_%H-%M-%S' );
-tar -cvzf ${vdo_backups}/${doc_name}/${doc_name}---${project_name}--${backup_time}.tar.gz ${project_name} ;
-mysqldump -u${database_username} -p${database_password} ${full_database_name} > ${vdo_backups}/${doc_name}/${doc_name}---${project_name}--${backup_time}-db.sql ;
+tar -cvzf ${vdo_backups}/${doc_name}/${doc_name}---${PROJECT_NAME}--${backup_time}.tar.gz ${PROJECT_NAME} ;
+mysqldump -u${database_username} -p${database_password} ${full_database_name} > ${vdo_backups}/${doc_name}/${doc_name}---${PROJECT_NAME}--${backup_time}-db.sql ;

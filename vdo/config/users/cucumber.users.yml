@@ -1,5 +1,6 @@
 cucumber:
-  title: "Cucumber"
+  title: Cucumber
+webroot: web
 users:
   - authenticated
   - support

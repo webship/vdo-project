@@ -6,13 +6,13 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.modules.settings.yml);
 
-# GET the Product name argument.
-if [ "$1" != "" ]; then
-    project_name=$1;
-else
-  echo "Please add the name of your module.";
-  exit 1;
-fi
+ARGPARSE_DESCRIPTION="Backup a module folder"
+argparse "$@" <<EOF || exit 1
+parser.add_argument('PROJECT_NAME',
+                    help='The name of the project.')
+EOF
+
+shift $#;
 
 backup_time=$( date '+%Y-%m-%d_%H-%M-%S' );
-tar -cvzf ${vdo_backups}/${doc_name}/${doc_name}---${project_name}--${backup_time}.tar.gz ${project_name} ;
+tar -cvzf ${vdo_backups}/${doc_name}/${doc_name}---${PROJECT_NAME}--${backup_time}.tar.gz ${PROJECT_NAME} ;

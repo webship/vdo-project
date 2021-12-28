@@ -1,5 +1,5 @@
-vardoc:
-  title: Vardoc
+cv:
+  title: CV
 webroot: docroot
 users:
   - authenticated

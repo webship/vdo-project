@@ -8,44 +8,56 @@ eval $(parse_yaml ${vdo_config}/workspace.sandboxes.settings.yml);
 
 # Change with the version.
 site_version="9.1.x-dev";
-# Change with the version.
-site_version_code="91DEV";
 
+ARGPARSE_DESCRIPTION="Build a Webship ${site_version} project"
+argparse "$@" <<EOF || exit 1
+parser.add_argument('PROJECT_NAME',
+                    help='The name of the project.')
+parser.add_argument('-i', '--install',
+                    action='store_true',
+                    default=False,
+                    help='Add the install flag to install the project.')
+parser.add_argument('-a', '--add-users',
+                    action='store_true',
+                    default=False,
+                    help='Add default set of users to the project in the case of install')
+parser.add_argument('-r', '--require',
+                    default="_none_",
+                    nargs='+',
+                    help='Require more modules/themes/libraries by composer. Example: --require "drupal/ctools:~3.0 drupal/token:~1.0"')
+parser.add_argument('-e', '--enable',
+                    default="_none_",
+                    nargs='+',
+                    help='Enable modules right after the install. Example: --enable "media media_library ctools token"')
+EOF
 
-# Change to true if you want to install.
-install_site=false;
+shift $#;
 
-base_url="http://${vdo_host}/${doc_name}/${project_name}";
-
-# GET the project name argument.
-if [ "$1" != "" ]; then
-    project_name=$1;
-else
-  echo "Please add the name of your project.";
-  exit 1;
-fi
-
-# GET install argument to install;
-if [ "$2" != "" ]; then
-  if [ "$2" == "install" ]; then
-    install_site=true;
-  fi
-fi
+base_url="http://${vdo_host}/${doc_name}/${PROJECT_NAME}/web";
 
 # Change directory to the workspace for this full operation.
 cd ${vdo_root}/${doc_name};
 
-if [ -d "${project_name}" ]; then
-  sudo rm -rf ${project_name} -vvv
+if [ -d "${PROJECT_NAME}" ]; then
+  sudo rm -rf ${PROJECT_NAME} -vvv
 fi
 
-full_database_name="${database_prefix}${project_name}";
+full_database_name="${database_prefix}${PROJECT_NAME}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" -vvv
 
-composer create-project webship/webship-project:${site_version} ${project_name} --stability dev --no-interaction -vvv ;
+composer create-project webship/webship-project:${site_version} ${PROJECT_NAME} --no-interaction -vvv ;
 
-cp ${vdo_root}/${doc_name}/${project_name}/web/sites/default/default.settings.php ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
+# Go into the project folder.
+cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
+
+if [ "${REQUIRE}" == '_none_' ] ; then
+  echo "No extra composer required." ;
+else
+  composer require ${REQUIRE} ;
+fi
+
+cp ${vdo_root}/${doc_name}/${PROJECT_NAME}/web/sites/default/default.settings.php ${vdo_root}/${doc_name}/${PROJECT_NAME}/web/sites/default/settings.php ;
 echo "\$databases['default']['default'] = [
   'database' => '${full_database_name}',
   'username' => '${database_username}',
@@ -56,37 +68,56 @@ echo "\$databases['default']['default'] = [
   'driver' => '${database_driver}',
   'prefix' => '',
   'collation' => '${database_collation}',
-];" >> ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
+];" >> ${vdo_root}/${doc_name}/${PROJECT_NAME}/web/sites/default/settings.php ;
 
 # Create the config/sync folder.
-mkdir -p ${vdo_root}/${doc_name}/${project_name}/config/sync ;
-echo "\$settings['config_sync_directory'] = '${config_sync_directory}';" >> ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
+mkdir -p ${vdo_root}/${doc_name}/${PROJECT_NAME}/config/sync ;
+echo "\$settings['config_sync_directory'] = '${config_sync_directory}';" >> ${vdo_root}/${doc_name}/${PROJECT_NAME}/web/sites/default/settings.php ;
 
-vdo_build_time=$( date '+%Y-%m-%d %H-%M-%S' );
-echo "// VDO Built time: ${vdo_build_time}" >> ${vdo_root}/${doc_name}/${project_name}/web/sites/default/settings.php ;
+sudo chmod 775 -R ${vdo_root}/${doc_name}/${PROJECT_NAME}
+sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${PROJECT_NAME}
 
-sudo chmod 775 -R ${vdo_root}/${doc_name}/${project_name}
-sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${project_name}
-
-echo "${doc_name} ${project_name} is ready to install!!!!";
+echo "${doc_name} ${PROJECT_NAME} is ready to install!!!!";
 echo "Go to ${base_url}";
 
-if $install_site ; then
+if [ "$INSTALL" == 'yes' ] ; then
+
+  if [ ! -d "${vdo_root}/${doc_name}/${PROJECT_NAME}/vendor/drush/drush" ]; then
+    cd ${vdo_root}/${doc_name}/${PROJECT_NAME};
+    composer require drush/drush:~10;
+  fi
+
   # Change directory to web.
-  cd ${vdo_root}/${doc_name}/${project_name}/web/;
+  cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/web/;
 
   # Install Webship with Drush.
-  drush site-install webship --yes --site-name="${doc_name} ${project_name}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" ;
+  ../vendor/drush/drush/drush site-install webship --yes --site-name="${doc_name} ${PROJECT_NAME}" --account-name="${account_name}" --account-pass="${account_pass}" --account-mail="${account_mail}" --db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" ;
+  ../vendor/drush/drush/drush config:set system.performance css.preprocess 0 --yes ;
+  ../vendor/drush/drush/drush config:set system.performance js.preprocess 0 --yes ;
+  ../vendor/drush/drush/drush config:set system.logging error_level all --yes ;
+  ../vendor/drush/drush/drush cache:rebuild ;
 
-  drush config-set system.performance css.preprocess 0 --yes ;
-  drush config-set system.performance js.preprocess 0 --yes ;
-  drush config-set system.logging error_level all --yes ;
-  drush cr ;
+  if [ "${ENABLE}" == '_none_' ] ; then
+    echo "No extra selected modules to enlable." ;
+  else
+    ../vendor/drush/drush/drush pm:enable ${ENABLE} --yes;
+  fi
+
+  sudo chmod 775 -R ${PROJECT_NAME};
+  sudo chown www-data:${user_name} -R ${PROJECT_NAME};
+
+
+  ## Add default set of users.
+  if [ "$ADD_USERS" == 'yes' ] ; then
+    source ${vdo_scripts}/functions/fun-vdo-users.sh || exit 1 ;
+    USER_LIST_NAME="webship";
+    add_users ${PROJECT_NAME} ${USER_LIST_NAME};
+  fi
+
 
   # Send a notification.
-  echo "${doc_name} ${project_name} has been installed!!!!";
+  echo "${doc_name} ${PROJECT_NAME} has been installed!!!!";
   echo  "Go to ${base_url}";
+
   cd ${vdo_root}/${doc_name};
-  sudo chmod 775 -R ${project_name};
-  sudo chown www-data:${user_name} -R ${project_name};
 fi

@@ -1,5 +1,5 @@
-vardoc:
-  title: Vardoc
+uber_publisher:
+  title: Uber Publisher
 webroot: docroot
 users:
   - authenticated
