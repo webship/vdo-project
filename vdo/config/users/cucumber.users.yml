@@ -19,7 +19,7 @@ user:
     name: Authenticated user
     mail: test.authenticated@webship.org
     password: dD.123123ddd
-    role: null
+    role: _none_
   support:
     name: Support
     mail: test.support@webship.org

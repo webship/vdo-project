@@ -10,7 +10,7 @@ user:
     name: Authenticated user
     mail: test.authenticated@webship.org
     password: dD.123123ddd
-    role: null
+    role: _none_
   content_admin:
     name: Contnet Admin
     mail: test.content_admin@webship.org

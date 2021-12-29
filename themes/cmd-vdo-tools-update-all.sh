@@ -10,6 +10,6 @@ for project in *; do
     echo "  $project";
     echo "===========================================";
 	cd ${vdo_root}/${doc_name}/${project};
-	composer update --no-interaction -vvv ;
+	composer update --no-interaction  ;
     fi
 done

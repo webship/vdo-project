@@ -9,7 +9,7 @@ user:
     name: Authenticated user
     mail: test.authenticated@webship.org
     password: dD.123123ddd
-    role: null
+    role: _none_
   administrator:
     name: Administrator
     mail: test.administrator@webship.org

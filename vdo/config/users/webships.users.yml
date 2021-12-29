@@ -11,7 +11,7 @@ user:
     name: Authenticated user
     mail: test.authenticated@webship.org
     password: dD.123123ddd
-    role: null
+    role: _none_
   app_admin:
     name: App Admin
     mail: test.app_admin@webship.org

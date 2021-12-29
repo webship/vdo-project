@@ -39,14 +39,14 @@ base_url="http://${vdo_host}/${doc_name}/${PROJECT_NAME}/web";
 cd ${vdo_root}/${doc_name};
 
 if [ -d "${PROJECT_NAME}" ]; then
-  sudo rm -rf ${PROJECT_NAME} -vvv
+  sudo rm -rf ${PROJECT_NAME} 
 fi
 
 full_database_name="${database_prefix}${PROJECT_NAME}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" -vvv
 
-composer create-project webship/cucumber-project:${site_version} ${PROJECT_NAME} --no-interaction -vvv ;
+composer create-project webship/cucumber-project:${site_version} ${PROJECT_NAME} --no-interaction  ;
 
 # Go into the project folder.
 cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
@@ -110,7 +110,7 @@ if [ "$INSTALL" == 'yes' ] ; then
 
   ## Add default set of users.
   if [ "$ADD_USERS" == 'yes' ] ; then
-    source ${vdo_scripts}/functions/fun-vdo-users.sh || exit 1 ;
+    
     USER_LIST_NAME="cucumber";
     add_users ${PROJECT_NAME} ${USER_LIST_NAME};
   fi

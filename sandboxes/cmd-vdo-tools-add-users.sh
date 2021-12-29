@@ -16,5 +16,5 @@ EOF
 
 shift $#;
 
-source ${vdo_scripts}/functions/fun-vdo-users.sh || exit 1 ;
+
 add_users ${PROJECT_NAME} ${USER_LIST_NAME};

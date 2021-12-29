@@ -2,7 +2,7 @@
 
 # Bootstrap VDO.
 source ${vdo_scripts}/bootstrap.sh || exit 1 ;
-source ${vdo_scripts}/functions/fun-vdo-users.sh || exit 1 ;
+
 
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);

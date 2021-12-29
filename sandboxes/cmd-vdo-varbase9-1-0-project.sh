@@ -10,26 +10,7 @@ eval $(parse_yaml ${vdo_config}/workspace.sandboxes.settings.yml);
 site_version="~9.1.0";
 
 ARGPARSE_DESCRIPTION="Build a Varbase ${site_version} project"
-argparse "$@" <<EOF || exit 1
-parser.add_argument('PROJECT_NAME',
-                    help='The name of the project.')
-parser.add_argument('-i', '--install',
-                    action='store_true',
-                    default=False,
-                    help='Add the install flag to install the project.')
-parser.add_argument('-a', '--add-users',
-                    action='store_true',
-                    default=False,
-                    help='Add default set of users to the project in the case of install')
-parser.add_argument('-r', '--require',
-                    default="_none_",
-                    nargs='+',
-                    help='Require more modules/themes/libraries by composer. Example: --require "drupal/ctools:~3.0 drupal/token:~1.0"')
-parser.add_argument('-e', '--enable',
-                    default="_none_",
-                    nargs='+',
-                    help='Enable modules right after the install. Example: --enable "media media_library ctools token"')
-EOF
+source ${vdo_scripts}/args/arg-vdo-varbase.sh || exit 1 ;
 
 shift $#;
 
@@ -39,14 +20,15 @@ base_url="http://${vdo_host}/${doc_name}/${PROJECT_NAME}/docroot";
 cd ${vdo_root}/${doc_name};
 
 if [ -d "${PROJECT_NAME}" ]; then
-  sudo rm -rf ${PROJECT_NAME} -vvv
+  sudo rm -rf ${PROJECT_NAME} 
 fi
 
 full_database_name="${database_prefix}${PROJECT_NAME}";
-mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
-mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" -vvv
+if [ ! "${SKIP_DROP_DATABASE}" == 'yes' ] ; then
+  drop_database;
+fi
 
-composer create-project vardot/varbase-project:${site_version} ${PROJECT_NAME} --no-interaction -vvv ;
+composer create-project vardot/varbase-project:${site_version} ${PROJECT_NAME} --no-interaction  ;
 
 # Go into the project folder.
 cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
@@ -57,25 +39,10 @@ else
   composer require ${REQUIRE} ;
 fi
 
-cp ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
-echo "\$databases['default']['default'] = [
-  'database' => '${full_database_name}',
-  'username' => '${database_username}',
-  'password' => '${database_password}',
-  'host' => '${database_host}',
-  'port' => '${database_port}',
-  'namespace' => '${database_namespace}',
-  'driver' => '${database_driver}',
-  'prefix' => '',
-  'collation' => '${database_collation}',
-];" >> ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
-
-# Create the config/sync folder.
-mkdir -p ${vdo_root}/${doc_name}/${PROJECT_NAME}/config/sync ;
-echo "\$settings['config_sync_directory'] = '${config_sync_directory}';" >> ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
-
-vdo_build_time=$( date '+%Y-%m-%d %H-%M-%S' );
-echo "// VDO Built time: ${vdo_build_time}" >> ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
+## Add default settings file before starting the install.
+if [ ! "$SKIP_SET_DEFULT_SETTINGS" == 'yes' ] ; then
+  set_default_settings ;
+fi
 
 sudo chmod 775 -R ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
 sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
@@ -118,7 +85,7 @@ if [ "$INSTALL" == 'yes' ] ; then
 
   ## Add default set of users.
   if [ "$ADD_USERS" == 'yes' ] ; then
-    source ${vdo_scripts}/functions/fun-vdo-users.sh || exit 1 ;
+    
     USER_LIST_NAME="varbase";
     add_users ${PROJECT_NAME} ${USER_LIST_NAME};
   fi

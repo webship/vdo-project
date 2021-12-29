@@ -28,7 +28,9 @@ function add_users () {
     echo " ================================================================= ";
 
     ../vendor/drush/drush/drush user:create "${!user_name}" --mail="${!user_mail}" --password="${!user_password}" ;
-    if [ ! -z "${!user_role}" ]; then
+    if [ "${!user_role}" == '_none_' ] ; then
+      echo "   No user role for this user" ;
+    else
       ../vendor/drush/drush/drush user:role:add "${!user_role}" "${!user_name}" ;
     fi
   done

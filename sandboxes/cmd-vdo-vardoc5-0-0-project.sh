@@ -34,14 +34,14 @@ fi
 cd ${vdo_root}/${doc_name};
 
 if [ -d "${PROJECT_NAME}" ]; then
-  sudo rm -rf ${PROJECT_NAME} -vvv
+  sudo rm -rf ${PROJECT_NAME} 
 fi
 
 full_database_name="${database_prefix}${PROJECT_NAME}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" -vvv
 
-composer create-project vardot/vardoc-project:${site_version} ${PROJECT_NAME} --no-interaction -vvv ;
+composer create-project vardot/vardoc-project:${site_version} ${PROJECT_NAME} --no-interaction  ;
 
 cp ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
 echo "\$databases['default']['default'] = [
