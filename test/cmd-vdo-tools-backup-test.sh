@@ -8,13 +8,13 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 # Load the workspace settings extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
-# GET the project name argument.
-if [ "$1" != "" ]; then
-    PROJECT_NAME=$1;
-else
-  echo "Please add the name of your project.";
-  exit 1;
-fi
+ARGPARSE_DESCRIPTION="Backup a project"
+argparse "$@" <<EOF || exit 1
+parser.add_argument('PROJECT_NAME',
+                    help='The name of the project.')
+EOF
+
+shift $#;
 
 full_database_name="${database_prefix}${PROJECT_NAME}";
 

@@ -1,0 +1,26 @@
+distribution:
+  name: webship
+  title: Webship
+  webroot: web
+  profile_repo: webship/webship
+  project_template: webship/webship-project
+users:
+  - authenticated
+  - content_admin
+  - administrator
+user:
+  authenticated:
+    name: Authenticated user
+    mail: test.authenticated@webship.org
+    password: dD.123123ddd
+    role: _none_
+  content_admin:
+    name: Contnet Admin
+    mail: test.content_admin@webship.org
+    password: dD.123123ddd
+    role: content_admin
+  administrator:
+    name: Admin
+    mail: test.admin@webship.org
+    password: dD.123123ddd
+    role: administrator

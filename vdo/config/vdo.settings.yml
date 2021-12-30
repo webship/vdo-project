@@ -5,6 +5,7 @@ vdo:
   config: /var/www/html/vdo/config
   host: localhost
   web: http://localhost/vdo
+  protocol: http
   backups: /var/www/html/backups
 database:
   username: DATABASE_USERNAME

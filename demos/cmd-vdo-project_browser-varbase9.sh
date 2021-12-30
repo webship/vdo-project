@@ -11,7 +11,7 @@ echo "|  Build Project Browser module under Varbase 9.1.x-dev                |";
 echo "*----------------------------------------------------------------------*";
 
 
-# Change with the version of Varbase 9.1.x-dev, 9.1.0
+# Set site version.
 site_version="9.1.x-dev";
 
 ARGPARSE_DESCRIPTION="Build a Cucumber ${site_version} project"
@@ -93,10 +93,8 @@ echo "Go to ${base_url}";
 ## Install the site.
 if [ "$INSTALL" == 'yes' ] ; then
 
-  if [ ! -d "${vdo_root}/${doc_name}/${PROJECT_NAME}/vendor/drush/drush" ]; then
-    cd ${vdo_root}/${doc_name}/${PROJECT_NAME};
-    composer require drush/drush:~10;
-  fi
+  # Add Drush if it was not in the system.
+  add_drush ;
 
   # Change directory to the docroot.
   cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot;

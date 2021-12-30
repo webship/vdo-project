@@ -11,10 +11,10 @@ ARGPARSE_DESCRIPTION="Add users to a project"
 argparse "$@" <<EOF || exit 1
 parser.add_argument('PROJECT_NAME',
                     help='The name of the project.')
-parser.add_argument('USER_LIST_NAME',
+parser.add_argument('distribution_NAME',
                     help='The name of the user list for the profile.')
 EOF
 
 shift $#;
 
-add_users ${PROJECT_NAME} ${USER_LIST_NAME};
+add_users ${PROJECT_NAME} ${distribution_NAME};

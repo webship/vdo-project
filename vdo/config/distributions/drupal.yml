@@ -1,0 +1,20 @@
+distribution:
+  name: drupal
+  title: Drupal
+  webroot: web
+  profile_repo: drupal/core
+  project_template: drupal/recommended-project
+users:
+  - authenticated
+  - administrator
+user:
+  authenticated:
+    name: Authenticated user
+    mail: test.authenticated@webship.org
+    password: dD.123123ddd
+    role: _none_
+  administrator:
+    name: Administrator
+    mail: test.administrator@webship.org
+    password: dD.123123ddd
+    role: administrator

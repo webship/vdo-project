@@ -3,15 +3,10 @@
 # Add users to a project.
 function add_users () {
 
-  if [ ! -d "${vdo_root}/${doc_name}/${PROJECT_NAME}/vendor/drush/drush" ]; then
-    cd ${vdo_root}/${doc_name}/${PROJECT_NAME};
-    composer require drush/drush:~10;
-  fi
+  # Add Drush if it was not in the system.
+  add_drush ;
 
-  # Load the list of default users for the user list.
-  eval $(parse_yaml ${vdo_config}/users/${USER_LIST_NAME}.users.yml);
-
-  cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/${webroot}/;
+  cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/${distribution_webroot}/;
 
   for user in ${users[@]}
   do
@@ -44,15 +39,10 @@ function add_users () {
 # Cancle users from a project and delete their content.
 function cancel_users () {
 
-  if [ ! -d "${vdo_root}/${doc_name}/${PROJECT_NAME}/vendor/drush/drush" ]; then
-    cd ${vdo_root}/${doc_name}/${PROJECT_NAME};
-    composer require drush/drush:~10;
-  fi
+  # Add Drush if it was not in the system.
+  add_drush ;
 
-  # Load the list of default users for the user list.
-  eval $(parse_yaml ${vdo_config}/users/${USER_LIST_NAME}.users.yml);
-
-  cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/${webroot}/;
+  cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/${distribution_webroot}/;
 
   for user in ${users[@]}
   do

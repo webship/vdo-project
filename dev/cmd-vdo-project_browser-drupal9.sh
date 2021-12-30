@@ -95,10 +95,8 @@ echo "Go to ${base_url}";
 
 if [ "$INSTALL" == 'yes' ] ; then
 
-  if [ ! -d "${vdo_root}/${doc_name}/${PROJECT_NAME}/vendor/drush/drush" ]; then
-    cd ${vdo_root}/${doc_name}/${PROJECT_NAME};
-    composer require drush/drush:~10;
-  fi
+  # Add Drush if it was not in the system.
+  add_drush ;
 
   # Change directory to the web.
   cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/web;
