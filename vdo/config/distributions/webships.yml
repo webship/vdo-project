@@ -1,5 +1,5 @@
 distribution:
-  name: webships:
+  name: webships
   title: Webships
   webroot: web
   profile_repo: webships/webships

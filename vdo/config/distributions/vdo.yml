@@ -2,6 +2,8 @@ distribution:
   name: vdo
   title: VDO
   webroot: web
+  profile_repo: webship/vdo
+  project_template: webship/vdo-project
 users:
   - authenticated
   - administrator
