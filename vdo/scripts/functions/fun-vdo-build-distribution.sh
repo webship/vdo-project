@@ -2,7 +2,7 @@
 
 function build_distribution() {
   # Include distribution functions.
-  source ${vdo_scripts}/functions/fun-vdo-distribution-${DISTRIBUTION_NAME}.sh || exit 1 ;
+  source ${vdo_scripts}/functions/fun-vdo-distribution-${distribution_name}.sh || exit 1 ;
 
   base_url="${vdo_protocol}://${vdo_host}/${doc_name}/${PROJECT_NAME}/${distribution_webroot}";
 
@@ -50,9 +50,9 @@ function build_distribution() {
     cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/${distribution_webroot};
 
     # Install distribution with Drush.
-    install_${DISTRIBUTION_NAME}_with_drush ;
+    install_${distribution_name}_with_drush ;
     # Enable extra components;
-    enable_${DISTRIBUTION_NAME}_extra_components ;
+    enable_${distribution_name}_extra_components ;
     # Set Aggrigation off and error level all
     drush_set_debug_on;
     # Cache Rebuilding ...

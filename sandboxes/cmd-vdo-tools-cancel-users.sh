@@ -16,5 +16,6 @@ EOF
 
 shift $#;
 
+distribution_name=${DISTRIBUTION_NAME};
 
-cancel_users ${PROJECT_NAME} ${DISTRIBUTION_NAME};
+cancel_users ${PROJECT_NAME} ${distribution_name};

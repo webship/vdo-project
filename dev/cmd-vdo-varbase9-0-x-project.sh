@@ -13,7 +13,7 @@ site_version="9.0.x-dev";
 eval $(parse_yaml ${vdo_config}/distributions/varbase.yml);
 
 ARGPARSE_DESCRIPTION="Build a ${distribution_title} ${site_version} project"
-source ${vdo_scripts}/args/arg-vdo-${DISTRIBUTION_NAME}.sh || exit 1 ;
+source ${vdo_scripts}/args/arg-vdo-${distribution_name}.sh || exit 1 ;
 
 shift $#;
 

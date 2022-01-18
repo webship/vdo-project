@@ -17,4 +17,6 @@ EOF
 
 shift $#;
 
-add_users ${PROJECT_NAME} ${DISTRIBUTION_NAME};
+distribution_name=${DISTRIBUTION_NAME};
+
+add_users ${PROJECT_NAME} ${distribution_name};
