@@ -11,10 +11,10 @@ ARGPARSE_DESCRIPTION="Cancle users from a project and delete their content"
 argparse "$@" <<EOF || exit 1
 parser.add_argument('PROJECT_NAME',
                     help='The name of the project.')
-parser.add_argument('distribution_NAME',
+parser.add_argument('DISTRIBUTION_NAME',
                     help='The name of the user list for the profile.')
 EOF
 
 shift $#;
 
-cancel_users ${PROJECT_NAME} ${distribution_NAME};
+cancel_users ${PROJECT_NAME} ${DISTRIBUTION_NAME};

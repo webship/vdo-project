@@ -12,16 +12,16 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css" integrity="sha384-ekOryaXPbeCpWQNxMwSWVvQ0+1VrStoPJq54shlYhR8HzQgig1v5fas6YgOqLoKz" crossorigin="anonymous">
     <style>
      a {
-       color: #292961;
+       color: #6667ab;
      }
      a:hover,
      a:focus,
      a:active {
-       color: #292961;
+       color: #6667ab;
        opacity: 0.8;
      }
      .display-1 {
-       color: #292961;
+       color: #6667ab;
        font-weight: bold !important;
      }
 
