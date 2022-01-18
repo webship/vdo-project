@@ -32,7 +32,7 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col col-12 py-5">
-            <h1 class="mb-4 display-1 text-center"><a href="/"><img alt="VDO" style="height: 1em;" src="https://raw.githubusercontent.com/webship/vdo/9.0.x/images/logo.svg"> VDO</a> <i class="fab fa-dev fa-1x mr-2"></i> Development</h1>
+            <h1 class="mb-4 display-1 text-center"><a href="/"> VDO</a> <i class="fab fa-dev fa-1x mr-2"></i> Development</h1>
           </div>
         </div>
       </div>
