@@ -23,6 +23,9 @@ function build_distribution() {
   # Go into the project folder.
   cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
 
+  # Change the minimum stablility to dev for development on VDO
+  composer config minimum-stability dev ;
+
   # Require all custom required packages.
   echo "Require all custom required packages.";
   if [ "${REQUIRE}" == '_none_' ] ; then
