@@ -2,8 +2,8 @@ distribution:
   name: webships
   title: Webships
   webroot: web
-  profile_repo: webships/webships
-  project_template: webships/webships-project
+  profile_repo: webship/webships
+  project_template: webship/webships-project
 users:
   - authenticated
   - app_admin
