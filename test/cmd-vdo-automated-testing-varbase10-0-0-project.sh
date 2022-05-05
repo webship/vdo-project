@@ -7,9 +7,9 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 # Set site version.
-site_version="9.1.x-dev";
+site_version="~10.0";
 
-ARGPARSE_DESCRIPTION="Add new Varbase 9.1.x-dev ready Automated testing builds, and install. Then run tests using a real browser or headless browser"
+ARGPARSE_DESCRIPTION="Add new Varbase ~10.0 ready Automated testing builds, and install. Then run tests using a real browser or headless browser"
 argparse "$@" <<EOF || exit 1
 parser.add_argument('PROJECT_NAME',
                     help='The name of the project.')
@@ -38,11 +38,6 @@ parser.add_argument('-s', '--headless',
                     default=False,
                     help='Configure the test as a headless automate test.')
 EOF
-
-shift $#;
-
-base_url="http://${vdo_host}/${doc_name}/${PROJECT_NAME}/docroot";
-
 
 # Help link:
 # Add new Varbase ready Automated testing builds, install,

@@ -4,10 +4,10 @@
 source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 
 # Load workspace settings and extra lists.
-eval $(parse_yaml ${vdo_config}/workspace.dev.settings.yml);
+eval $(parse_yaml ${vdo_config}/workspace.sandboxes.settings.yml);
 
 # Set site version.
-site_version="9.1.x-dev";
+site_version="~10.0";
 
 # Load distribution configs.
 eval $(parse_yaml ${vdo_config}/distributions/varbase.yml);
