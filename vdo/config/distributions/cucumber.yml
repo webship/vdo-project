@@ -6,75 +6,45 @@ distribution:
   project_template: webship/cucumber-project
 users:
   - authenticated
-  - support
-  - system_admin
-  - programmer
-  - designer
-  - project_manager
-  - product_manager
+  - developer
   - tester
-  - quality_analysts_manager
   - analyst
-  - business_analysts_manager
-  - software_development_manager
+  - coordinator
+  - product_owner
+  - administrator
 user:
   authenticated:
     name: Authenticated user
     mail: test.authenticated@webship.org
     password: dD.123123ddd
     role: _none_
-  support:
-    name: Support
-    mail: test.support@webship.org
+  developer:
+    name: Developer
+    mail: test.developer@webship.org
     password: dD.123123ddd
-    role: support
-  system_admin:
-    name: System Admin
-    mail: test.system_admin@webship.org
-    password: dD.123123ddd
-    role: system_admin
-  programmer:
-    name: Programmer
-    mail: test.programmer@webship.org
-    password: dD.123123ddd
-    role: programmer
-  designer:
-    name: Designer
-    mail: test.designer@webship.org
-    password: dD.123123ddd
-    role: designer
-  project_manager:
-    name: Project Manager
-    mail: test.project_manager@webship.org
-    password: dD.123123ddd
-    role: project_manager
-  product_manager:
-    name: Product Manager
-    mail: test.product_manager@webship.org
-    password: dD.123123ddd
-    role: product_manager
+    role: developer
   tester:
     name: Tester
     mail: test.tester@webship.org
     password: dD.123123ddd
     role: tester
-  quality_analysts_manager:
-    name: Quality Analysts Manager
-    mail: test.quality_analysts_manager@webship.org
-    password: dD.123123ddd
-    role: quality_analysts_manager
   analyst:
     name: Analyst
     mail: test.analyst@webship.org
     password: dD.123123ddd
     role: analyst
-  business_analysts_manager:
-    name: Business Analysts Manager
-    mail: test.business_analysts_manager@webship.org
+  coordinator:
+    name: Coordinator
+    mail: test.coordinator@webship.org
     password: dD.123123ddd
-    role: business_analysts_manager
-  software_development_manager:
-    name: Software Development Manager
-    mail: test.software_development_manager@webship.org
+    role: coordinator
+  product_owner:
+    name: Product Owner
+    mail: test.product_owner@webship.org
     password: dD.123123ddd
-    role: software_development_manager
+    role: product_owner
+  administrator:
+    name: Administrator
+    mail: test.administrator@webship.org
+    password: dD.123123ddd
+    role: administrator

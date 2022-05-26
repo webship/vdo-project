@@ -6,7 +6,7 @@ distribution:
   project_template: webship/webship-project
 users:
   - authenticated
-  - content_admin
+  - content_editor
   - administrator
 user:
   authenticated:
@@ -14,13 +14,13 @@ user:
     mail: test.authenticated@webship.org
     password: dD.123123ddd
     role: _none_
-  content_admin:
-    name: Contnet Admin
-    mail: test.content_admin@webship.org
+  content_editor:
+    name: Content editor
+    mail: test.content_editor@webship.org
     password: dD.123123ddd
-    role: content_admin
+    role: content_editor
   administrator:
-    name: Admin
-    mail: test.admin@webship.org
+    name: Webmaster
+    mail: test.Webmaster@webship.org
     password: dD.123123ddd
     role: administrator
