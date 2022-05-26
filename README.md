@@ -1,7 +1,6 @@
 # VDO Project
-[![Build Status](https://travis-ci.org/webship/vdo.svg?branch=9.0.0-alpha4)](https://travis-ci.com/github/webship/vdo/builds/233046847) VDO 9.0.0-alpha4
 
-Helps Drupal developers manage base code development work cycle for custom distributions/profiles.
+Helps Drupal developers manage base code development work cycle for custom distributions/profiles/starter kit templates.
 [![VDO](https://raw.githubusercontent.com/webship/vdo/9.0.x/images/logo.svg)](https://www.drupal.org/project/vdo)
 
 
