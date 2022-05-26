@@ -7,12 +7,12 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 eval $(parse_yaml ${vdo_config}/workspace.dev.settings.yml);
 
 echo "*----------------------------------------------------------------------*";
-echo "|  Build Project Browser module under Varbase 9.1.x-dev                |";
+echo "|  Build Project Browser module under Varbase 10.0.x-dev                |";
 echo "*----------------------------------------------------------------------*";
 
 
 # Set site version.
-site_version="9.1.x-dev";
+site_version="10.0.x-dev";
 
 ARGPARSE_DESCRIPTION="Build a Varbase ${site_version} project"
 argparse "$@" <<EOF || exit 1
