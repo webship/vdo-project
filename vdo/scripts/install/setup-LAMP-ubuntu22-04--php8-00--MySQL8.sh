@@ -1,12 +1,5 @@
 #!/bin/usr/env bash
 
-current_path=$(pwd);
-user_name="$USER";
-
-database_username="root";
-database_host="localhost";
-database_password="123___";
-
 # Usefull must have utils.
 sudo apt install -y vim;
 sudo apt install -y links;
@@ -23,8 +16,8 @@ sudo apt install -y sed;
 sudo apt install -y gcc;
 sudo apt install -y g++;
 sudo apt install -y make;
-sudo apt install -y python;
 sudo apt install -y python3;
+sudo apt install -y python-is-python3;
 
 # PHP
 sudo add-apt-repository ppa:ondrej/php ;
@@ -129,8 +122,19 @@ sudo echo "max_allowed_packet = 32M" >> /etc/mysql/my.cnf ;
 # Restart MySQL service.
 sudo service mysql restart ;
 
-# To change the password for root user.
-sudo mysql -u ${database_username} -e "use mysql;SET PASSWORD FOR '${database_username}'@'${database_host}' = '${database_password}';update user set plugin=\"mysql_native_password\" where User='${database_username}';flush privileges;quit" ;
+# Change the Password for the Root MySQL User.
+sudo mysql -u root
+use mysql;
+SET PASSWORD FOR 'root'@'localhost' = '123___';
+update user set plugin="mysql_native_password" where User='root';
+flush privileges;
+quit;
 
 # Restart MySQL service.
 sudo service mysql restart ;
+
+# In case of facing issues with 'root'@'localhost' login in the terminal or when Drupal is connecting to the MySQL database
+# Set the better MySQL native password by
+sudo mysql_secure_installation
+
+# Do not change the old password from the last step, If the command asks to change the password.
