@@ -92,11 +92,11 @@ mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_d
 composer create-project vardot/varbase-project:${site_version} ${PROJECT_NAME} --no-interaction  ;
 
 cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
-composer require --dev drupal/core-dev:~9.0 ;
-composer require --dev drush/drush:~11.0;
+composer require --dev drupal/core-dev:~9.0 --with-all-dependencies;
+composer require --dev drush/drush:~11.0 --with-all-dependencies;
 composer require --dev drupal/drupal-extension:~4.0 --with-all-dependencies ;
-composer require --dev emuse/behat-html-formatter:^0.2.0 ;
-composer require --dev drevops/behat-screenshot:~1.0 ;
+composer require --dev emuse/behat-html-formatter:^0.2.0 --with-all-dependencies;
+composer require --dev drevops/behat-screenshot:~1.0 --with-all-dependencies;
 composer require drupal/drush_language:~1.0 ;
 
 cp ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
