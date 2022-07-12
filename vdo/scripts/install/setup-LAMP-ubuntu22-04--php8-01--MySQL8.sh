@@ -110,7 +110,7 @@ sudo curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr
 # ------------------------------------------------------------------------------
 sudo git clone https://github.com/drush-ops/drush.git /usr/local/src/drush ;
 cd /usr/local/src/drush ;
-git checkout 11.0.4 ;
+git checkout 11.0.9 ;
 sudo ln -s /usr/local/src/drush/drush /usr/bin/drush ;
 sudo composer install ;
 
