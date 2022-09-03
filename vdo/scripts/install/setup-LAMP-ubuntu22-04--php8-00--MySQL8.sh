@@ -115,6 +115,7 @@ sudo export PATH="$HOME/.config/composer/vendor/bin:$PATH" ;
 # ------------------------------------------------------------------------------
 sudo apt install mysql-client mysql-server ;
 
+sudo su
 sudo echo "[mysqld]" >> /etc/mysql/my.cnf
 sudo echo "default-authentication-plugin=mysql_native_password" >> /etc/mysql/my.cnf ;
 sudo echo "max_allowed_packet = 32M" >> /etc/mysql/my.cnf ;
