@@ -115,6 +115,7 @@ sudo export PATH="$HOME/.config/composer/vendor/bin:$PATH" ;
 # ------------------------------------------------------------------------------
 sudo apt install mysql-client mysql-server ;
 
+sudo su
 sudo echo "[mysqld]" >> /etc/mysql/my.cnf
 sudo echo "default-authentication-plugin=mysql_native_password" >> /etc/mysql/my.cnf ;
 sudo echo "max_allowed_packet = 32M" >> /etc/mysql/my.cnf ;
@@ -125,13 +126,27 @@ sudo service mysql restart ;
 # Change the Password for the Root MySQL User.
 sudo mysql -u root
 use mysql;
-SET PASSWORD FOR 'root'@'localhost' = '123___';
+ALTER USER 'root'@'localhost' IDENTIFIED BY '123___';
 update user set plugin="mysql_native_password" where User='root';
 flush privileges;
 quit;
 
 # Restart MySQL service.
 sudo service mysql restart ;
+
+# Do that same but with 
+sudo mysql -u root
+use mysql;
+ALTER USER 'root'@'localhost' IDENTIFIED BY '123___';
+SET PASSWORD FOR 'root'@'localhost' = '123___';
+flush privileges;
+quit;
+
+# Restart MySQL service again.
+sudo service mysql restart ;
+
+# Test that the password identificatio is working.
+mysql -uroot -p123___
 
 # In case of facing issues with 'root'@'localhost' login in the terminal or when Drupal is connecting to the MySQL database
 # Set the better MySQL native password by
