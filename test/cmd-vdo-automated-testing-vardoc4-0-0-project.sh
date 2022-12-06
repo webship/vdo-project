@@ -138,7 +138,6 @@ cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot;
 # Install vardoc with Drush.
 ../bin/drush site:install vardoc --yes --site-name="${doc_name} ${PROJECT_NAME}"  --account-name="${account_name}"  --account-pass="${account_pass}"  --account-mail="${account_mail}"  --db-url="mysql://${database_username}:${database_password}@${database_host}:${database_port}/${full_database_name}" --locale="en" vardoc_extra_components.vardoc_demo=true -vvv;
 ../bin/drush pm:enable varbase_development --yes ;
-../bin/drush pm:enable varbase_styleguide --yes ;
 ../bin/drush config:set system.performance css.preprocess 0 --yes ;
 ../bin/drush config:set system.performance js.preprocess 0 --yes ;
 ../bin/drush config:set system.logging error_level all --yes ;

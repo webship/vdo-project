@@ -10,7 +10,6 @@ function install_varbase_with_drush() {
 function enable_varbase_extra_components() {
   echo "Enable Varbase extra components.";
   ../vendor/drush/drush/drush pm:enable varbase_development --yes ;
-  ../vendor/drush/drush/drush pm:enable varbase_styleguide --yes ;
   ../vendor/drush/drush/drush pm:enable varbase_api --yes ;
   ../vendor/drush/drush/drush pm:enable varbase_content_planner --yes ;
   ../vendor/drush/drush/drush pm:enable varbase_media_instagram --yes ;
