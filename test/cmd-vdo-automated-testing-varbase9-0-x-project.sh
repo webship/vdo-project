@@ -150,7 +150,7 @@ cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot;
 ../bin/drush config:set system.performance js.preprocess 0 --yes ;
 ../bin/drush config:set system.logging error_level all --yes ;
 
-# Import and Update a RTL language
+# Import and Update local RTL language
 ../bin/drush locale-import ar --autocreate-language profiles/varbase/translations/ar.po
 ../bin/drush locale-update --langcodes=ar
 ../bin/drush cr
