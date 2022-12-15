@@ -98,7 +98,6 @@ composer require --dev drush/drush:~11.0 --with-all-dependencies;
 composer require --dev drupal/drupal-extension:~4.0 --with-all-dependencies ;
 composer require --dev emuse/behat-html-formatter:^0.2.0 --with-all-dependencies;
 composer require --dev drevops/behat-screenshot:~1.0 --with-all-dependencies;
-composer require drupal/drush_language:~1.0 ;
 
 cp ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
 echo "\$databases['default']['default'] = [
@@ -151,10 +150,10 @@ cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot;
 ../bin/drush config:set system.performance js.preprocess 0 --yes ;
 ../bin/drush config:set system.logging error_level all --yes ;
 
-# Enable the Drush Language Command module and add RTL language
-../bin/drush pm:enable drush_language --yes
-../bin/drush language-add ar
-../bin/drush language-info
+# Import and Update a RTL language
+../bin/drush locale-import ar --autocreate-language profiles/varbase/translations/ar.po
+../bin/drush locale-update --langcodes=ar
+../bin/drush cr
 
 ## Uninstall Antibot module to let the selenium bot work  
 ../bin/drush pm:uninstall antibot --yes
