@@ -59,7 +59,7 @@ cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
 composer config minimum-stability dev ;
 
 # Add the Project Browser latest dev version.
-composer require drupal/project_browser:1.0.x-dev ;
+composer require drupal/project_browser:~1.0 ;
 
 if [ "${REQUIRE}" == '_none_' ] ; then
   echo "No extra composer required." ;

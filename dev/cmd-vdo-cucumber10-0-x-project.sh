@@ -4,10 +4,10 @@
 source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 
 # Load workspace settings and extra lists.
-eval $(parse_yaml ${vdo_config}/workspace.demos.settings.yml);
+eval $(parse_yaml ${vdo_config}/workspace.dev.settings.yml);
 
-# Set site version.
-site_version="~9.0";
+# Set the version.
+site_version="10.0.x-dev";
 
 # Load distribution configs.
 eval $(parse_yaml ${vdo_config}/distributions/cucumber.yml);
