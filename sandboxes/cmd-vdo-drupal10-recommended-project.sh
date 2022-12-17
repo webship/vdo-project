@@ -7,7 +7,7 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 eval $(parse_yaml ${vdo_config}/workspace.sandboxes.settings.yml);
 
 # Set site version.
-site_version="^10.0@alpha";
+site_version="~10.0";
 
 # Load distribution configs.
 eval $(parse_yaml ${vdo_config}/distributions/drupal.yml);

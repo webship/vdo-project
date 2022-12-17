@@ -175,7 +175,7 @@ echo ${vdo_config}
 
 If "/var/www/html/vdo/config" was printed,which mean we are ready for the next step.
 
-Only for Ubuntu 21.04 you could run the follwoing command to setup your LAMP. ( You man install LAMP in your own. or copy the bash file change it to work for your system.)
+Only for Ubuntu 21.04 you could run the following command to setup your LAMP. ( You man install LAMP in your own. or copy the bash file change it to work for your system.)
 
 ```
 cd /var/www/html/vdo/scripts/install/
@@ -213,7 +213,7 @@ cd /var/www/html/dev/
 bash cmd-vdo-drupal9-recommended-project.sh drupal9c1 --install
 ```
 
-### Varbase disto for example:
+### Varbase distribution for example:
 ```
 cd /var/www/html/dev/
 bash cmd-vdo-varbase9-project.sh varbase9c1 --install --add-users

@@ -50,7 +50,7 @@ mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS 
 mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" -vvv
 
 # Build Drupal using the recommended project template.
-composer create-project drupal/recommended-project:~9 ${PROJECT_NAME} --no-interaction ;
+composer create-project drupal/recommended-project:~10.0 ${PROJECT_NAME} --no-interaction ;
 
 # Go into the project folder.
 cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
