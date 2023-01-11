@@ -10,8 +10,4 @@ function install_drupal_with_drush() {
 function enable_drupal_extra_components() {
   echo "Enable Drupal extra components.";
 
-  ../vendor/drush/drush/drush theme:enable olivero --yes;
-  ../vendor/drush/drush/drush config:set system.theme default olivero --yes ;
-  ../vendor/drush/drush/drush theme:enable claro --yes;
-  ../vendor/drush/drush/drush config:set system.theme admin claro --yes ;
 }
