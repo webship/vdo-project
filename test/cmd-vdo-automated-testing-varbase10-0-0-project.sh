@@ -144,19 +144,21 @@ cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot;
 ../bin/drush pm:enable social_auth_facebook --yes ;
 ../bin/drush pm:enable social_auth_twitter --yes ;
 ../bin/drush pm:enable social_auth_linkedin --yes ;
-../bin/drush config:set system.performance css.preprocess 0 --yes ;
-../bin/drush config:set system.performance js.preprocess 0 --yes ;
-../bin/drush config:set system.logging error_level all --yes ;
+../bin/drush pm:enable varbase_update_helper --yes ;
+../bin/drush cache:rebuild ;
 
 # Import and Update local RTL language
 ../bin/drush locale-import ar --autocreate-language profiles/varbase/translations/ar.po
 ../bin/drush locale-update --langcodes=ar
-../bin/drush cr
+../bin/drush cache:rebuild ;
 
 ## Uninstall Antibot module to let the selenium bot work  
 ../bin/drush pm:uninstall antibot --yes
 
 ## Rebuild the cache.
+../bin/drush config:set system.performance css.preprocess 0 --yes ;
+../bin/drush config:set system.performance js.preprocess 0 --yes ;
+../bin/drush config:set system.logging error_level all --yes ;
 ../bin/drush cache:rebuild ;
 
 # Add testing users.
