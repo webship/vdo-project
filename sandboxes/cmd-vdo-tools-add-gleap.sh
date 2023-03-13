@@ -13,6 +13,14 @@ parser.add_argument('PROJECT_NAME',
                     help='The name of the project.')
 parser.add_argument('DISTRIBUTION_WEBROOT',
                     help='The Webroot folder name for the project (docroot, web, public_html)')
+parser.add_argument('-e', '--enable',
+                    action='store_true',
+                    default=False,
+                    help='Enable the Gleap module')
+parser.add_argument('-d', '--disable',
+                    action='store_true',
+                    default=False,
+                    help='Disable the Gleap module')
 EOF
 
 shift $#;
@@ -20,3 +28,11 @@ shift $#;
 distribution_webroot=${DISTRIBUTION_WEBROOT};
 
 add_gleap ${PROJECT_NAME} ${distribution_webroot}
+
+if [ "$ENABLE" == 'yes' ]; then
+  enable_gleap ${PROJECT_NAME} ${distribution_webroot}
+fi
+
+if [ "$DISABLE" == 'yes' ]; then
+  disable_gleap ${PROJECT_NAME} ${distribution_webroot}
+fi
