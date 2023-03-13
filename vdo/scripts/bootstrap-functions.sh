@@ -15,5 +15,8 @@ source ${vdo_scripts}/functions/fun-vdo-files.sh || exit 1 ;
 # Include VDO drush functions.
 source ${vdo_scripts}/functions/fun-vdo-drush.sh || exit 1 ;
 
+# Include VDO Gleap functions.
+source ${vdo_scripts}/functions/fun-vdo-gleap.sh || exit 1 ;
+
 # Include VDO distribution functions.
 source ${vdo_scripts}/functions/fun-vdo-build-distribution.sh || exit 1 ;

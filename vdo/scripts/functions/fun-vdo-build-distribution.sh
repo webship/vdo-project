@@ -34,6 +34,11 @@ function build_distribution() {
     composer require ${REQUIRE} ;
   fi
 
+  # Add Gleap 
+  if [ "$GLEAP" == 'yes' ] ; then
+    add_gleap ;
+  fi
+
   ## Add default settings file before starting the install.
   if [ ! "$SKIP_SET_DEFULT_SETTINGS" == 'yes' ] ; then
     set_default_settings ;

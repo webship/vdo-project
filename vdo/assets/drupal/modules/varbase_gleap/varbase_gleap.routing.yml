@@ -1,0 +1,7 @@
+varbase_gleap.varbase_gleap_settings:
+  path: '/admin/config/system/varbase-gleap-settings'
+  defaults:
+    _title: 'Varbase Gleap Settings'
+    _form: 'Drupal\varbase_gleap\Form\VarbaseGleapSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'

@@ -27,4 +27,8 @@ parser.add_argument('-d', '--skip-drop-database',
                     action='store_true',
                     default=False,
                     help='Skip drop the database and create it again before starting the install')
+parser.add_argument('-g', '--gleap',
+                    action='store_true',
+                    default=False,
+                    help='Add the Varbase Gleap module with the Gleap API Key for Varbase reporting to JIRA')
 EOF

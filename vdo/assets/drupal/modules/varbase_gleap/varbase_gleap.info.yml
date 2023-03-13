@@ -1,0 +1,5 @@
+name: 'Varbase Gleap'
+description: 'Add Gleap script for Varbase to be able to report to the Varbase JIRA project'
+type: module
+configure: varbase_gleap.varbase_gleap_settings
+core_version_requirement: ~9.0 || ~10.0

@@ -3,6 +3,7 @@ vdo:
   path: /var/www/html/vdo
   scripts: /var/www/html/vdo/scripts
   config: /var/www/html/vdo/config
+  assets: /var/www/html/vdo/assets
   host: localhost
   web: http://localhost/vdo
   protocol: http

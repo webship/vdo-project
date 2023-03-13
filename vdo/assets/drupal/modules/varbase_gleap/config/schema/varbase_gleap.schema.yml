@@ -1,0 +1,8 @@
+# Schema for the configuration files of the Varbase Gleap module.
+varbase_gleap.settings:
+  type: config_object
+  label: 'Varbase Gleap settings'
+  mapping:
+    varbase_gleap_api_key:
+      type: string
+      label: 'Varbase Gleap API Key'
