@@ -116,15 +116,15 @@ echo "\$settings['config_sync_directory'] = '${config_sync_directory}';" >> ${vd
 vdo_build_time=$( date '+%Y-%m-%d %H-%M-%S' );
 echo "// VDO Built time: ${vdo_build_time}" >> ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
 
-sed -i "s,127.0.0.1:4445/wd/hub,${automated_testing_wd_host},g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/behat.yml ;
-sed -i "s,http://varbase.test,${base_url},g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/behat.yml ;
+sed -i "s,127.0.0.1:4445/wd/hub,${automated_testing_wd_host},g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profile/contrib/varbase/behat.yml ;
+sed -i "s,http://varbase.test,${base_url},g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profile/contrib/varbase/behat.yml ;
 
 webmaster_testing_user_target="webmaster: { email: '${account_mail}', password: '${account_pass}' }" ;
 
-sed -i "s/webmaster: { email: 'webmaster@vardot.com', password: 'dD.123123ddd' }/${webmaster_testing_user_target}/g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/behat.yml ;
+sed -i "s/webmaster: { email: 'webmaster@vardot.com', password: 'dD.123123ddd' }/${webmaster_testing_user_target}/g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profile/contrib/varbase/behat.yml ;
 
 if ! $headless ; then
-  sed -i "s,- \"--headless\",#- \"--headless\",g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/behat.yml ;
+  sed -i "s,- \"--headless\",#- \"--headless\",g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profile/contrib/varbase/behat.yml ;
 fi
 
 sudo chmod 775 -R ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
@@ -148,7 +148,7 @@ cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot;
 ../bin/drush cache:rebuild ;
 
 # Import and Update local RTL language
-../bin/drush locale-import ar --autocreate-language profiles/varbase/translations/ar.po
+../bin/drush locale-import ar --autocreate-language profile/contrib/varbase/translations/ar.po
 ../bin/drush locale-update --langcodes=ar
 ../bin/drush cache:rebuild ;
 
@@ -162,32 +162,32 @@ cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot;
 ../bin/drush cache:rebuild ;
 
 # Add testing users.
-cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/scripts
+cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profile/contrib/varbase/scripts
 bash add-testing-users.sh
 
 # Send a notification.
 echo "${doc_name} ${PROJECT_NAME} has been installed!!!!";
 echo "-----------------------------------------";
 echo " Change direcotry to the project:"
-echo " cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase";
+echo " cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profile/contrib/varbase";
 echo "-----------------------------------------";
 echo " To run the full test with one command:";
-echo " ../../../bin/behat tests/features/varbase"
+echo " ../../../../bin/behat tests/features/varbase"
 echo "-----------------------------------------";
 echo " To run tests in Automated Functional Acceptance Testing group";
-echo " ../../../bin/behat tests/features/varbase/01-website-base-requirements/";
-echo " ../../../bin/behat tests/features/varbase/02-user-management/";
-echo " ../../../bin/behat tests/features/varbase/03-admin-management/";
-echo " ../../../bin/behat tests/features/varbase/04-content-structure/";
-echo " ../../../bin/behat tests/features/varbase/05-content-management/";
+echo " ../../../../bin/behat tests/features/varbase/01-website-base-requirements/";
+echo " ../../../../bin/behat tests/features/varbase/02-user-management/";
+echo " ../../../../bin/behat tests/features/varbase/03-admin-management/";
+echo " ../../../../bin/behat tests/features/varbase/04-content-structure/";
+echo " ../../../../bin/behat tests/features/varbase/05-content-management/";
 echo "-----------------------------------------";
 echo " To run only one feature ";
-echo " ../../../bin/behat tests/features/varbase/01-website-base-requirements/01-01-user-registration_only-admins-login.feature"
+echo " ../../../../bin/behat tests/features/varbase/01-website-base-requirements/01-01-user-registration_only-admins-login.feature"
 echo "-----------------------------------------";
 cd ${vdo_root}/${doc_name};
 
 ## Run the full automated test.
 if $run_automated_testing ; then
-  cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase;
-  ../../../bin/behat ${TESTING_PATH} ;
+  cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profile/contrib/varbase;
+  ../../../../bin/behat ${TESTING_PATH} ;
 fi
