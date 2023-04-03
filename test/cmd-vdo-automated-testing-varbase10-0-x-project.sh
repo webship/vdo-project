@@ -133,7 +133,7 @@ if ! $headless ; then
   sed -i "s,- \"--headless\",#- \"--headless\",g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/contrib/varbase/behat.yml ;
 fi
 
-  sed -i "s,- \"--headless\",#- \"${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot\",g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/contrib/varbase/behat.yml ;
+sed -i "s,- \"/var/www/html/test/varbase/docroot\",\"${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot\",g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/contrib/varbase/behat.yml ;
 
 sudo chmod 775 -R ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
 sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
