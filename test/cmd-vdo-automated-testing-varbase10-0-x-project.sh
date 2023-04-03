@@ -100,6 +100,7 @@ cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
 composer require --dev drupal/core-dev:~10 --with-all-dependencies;
 composer require --dev drush/drush:~11.0 --with-all-dependencies;
 composer require --dev drupal/drupal-extension:5.0.0alpha1 --with-all-dependencies ;
+composer require --dev webship/behat-html-formatter:~1.0 --with-all-dependencies ;
 composer require --dev drevops/behat-screenshot:~1.0 --with-all-dependencies;
 
 cp ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
@@ -131,6 +132,8 @@ sed -i "s/webmaster: { email: 'webmaster@vardot.com', password: 'dD.123123ddd' }
 if ! $headless ; then
   sed -i "s,- \"--headless\",#- \"--headless\",g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/contrib/varbase/behat.yml ;
 fi
+
+  sed -i "s,- \"--headless\",#- \"${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot\",g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/contrib/varbase/behat.yml ;
 
 sudo chmod 775 -R ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
 sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
