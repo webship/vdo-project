@@ -94,7 +94,7 @@ composer create-project vardot/varbase-project:${site_version} ${PROJECT_NAME} -
 cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
 composer require --dev drupal/core-dev:~10 --with-all-dependencies;
 composer require --dev drush/drush:~11.0 --with-all-dependencies;
-composer require --dev drupal/drupal-extension:~5.0 --with-all-dependencies ;
+composer require --dev drupal/drupal-extension:5.0.0alpha1 --with-all-dependencies ;
 composer require --dev drevops/behat-screenshot:~1.0 --with-all-dependencies;
 
 cp ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
