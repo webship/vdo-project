@@ -110,12 +110,12 @@ sudo curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr
 # ------------------------------------------------------------------------------
 sudo git clone https://github.com/drush-ops/drush.git /usr/local/src/drush ;
 cd /usr/local/src/drush ;
-git checkout 11.0.9 ;
+git checkout 12.3.0 ;
 sudo ln -s /usr/local/src/drush/drush /usr/bin/drush ;
 sudo composer install ;
 
 # Install a global Drush via Composer.
-sudo composer global require drush/drush:~11.0 ;
+sudo composer global require drush/drush:~12.0 ;
 sudo export PATH="$HOME/.config/composer/vendor/bin:$PATH" ;
 
 # Install MySQL 8 server.
