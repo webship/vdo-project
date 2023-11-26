@@ -5,7 +5,7 @@ function add_drush() {
   echo "Add Drush if it was not in the system.";
   if [ ! -d "${vdo_root}/${doc_name}/${PROJECT_NAME}/vendor/drush/drush" ]; then
     cd ${vdo_root}/${doc_name}/${PROJECT_NAME};
-    composer require drush/drush:~12.0;
+    composer require "drush/drush:~11 || ~12";
   fi
 }
 
