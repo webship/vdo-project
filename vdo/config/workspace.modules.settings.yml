@@ -145,7 +145,7 @@ modules:
   - varbase_core
   - varbase_editor
   - varbase_email
-  - varbase_heroslider_media
+  - varbase_heroslider
   - varbase_landing
   - varbase_media
   - varbase_search
