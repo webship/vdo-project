@@ -156,6 +156,10 @@ cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot;
 ../bin/drush pm:enable varbase_update_helper --yes ;
 ../bin/drush cache:rebuild ;
 
+# Set the API key and org for OpenAI.
+../bin/drush -y config:set openai.settings api_key ${openai_api_key};
+../bin/drush -y config:set openai.settings api_org ${openai_api_org};
+
 # Import and Update local RTL language
 ../bin/drush locale-import ar --autocreate-language profiles/contrib/varbase/translations/ar.po
 ../bin/drush locale-update --langcodes=ar
