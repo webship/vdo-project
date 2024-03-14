@@ -11,10 +11,15 @@ function enable_varbase_extra_components() {
   echo "Enable Varbase extra components.";
   ../vendor/drush/drush/drush pm:enable varbase_development --yes ;
   ../vendor/drush/drush/drush pm:enable varbase_api --yes ;
+  ../vendor/drush/drush/drush pm:enable varbase_ai --yes ;
   ../vendor/drush/drush/drush pm:enable varbase_content_planner --yes ;
   ../vendor/drush/drush/drush pm:enable varbase_media_instagram --yes ;
   ../vendor/drush/drush/drush pm:enable varbase_media_twitter --yes ;
   ../vendor/drush/drush/drush pm:enable social_auth_facebook --yes ;
   ../vendor/drush/drush/drush pm:enable social_auth_twitter --yes ;
   ../vendor/drush/drush/drush pm:enable social_auth_linkedin --yes ;
+
+  # Set the API key and org for OpenAI.
+  ../bin/drush -y config:set openai.settings api_key ${openai_api_key};
+  ../bin/drush -y config:set openai.settings api_org ${openai_api_org};
 }

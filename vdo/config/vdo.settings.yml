@@ -23,6 +23,9 @@ account:
 config_sync_directory: ../config/sync
 automated_testing:
   wd_host: 127.0.0.1:4444/wd/hub
+openai:
+  api_key: sk-change-this
+  api_org: org-change-this
 workspaces:
   - products
   - dev
