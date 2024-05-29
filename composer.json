@@ -34,8 +34,8 @@
   "require": {
     "composer/installers": "~2",
     "oomphinc/composer-installers-extender": "~2",
-    "drupal/core-composer-scaffold": "~10",
-    "webship/vdo": "10.0.x-dev"
+    "drupal/core-composer-scaffold": "^11",
+    "webship/vdo": "11.0.x-dev"
   },
   "conflict": {
     "drupal/drupal": "*"
