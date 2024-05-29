@@ -1,7 +1,7 @@
 # VDO Project
 
 Helps Drupal developers manage base code development work cycle for custom distributions/profiles/starter kit templates.
-[![VDO](https://raw.githubusercontent.com/webship/vdo/9.0.x/images/logo.svg)](https://www.drupal.org/project/vdo)
+[![VDO](https://raw.githubusercontent.com/webship/vdo/10.0.x/images/logo.svg)](https://www.drupal.org/project/vdo)
 
 
 ### Please backup your /var/www/html and your mysql databases;
@@ -189,15 +189,10 @@ composer install
 ```
 
 Or you could build by composer create project command
-Create a VDO Project 9.0.x with Composer
-To install the most recent stable release of VDO 9.0.x run this command:
-```
-composer create-project webship/vdo-project:^9.0.0-alpha4 /var/www/html --no-dev --no-interaction
-```
 
-To install the dev version of VDO 9.0.x run this command:
+To install the dev version of VDO 10.0.x run this command:
 ```
-composer create-project webship/vdo-project:9.0.x-dev /var/www/html --stability dev --no-interaction
+composer create-project webship/vdo-project:10.0.x-dev /var/www/html --stability dev --no-interaction
 ```
 Status message
 After that delete the composer.josn and composer.lock file from your /var/www/html folder
@@ -210,13 +205,19 @@ To test that the VDO settings are working
 If you go to DEV you can find many bash files that could help you in your development of the profile.
 ```
 cd /var/www/html/dev/
-bash cmd-vdo-drupal9-recommended-project.sh drupal9c1 --install
+bash cmd-vdo-drupal10-recommended-project.sh drupal10c1 --install
 ```
 
-### Varbase distribution for example:
+### Varbase 9.1.x distribution for example:
 ```
 cd /var/www/html/dev/
-bash cmd-vdo-varbase9-project.sh varbase9c1 --install --add-users
+bash cmd-vdo-varbase9-1-x-project.sh varbase9c1 --install --add-users
+```
+
+### Varbase 10.1.x distribution for example:
+```
+cd /var/www/html/dev/
+bash cmd-vdo-varbase10-0-x-project.sh varbase10c1 --install --add-users
 ```
 
 ### Create custom VDO bash:
