@@ -7,7 +7,7 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 eval $(parse_yaml ${vdo_config}/workspace.dev.settings.yml);
 
 # Set site version.
-site_version="10.0.x-dev";
+site_version="10.3.x-dev";
 
 # Load distribution configs.
 eval $(parse_yaml ${vdo_config}/distributions/drupal.yml);
