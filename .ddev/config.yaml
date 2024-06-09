@@ -1,0 +1,15 @@
+type: drupal10
+docroot: web
+webserver_type: apache-fpm
+database:
+  type: mysql
+  version: "8.0"
+mutagen_enabled: false
+use_dns_when_possible: true
+composer_version: "2"
+web_environment: []
+php_version: "8.3"
+nodejs_version: "18"
+webimage_extra_packages: ["php${DDEV_PHP_VERSION}-yaml"]
+dbimage_extra_packages: [sudo]
+project_tld: ddev.vdo
