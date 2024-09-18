@@ -107,7 +107,7 @@ sudo npm install gulp -D ;
 sudo curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin/ --filename=composer --2;
 
 # Install a global Drush via Composer.
-sudo composer global require drush/drush:~12 ;
+sudo composer global require drush/drush:~13 ;
 sudo export PATH="$HOME/.config/composer/vendor/bin:$PATH" ;
 
 # Install MySQL 8 server.
