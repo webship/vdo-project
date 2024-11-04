@@ -7,7 +7,7 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 # Set site version.
-site_version="~10.0.0";
+site_version="~10.1.0";
 
 ARGPARSE_DESCRIPTION="Add new Varbase ~10.0 ready Automated testing builds, and install. Then run tests using a real browser or headless browser"
 argparse "$@" <<EOF || exit 1

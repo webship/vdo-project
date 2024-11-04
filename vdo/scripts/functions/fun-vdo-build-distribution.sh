@@ -10,7 +10,7 @@ function build_distribution() {
   cd ${vdo_root}/${doc_name};
 
   if [ -d "${PROJECT_NAME}" ]; then
-    sudo rm -rf ${PROJECT_NAME} 
+    rm -rf ${PROJECT_NAME} 
   fi
 
   full_database_name="${database_prefix}${PROJECT_NAME}";
@@ -18,7 +18,7 @@ function build_distribution() {
     drop_database;
   fi
 
-  composer create-project ${distribution_project_template}:${site_version} ${PROJECT_NAME} --no-interaction  ;
+  composer create-project ${distribution_project_template}:${site_version} ${PROJECT_NAME} --no-interaction -vvv;
 
   # Go into the project folder.
   cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
@@ -45,7 +45,7 @@ function build_distribution() {
   fi
 
   # Securing file permissions and ownership.
-  set_chmod_chown ;
+  # set_chmod_chown ;
 
   ## Install the site.
   if [ "$INSTALL" == 'yes' ] ; then
