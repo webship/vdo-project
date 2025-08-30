@@ -88,13 +88,12 @@ fi
 
 full_database_name="${database_prefix}${PROJECT_NAME}";
 mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
-mysql -u${database_username} -p${database_password} -e "CREATE DATABASE ${full_database_name} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" -vvv
+ -vvv
 
 composer create-project vardot/vardoc-project:${site_version} ${PROJECT_NAME} --no-interaction  ;
 
 cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
 composer require --dev drupal/core-dev:~9.0 --with-all-dependencies;
-composer require --dev drush/drush:~13 --with-all-dependencies;
 composer require --dev drupal/drupal-extension:~4.0 --with-all-dependencies ;
 composer require --dev emuse/behat-html-formatter:^0.2.0 --with-all-dependencies;
 composer require --dev drevops/behat-screenshot:~1.0 --with-all-dependencies;
