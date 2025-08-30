@@ -41,6 +41,28 @@
       <div class="col col-12 py-5">
       <div class="row">
           <?php
+          function isDdevProject($project_path) {
+              // Only consider it a DDEV project if it has .webimageBuild directory
+              if (is_dir($project_path . '/.ddev/.webimageBuild')) {
+                  return true;
+              }
+              return false;
+          }
+          
+          function getDdevUrl($project_name, $project_path) {
+              $config_file = $project_path . '/.ddev/config.yaml';
+              $project_tld = 'ddev.site'; // default fallback
+              
+              if (is_file($config_file)) {
+                  $config_content = file_get_contents($config_file);
+                  if (preg_match('/^project_tld:\s*(.+)$/m', $config_content, $matches)) {
+                      $project_tld = trim($matches[1]);
+                  }
+              }
+              
+              return 'https://' . $project_name . '.' . $project_tld;
+          }
+          
           $current_directory = getcwd();
           $files = scandir($current_directory);
 
@@ -51,28 +73,42 @@
               $docroot_found = '';
               $href = '';
               
+              $project_path = $current_directory . DIRECTORY_SEPARATOR . $value;
+              $is_ddev = isDdevProject($project_path);
+              
               // Find the first existing document root directory
               foreach($docroot_options as $docroot_option) {
-              if (is_dir($current_directory . DIRECTORY_SEPARATOR . $value . '/' . $docroot_option)) {
+              if (is_dir($project_path . '/' . $docroot_option)) {
                   $docroot_found = $docroot_option;
-                  $href = '/projects/' . $value . '/' . $docroot_option . '/';
+                  if ($is_ddev) {
+                    $href = getDdevUrl($value, $project_path);
+                  } else {
+                    $href = '/projects/' . $value . '/' . $docroot_option . '/';
+                  }
                   break;
               }
               }
               
               // If no document root found, link to the directory itself
               if (empty($href)) {
-              $href = '/projects/' . $value . '/';
-              $docroot_found = 'directory';
+                if ($is_ddev) {
+                  $href = getDdevUrl($value, $project_path);
+                  $docroot_found = 'DDEV project';
+                } else {
+                  $href = '/projects/' . $value . '/';
+                  $docroot_found = 'directory';
+                }
               }
               
               $dir_name = $current_directory . DIRECTORY_SEPARATOR . $value;
+              $build_type = $is_ddev ? 'DDEV' : 'LAMP';
               echo '
               <a href="'. $href . '" class="col col-4 pr-3 py-4 text-center">
               <div class="card border-0 shadow-lg shadow-hover">
                   <div class="card-body">
                       <i class="fab fa-drupal fa-4x mr-2"></i>
                       <h4>' . $value . '</h4>
+                      <p class="mb-1"><small class="text-muted">Build: <strong>' . $build_type . '</strong></small></p>
                       <p class="mb-1"><small class="text-muted">Document root: <strong>' . $docroot_found . '</strong></small></p>
                       <h6>' . date ("Y-m-d H:i", filemtime($dir_name)) . '</h6>
                   </div>
