@@ -26,49 +26,49 @@ sudo apt install -y python-is-python3;
 sudo add-apt-repository ppa:ondrej/php ;
 sudo apt update;
 sudo apt install -y apache2;
-sudo apt install -y php8.2;
-sudo apt install -y libapache2-mod-php8.2;
-sudo apt install -y php8.2-mbstring;
-sudo apt install -y php8.2-mysql;
-sudo apt install -y php8.2-xml;
-sudo apt install -y php8.2-cgi;
-sudo apt install -y php8.2-cli;
-sudo apt install -y php8.2-common;
-sudo apt install -y php8.2-curl;
-sudo apt install -y php8.2-gd;
-sudo apt install -y php8.2-imap;
-sudo apt install -y php8.2-intl;
-sudo apt install -y php8.2-pspell;
-sudo apt install -y php8.2-sqlite3;
-sudo apt install -y php8.2-tidy;
-sudo apt install -y php8.2-opcache;
-sudo apt install -y php8.2-yaml;
-sudo apt install -y php8.2-bz2;
-sudo apt install -y php8.2-readline;
-sudo apt install -y php8.2-xmlrpc;
-sudo apt install -y php8.2-enchant;
-sudo apt install -y php8.2-xsl;
-sudo apt install -y php8.2-zip;
-sudo apt install -y php8.2-bcmath;
+sudo apt install -y php8.4;
+sudo apt install -y libapache2-mod-php8.4;
+sudo apt install -y php8.4-mbstring;
+sudo apt install -y php8.4-mysql;
+sudo apt install -y php8.4-xml;
+sudo apt install -y php8.4-cgi;
+sudo apt install -y php8.4-cli;
+sudo apt install -y php8.4-common;
+sudo apt install -y php8.4-curl;
+sudo apt install -y php8.4-gd;
+sudo apt install -y php8.4-imap;
+sudo apt install -y php8.4-intl;
+sudo apt install -y php8.4-pspell;
+sudo apt install -y php8.4-sqlite3;
+sudo apt install -y php8.4-tidy;
+sudo apt install -y php8.4-opcache;
+sudo apt install -y php8.4-yaml;
+sudo apt install -y php8.4-bz2;
+sudo apt install -y php8.4-readline;
+sudo apt install -y php8.4-xmlrpc;
+sudo apt install -y php8.4-enchant;
+sudo apt install -y php8.4-xsl;
+sudo apt install -y php8.4-zip;
+sudo apt install -y php8.4-bcmath;
 sudo apt install -y php-pear;
 
-# Set the Apache2 enable mode to php8.2
-sudo a2enmod php8.2 ;
-sudo update-alternatives --set php /usr/bin/php8.2 ;
+# Set the Apache2 enable mode to php8.4
+sudo a2enmod php8.4 ;
+sudo update-alternatives --set php /usr/bin/php8.4 ;
 sudo service apache2 restart ;
 
 # Make sure important apache modules are enabled.
 sudo a2enmod headers rewrite env mime expires ssl;
 
 # Change PHP variables.
-sudo echo 'max_execution_time = 1200' >> /etc/php/8.2/apache2/php.ini ;
-sudo echo 'max_input_time = 180' >> /etc/php/8.2/apache2/php.ini ;
-sudo echo 'max_input_vars = 10000' >> /etc/php/8.2/apache2/php.ini ;
-sudo echo 'memory_limit = -1' >> /etc/php/8.2/apache2/php.ini ;
-sudo echo 'error_reporting = E_ALL' >> /etc/php/8.2/apache2/php.ini ;
-sudo echo 'post_max_size = 64M' >> /etc/php/8.2/apache2/php.ini ;
-sudo echo 'upload_max_filesize = 32M' >> /etc/php/8.2/apache2/php.ini ;
-sudo echo 'max_file_uploads = 40' >> /etc/php/8.2/apache2/php.ini ;
+sudo echo 'max_execution_time = 1200' >> /etc/php/8.4/apache2/php.ini ;
+sudo echo 'max_input_time = 180' >> /etc/php/8.4/apache2/php.ini ;
+sudo echo 'max_input_vars = 10000' >> /etc/php/8.4/apache2/php.ini ;
+sudo echo 'memory_limit = -1' >> /etc/php/8.4/apache2/php.ini ;
+sudo echo 'error_reporting = E_ALL' >> /etc/php/8.4/apache2/php.ini ;
+sudo echo 'post_max_size = 64M' >> /etc/php/8.4/apache2/php.ini ;
+sudo echo 'upload_max_filesize = 32M' >> /etc/php/8.4/apache2/php.ini ;
+sudo echo 'max_file_uploads = 40' >> /etc/php/8.4/apache2/php.ini ;
 
 sudo service apache2 restart ;
 
@@ -94,17 +94,15 @@ sudo apt install npm
 # ------------------------------------------------------------------------------
 sudo npm install -g yarn
 
-# Install Gulp : Helps compiling SASS to CSS.
-# ------------------------------------------------------------------------------
-sudo npm install gulp-cli -g ;
-sudo npm install gulp -D ;
+rm -rf ~/.yarn
+mkdir -p ~/.yarn/releases
+curl -L https://repo.yarnpkg.com/4.9.4/packages/yarnpkg-cli/bin/yarn.js -o ~/.yarn/releases/yarn-4.9.4.cjs
+chmod +x ~/.yarn/releases/yarn-4.9.4.cjs
+echo "yarnPath: ~/.yarn/releases/yarn-4.9.4.cjs" > ~/.yarnrc.yml  or echo "yarnPath: /home/$USER/.yarn/releases/yarn-4.9.4.cjs" > ~/.yarnrc.yml
+yarn --version
 
 # Install composer ~2.0.
 sudo curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin/ --filename=composer --2;
-
-# Install a global Drush via Composer.
-sudo composer global require drush/drush:~13 ;
-sudo export PATH="$HOME/.config/composer/vendor/bin:$PATH" ;
 
 # Install MySQL 8 server.
 # ------------------------------------------------------------------------------

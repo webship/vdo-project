@@ -93,18 +93,16 @@ sudo apt install npm
 # Install Yarn as a global by npm.
 # ------------------------------------------------------------------------------
 sudo npm install -g yarn
+rm -rf ~/.yarn
+mkdir -p ~/.yarn/releases
+curl -L https://repo.yarnpkg.com/4.9.4/packages/yarnpkg-cli/bin/yarn.js -o ~/.yarn/releases/yarn-4.9.4.cjs
+chmod +x ~/.yarn/releases/yarn-4.9.4.cjs
+echo "yarnPath: ~/.yarn/releases/yarn-4.9.4.cjs" > ~/.yarnrc.yml  or echo "yarnPath: /home/$USER/.yarn/releases/yarn-4.9.4.cjs" > ~/.yarnrc.yml
+yarn --version
 
-# Install Gulp : Helps compiling SASS to CSS.
-# ------------------------------------------------------------------------------
-sudo npm install gulp-cli -g ;
-sudo npm install gulp -D ;
 
 # Install composer ~2.0.
 sudo curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin/ --filename=composer --2;
-
-# Install a global Drush via Composer.
-sudo composer global require drush/drush:~13 ;
-sudo export PATH="$HOME/.config/composer/vendor/bin:$PATH" ;
 
 # Install MySQL 8 server.
 # ------------------------------------------------------------------------------
