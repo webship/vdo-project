@@ -3,10 +3,6 @@
 current_path=$(pwd);
 user_name="$USER";
 
-database_username="root";
-database_host="localhost";
-database_password="123___";
-
 # Usefull must have utils.
 sudo apt install -y vim;
 sudo apt install -y links;
@@ -30,49 +26,49 @@ sudo apt install -y python-is-python3;
 sudo add-apt-repository ppa:ondrej/php ;
 sudo apt update;
 sudo apt install -y apache2;
-sudo apt install -y php8.2;
-sudo apt install -y libapache2-mod-php8.2;
-sudo apt install -y php8.2-mbstring;
-sudo apt install -y php8.2-mysql;
-sudo apt install -y php8.2-xml;
-sudo apt install -y php8.2-cgi;
-sudo apt install -y php8.2-cli;
-sudo apt install -y php8.2-common;
-sudo apt install -y php8.2-curl;
-sudo apt install -y php8.2-gd;
-sudo apt install -y php8.2-imap;
-sudo apt install -y php8.2-intl;
-sudo apt install -y php8.2-pspell;
-sudo apt install -y php8.2-sqlite3;
-sudo apt install -y php8.2-tidy;
-sudo apt install -y php8.2-opcache;
-sudo apt install -y php8.2-yaml;
-sudo apt install -y php8.2-bz2;
-sudo apt install -y php8.2-readline;
-sudo apt install -y php8.2-xmlrpc;
-sudo apt install -y php8.2-enchant;
-sudo apt install -y php8.2-xsl;
-sudo apt install -y php8.2-zip;
-sudo apt install -y php8.2-bcmath;
+sudo apt install -y php8.3;
+sudo apt install -y libapache2-mod-php8.3;
+sudo apt install -y php8.3-mbstring;
+sudo apt install -y php8.3-mysql;
+sudo apt install -y php8.3-xml;
+sudo apt install -y php8.3-cgi;
+sudo apt install -y php8.3-cli;
+sudo apt install -y php8.3-common;
+sudo apt install -y php8.3-curl;
+sudo apt install -y php8.3-gd;
+sudo apt install -y php8.3-imap;
+sudo apt install -y php8.3-intl;
+sudo apt install -y php8.3-pspell;
+sudo apt install -y php8.3-sqlite3;
+sudo apt install -y php8.3-tidy;
+sudo apt install -y php8.3-opcache;
+sudo apt install -y php8.3-yaml;
+sudo apt install -y php8.3-bz2;
+sudo apt install -y php8.3-readline;
+sudo apt install -y php8.3-xmlrpc;
+sudo apt install -y php8.3-enchant;
+sudo apt install -y php8.3-xsl;
+sudo apt install -y php8.3-zip;
+sudo apt install -y php8.3-bcmath;
 sudo apt install -y php-pear;
 
-# Set the Apache2 enable mode to php8.2
-sudo a2enmod php8.2 ;
-sudo update-alternatives --set php /usr/bin/php8.2 ;
+# Set the Apache2 enable mode to php8.3
+sudo a2enmod php8.3 ;
+sudo update-alternatives --set php /usr/bin/php8.3 ;
 sudo service apache2 restart ;
 
 # Make sure important apache modules are enabled.
 sudo a2enmod headers rewrite env mime expires ssl;
 
 # Change PHP variables.
-sudo echo 'max_execution_time = 1200' >> /etc/php/8.2/apache2/php.ini ;
-sudo echo 'max_input_time = 180' >> /etc/php/8.2/apache2/php.ini ;
-sudo echo 'max_input_vars = 10000' >> /etc/php/8.2/apache2/php.ini ;
-sudo echo 'memory_limit = -1' >> /etc/php/8.2/apache2/php.ini ;
-sudo echo 'error_reporting = E_ALL' >> /etc/php/8.2/apache2/php.ini ;
-sudo echo 'post_max_size = 64M' >> /etc/php/8.2/apache2/php.ini ;
-sudo echo 'upload_max_filesize = 32M' >> /etc/php/8.2/apache2/php.ini ;
-sudo echo 'max_file_uploads = 40' >> /etc/php/8.2/apache2/php.ini ;
+sudo echo 'max_execution_time = 1200' >> /etc/php/8.3/apache2/php.ini ;
+sudo echo 'max_input_time = 180' >> /etc/php/8.3/apache2/php.ini ;
+sudo echo 'max_input_vars = 10000' >> /etc/php/8.3/apache2/php.ini ;
+sudo echo 'memory_limit = -1' >> /etc/php/8.3/apache2/php.ini ;
+sudo echo 'error_reporting = E_ALL' >> /etc/php/8.3/apache2/php.ini ;
+sudo echo 'post_max_size = 64M' >> /etc/php/8.3/apache2/php.ini ;
+sudo echo 'upload_max_filesize = 32M' >> /etc/php/8.3/apache2/php.ini ;
+sudo echo 'max_file_uploads = 40' >> /etc/php/8.3/apache2/php.ini ;
 
 sudo service apache2 restart ;
 
@@ -83,7 +79,7 @@ sudo sed -i -e 's/<\/VirtualHost>/\t<Directory \/var\/www\/html >\n\t\tOptions I
 sudo service apache2 restart ;
 
 # Install node js;
-curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+curl -sL https://deb.nodesource.com/setup_20.x | sudo bash -
 sudo apt update
 sudo apt install -y nodejs ;
 sudo apt install -y build-essential ;
