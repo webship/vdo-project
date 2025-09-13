@@ -97,7 +97,7 @@ rm -rf ~/.yarn
 mkdir -p ~/.yarn/releases
 curl -L https://repo.yarnpkg.com/4.9.4/packages/yarnpkg-cli/bin/yarn.js -o ~/.yarn/releases/yarn-4.9.4.cjs
 chmod +x ~/.yarn/releases/yarn-4.9.4.cjs
-echo "yarnPath: ~/.yarn/releases/yarn-4.9.4.cjs" > ~/.yarnrc.yml  or echo "yarnPath: /home/$USER/.yarn/releases/yarn-4.9.4.cjs" > ~/.yarnrc.yml
+echo "yarnPath: /home/$USER/.yarn/releases/yarn-4.9.4.cjs" > ~/.yarnrc.yml
 yarn --version
 
 
