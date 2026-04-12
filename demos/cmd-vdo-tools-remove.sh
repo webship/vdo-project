@@ -20,6 +20,7 @@ cd ${vdo_root}/${doc_name};
 
 if [ -d "${PROJECT_NAME}" ]; then
   echo "--------------";
+  cd ${PROJECT_NAME} && ddev delete -y -O ; cd ${vdo_root}/${doc_name} ;
   rm -rf ${PROJECT_NAME}
   echo "Deleted: ${vdo_root}/${doc_name}/${PROJECT_NAME}";
   echo "--------------";

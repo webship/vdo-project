@@ -19,7 +19,7 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 # Delete old workspace backups.
 for workspace_name in "${workspaces[@]}"
 do
-  sudo rm -rf ${vdo_backups}/${workspace_name};
+  rm -rf ${vdo_backups}/${workspace_name};
   mkdir ${vdo_backups}/${workspace_name};
   printf "# %s Backups\n\nWe place our %s backups in this folder\n" "${workspace_name}" "${workspace_name}" >> ${vdo_backups}/${workspace_name}/README.md
 done
