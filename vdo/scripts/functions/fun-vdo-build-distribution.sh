@@ -11,7 +11,16 @@ function build_distribution() {
     rm -rf ${PROJECT_NAME}
   fi
 
-  ddev composer create-project ${distribution_project_template}:${site_version} ${PROJECT_NAME} --no-interaction -vvv;
+  mkdir ${PROJECT_NAME} ;
+  cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
+
+  ddev config --project-type=drupal --docroot=${distribution_webroot} --php-version=8.4 ;
+  ddev start ;
+
+  # Enable Corepack for yarn modern.
+  ddev exec corepack enable ;
+
+  ddev composer create-project ${distribution_project_template}:${site_version} ${vdo_root}/${doc_name}/${PROJECT_NAME} --no-interaction -vvv;
 
   # Go into the project folder.
   cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
