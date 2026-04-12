@@ -83,33 +83,18 @@ base_url="http://${vdo_host}/${doc_name}/${PROJECT_NAME}/docroot";
 cd ${vdo_root}/${doc_name};
 
 if [ -d "${PROJECT_NAME}" ]; then
-  sudo rm -rf ${PROJECT_NAME} 
+  rm -rf ${PROJECT_NAME} 
 fi
 
-full_database_name="${database_prefix}${PROJECT_NAME}";
-mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
- -vvv
 
-composer create-project vardot/vardoc-project:${site_version} ${PROJECT_NAME} --no-interaction  ;
+ddev composer create-project vardot/vardoc-project:${site_version} ${PROJECT_NAME} --no-interaction  ;
 
 cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
-composer require --dev drupal/core-dev:~9.0 --with-all-dependencies;
-composer require --dev drupal/drupal-extension:~4.0 --with-all-dependencies ;
-composer require --dev emuse/behat-html-formatter:^0.2.0 --with-all-dependencies;
-composer require --dev drevops/behat-screenshot:~1.0 --with-all-dependencies;
+ddev composer require --dev drupal/core-dev:~9.0 --with-all-dependencies;
+ddev composer require --dev drupal/drupal-extension:~4.0 --with-all-dependencies ;
+ddev composer require --dev emuse/behat-html-formatter:^0.2.0 --with-all-dependencies;
+ddev composer require --dev drevops/behat-screenshot:~1.0 --with-all-dependencies;
 
-cp ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
-echo "\$databases['default']['default'] = [
-  'database' => '${full_database_name}',
-  'username' => '${database_username}',
-  'password' => '${database_password}',
-  'host' => '${database_host}',
-  'port' => '${database_port}',
-  'namespace' => '${database_namespace}',
-  'driver' => '${database_driver}',
-  'prefix' => '',
-  'collation' => '${database_collation}',
-];" >> ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
 
 mkdir -p ${vdo_root}/${doc_name}/${PROJECT_NAME}/config/sync ;
 echo "\$settings['config_sync_directory'] = '${config_sync_directory}';" >> ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
@@ -128,25 +113,23 @@ if ! $headless ; then
   sed -i "s,- \"--headless\",#- \"--headless\",g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/vardoc/behat.yml ;
 fi
 
-sudo chmod 775 -R ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
-sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
 
 # Change directory to the docroot.
 cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot;
 
 # Install vardoc with Drush.
-../bin/drush site:install vardoc --yes --site-name="${doc_name} ${PROJECT_NAME}"  --account-name="${account_name}"  --account-pass="${account_pass}"  --account-mail="${account_mail}"  --db-url="mysql://${database_username}:${database_password}@${database_host}:${database_port}/${full_database_name}" --locale="en"  vardoc_extra_components.vardoc_demo=true -vvv;
-../bin/drush pm:enable varbase_development --yes ;
-../bin/drush config:set system.performance css.preprocess 0 --yes ;
-../bin/drush config:set system.performance js.preprocess 0 --yes ;
-../bin/drush config:set system.logging error_level all --yes ;
+ddev drush site:install vardoc --yes --site-name="${doc_name} ${PROJECT_NAME}"  --account-name="${account_name}"  --account-pass="${account_pass}"  --account-mail="${account_mail}"  --locale="en"  vardoc_extra_components.vardoc_demo=true -vvv;
+ddev drush pm:enable varbase_development --yes ;
+ddev drush config:set system.performance css.preprocess 0 --yes ;
+ddev drush config:set system.performance js.preprocess 0 --yes ;
+ddev drush config:set system.logging error_level all --yes ;
 
 
 ## Uninstall Antibot module to let the selenium bot work  
-../bin/drush pm:uninstall antibot --yes
+ddev drush pm:uninstall antibot --yes
 
 ## Rebuild the cache.
-../bin/drush cache:rebuild ;
+ddev drush cache:rebuild ;
 
 # Add testing users.
 cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/vardoc/scripts

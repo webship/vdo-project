@@ -14,9 +14,7 @@ eval $(parse_yaml ${vdo_config}/workspace.themes.settings.yml);
 
 cd ${vdo_root}/themes/ ;
 
-sudo rm -rf ${vdo_root}/themes/${vdo_drupal_template_drupal_theme_name} ;
-composer create-project drupal/recommended-project:~9.0 ${vdo_drupal_template_drupal_theme_name} --stability dev --no-interaction ;
+rm -rf ${vdo_root}/themes/${vdo_drupal_template_drupal_theme_name} ;
+ddev composer create-project drupal/recommended-project:~9.0 ${vdo_drupal_template_drupal_theme_name} --stability dev --no-interaction ;
 
 
-sudo chmod 775 -R ${vdo_root}/themes/${vdo_drupal_template_drupal_theme_name} ;
-sudo chown www-data:${USER} -R ${vdo_root}/themes/${vdo_drupal_template_drupal_theme_name} ;

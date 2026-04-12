@@ -20,4 +20,4 @@ echo "*-----------------------------------------------------------*";
 
 cp -r ${vdo_drupal_template_drupal_theme_name} ${vdo_root}/themes/${theme_name} ;
 cd ${vdo_root}/themes/${theme_name} ;
-composer require drupal/${theme_name} ;
+ddev composer require drupal/${theme_name} ;

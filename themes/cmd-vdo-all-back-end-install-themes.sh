@@ -15,8 +15,6 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 eval $(parse_yaml ${vdo_config}/workspace.themes.settings.yml);
 
 # Change file mod and owner.
-sudo chmod 775 -R ${vdo_root}/themes/ ;
-sudo chown www-data:${USER} -R ${vdo_root}/themes/ ;
 
 # Install all admin themes in the admin theme list.
 for admin_theme_name in "${admin_themes[@]}"

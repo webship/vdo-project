@@ -12,8 +12,6 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
 
-composer create-project --stability dev --prefer-dist govcms/govcms8-project govcms8 ;
+ddev composer create-project --stability dev --prefer-dist govcms/govcms8-project govcms8 ;
 
-full_database_name="${database_prefix}govcms8";
-mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};"
 

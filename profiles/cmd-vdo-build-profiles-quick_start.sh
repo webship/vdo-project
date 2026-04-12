@@ -13,9 +13,7 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
 
 
-composer create-project drupalcoders/quick_start_distribution:dev-master quick_start --no-dev --no-interaction --prefer-dist;
+ddev composer create-project drupalcoders/quick_start_distribution:dev-master quick_start --no-dev --no-interaction --prefer-dist;
 
 
-full_database_name="${database_prefix}quick_start";
-mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};"
 

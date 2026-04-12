@@ -12,8 +12,6 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
 
-composer create-project elevatedthird/paragon-base paragon --no-interaction --stability=alpha;
+ddev composer create-project elevatedthird/paragon-base paragon --no-interaction --stability=alpha;
 
-full_database_name="${database_prefix}paragon";
-mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};"
 

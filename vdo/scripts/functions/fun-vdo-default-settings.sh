@@ -4,17 +4,6 @@ function set_default_settings() {
   echo "Add default settings file before starting the install.";
 
   cp ${vdo_root}/${doc_name}/${PROJECT_NAME}/${distribution_webroot}/sites/default/default.settings.php ${vdo_root}/${doc_name}/${PROJECT_NAME}/${distribution_webroot}/sites/default/settings.php ;
-  echo "\$databases['default']['default'] = [
-    'database' => '${full_database_name}',
-    'username' => '${database_username}',
-    'password' => '${database_password}',
-    'host' => '${database_host}',
-    'port' => '${database_port}',
-    'namespace' => '${database_namespace}',
-    'driver' => '${database_driver}',
-    'prefix' => '',
-    'collation' => '${database_collation}',
-  ];" >> ${vdo_root}/${doc_name}/${PROJECT_NAME}/${distribution_webroot}/sites/default/settings.php ;
 
   # Create the config/sync folder.
   mkdir -p ${vdo_root}/${doc_name}/${PROJECT_NAME}/config/sync ;

@@ -21,11 +21,9 @@ cd ${vdo_root}/${doc_name};
 
 if [ -d "${PROJECT_NAME}" ]; then
   echo "--------------";
-  sudo rm -rf ${PROJECT_NAME}
+  rm -rf ${PROJECT_NAME}
   echo "Deleted: ${vdo_root}/${doc_name}/${PROJECT_NAME}";
   echo "--------------";
 
-  full_database_name="${database_prefix}${PROJECT_NAME}";
-  mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -v
 fi
 

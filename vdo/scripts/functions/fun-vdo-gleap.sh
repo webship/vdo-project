@@ -13,7 +13,7 @@ function enable_gleap() {
   cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/${distribution_webroot} ; 
 
   echo "Enable Gleap";
-  ../vendor/drush/drush/drush pm:enable varbase_gleap
+  ddev drush pm:enable varbase_gleap
 }
 
 # Disable Gleap.
@@ -22,5 +22,5 @@ function disable_gleap() {
   cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/${distribution_webroot} ;
 
   echo "Disable Gleap";
-  ../vendor/drush/drush/drush pm:uninstall varbase_gleap
+  ddev drush pm:uninstall varbase_gleap
 }

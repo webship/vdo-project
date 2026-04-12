@@ -19,18 +19,16 @@ cd ${vdo_root}/themes/ ;
 # Delete old Admin themes.
 for admin_theme_name in "${admin_themes[@]}"
 do
-  sudo rm -rf ${vdo_root}/themes/${admin_theme_name};
+  rm -rf ${vdo_root}/themes/${admin_theme_name};
 done
 
 
 cd ${vdo_root}/themes/ ;
 
-sudo rm -rf ${vdo_root}/themes/${vdo_drupal_template_drupal_theme_name} ;
-composer create-project drupal/recommended-project:~9.0 ${vdo_drupal_template_drupal_theme_name} --stability dev --no-interaction ;
+rm -rf ${vdo_root}/themes/${vdo_drupal_template_drupal_theme_name} ;
+ddev composer create-project drupal/recommended-project:~9.0 ${vdo_drupal_template_drupal_theme_name} --stability dev --no-interaction ;
 
 
-sudo chmod 775 -R ${vdo_root}/themes/${vdo_drupal_template_drupal_theme_name} ;
-sudo chown www-data:${USER} -R ${vdo_root}/themes/${vdo_drupal_template_drupal_theme_name} ;
 
 
 # Build all admin themes in the admin theme list.
@@ -41,6 +39,4 @@ do
 done
 
 # Change file mod and owner.
-sudo chmod 775 -R ${vdo_root}/themes/ ;
-sudo chown www-data:${USER} -R ${vdo_root}/themes/ ;
 

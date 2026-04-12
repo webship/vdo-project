@@ -82,33 +82,18 @@ base_url="http://${vdo_host}/${doc_name}/${PROJECT_NAME}/docroot";
 cd ${vdo_root}/${doc_name};
 
 if [ -d "${PROJECT_NAME}" ]; then
-  sudo rm -rf ${PROJECT_NAME} 
+  rm -rf ${PROJECT_NAME} 
 fi
 
-full_database_name="${database_prefix}${PROJECT_NAME}";
-mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};" -vvv
- -vvv
 
-composer create-project vardot/varbase-project:${site_version} ${PROJECT_NAME} --no-interaction  ;
+ddev composer create-project vardot/varbase-project:${site_version} ${PROJECT_NAME} --no-interaction  ;
 
 cd ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
-composer require --dev drupal/core-dev:~10 --with-all-dependencies;
-composer require --dev drupal/drupal-extension:5.0.0alpha1 --with-all-dependencies ;
-composer require --dev webship/behat-html-formatter:~1.0 --with-all-dependencies ;
-composer require --dev drevops/behat-screenshot:~1.0 --with-all-dependencies;
+ddev composer require --dev drupal/core-dev:~10 --with-all-dependencies;
+ddev composer require --dev drupal/drupal-extension:5.0.0alpha1 --with-all-dependencies ;
+ddev composer require --dev webship/behat-html-formatter:~1.0 --with-all-dependencies ;
+ddev composer require --dev drevops/behat-screenshot:~1.0 --with-all-dependencies;
 
-cp ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/default.settings.php ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
-echo "\$databases['default']['default'] = [
-  'database' => '${full_database_name}',
-  'username' => '${database_username}',
-  'password' => '${database_password}',
-  'host' => '${database_host}',
-  'port' => '${database_port}',
-  'namespace' => '${database_namespace}',
-  'driver' => '${database_driver}',
-  'prefix' => '',
-  'collation' => '${database_collation}',
-];" >> ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
 
 mkdir -p ${vdo_root}/${doc_name}/${PROJECT_NAME}/config/sync ;
 echo "\$settings['config_sync_directory'] = '${config_sync_directory}';" >> ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/sites/default/settings.php ;
@@ -129,38 +114,36 @@ fi
 
 sed -i "s,/var/www/html/test/varbase/docroot,${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot,g" ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/behat.yml ;
 
-sudo chmod 775 -R ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
-sudo chown www-data:${user_name} -R ${vdo_root}/${doc_name}/${PROJECT_NAME} ;
 
 # Change directory to the docroot.
 cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot;
 
 # Install Varbase with Drush.
-../bin/drush site:install varbase --yes --site-name="${doc_name} ${PROJECT_NAME}"  --account-name="${account_name}"  --account-pass="${account_pass}"  --account-mail="${account_mail}"  --db-url="mysql://${database_username}:${database_password}@${database_host}:${database_port}/${full_database_name}" --locale="en" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider_media=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true install_configure_form.enable_update_status_emails=NULL -vvv;
-../bin/drush pm:enable varbase_development --yes ;
-../bin/drush pm:enable varbase_landing --yes
-../bin/drush pm:enable varbase_api --yes ;
-../bin/drush pm:enable varbase_content_planner --yes ;
-../bin/drush pm:enable varbase_media_instagram --yes ;
-../bin/drush pm:enable varbase_media_twitter --yes ;
-../bin/drush pm:enable social_auth_facebook --yes ;
-../bin/drush pm:enable social_auth_twitter --yes ;
-../bin/drush pm:enable social_auth_linkedin --yes ;
-../bin/drush cache:rebuild
+ddev drush site:install varbase --yes --site-name="${doc_name} ${PROJECT_NAME}"  --account-name="${account_name}"  --account-pass="${account_pass}"  --account-mail="${account_mail}"  --locale="en" varbase_multilingual_configuration.enable_multilingual=true varbase_extra_components.vmi=true varbase_extra_components.varbase_heroslider_media=true varbase_extra_components.varbase_carousels=true varbase_extra_components.varbase_search=true varbase_extra_components.varbase_blog=true varbase_extra_components.varbase_auth=true install_configure_form.enable_update_status_emails=NULL -vvv;
+ddev drush pm:enable varbase_development --yes ;
+ddev drush pm:enable varbase_landing --yes
+ddev drush pm:enable varbase_api --yes ;
+ddev drush pm:enable varbase_content_planner --yes ;
+ddev drush pm:enable varbase_media_instagram --yes ;
+ddev drush pm:enable varbase_media_twitter --yes ;
+ddev drush pm:enable social_auth_facebook --yes ;
+ddev drush pm:enable social_auth_twitter --yes ;
+ddev drush pm:enable social_auth_linkedin --yes ;
+ddev drush cache:rebuild
 
 # Import and Update local RTL language
-../bin/drush locale-import ar --autocreate-language profiles/varbase/translations/ar.po
-../bin/drush locale-update --langcodes=ar
-../bin/drush cache:rebuild
+ddev drush locale-import ar --autocreate-language profiles/varbase/translations/ar.po
+ddev drush locale-update --langcodes=ar
+ddev drush cache:rebuild
 
 ## Uninstall Antibot module to let the selenium bot work  
-../bin/drush pm:uninstall antibot --yes
+ddev drush pm:uninstall antibot --yes
 
 ## Rebuild the cache.
-../bin/drush config:set system.performance css.preprocess 0 --yes ;
-../bin/drush config:set system.performance js.preprocess 0 --yes ;
-../bin/drush config:set system.logging error_level all --yes ;
-../bin/drush cache:rebuild ;
+ddev drush config:set system.performance css.preprocess 0 --yes ;
+ddev drush config:set system.performance js.preprocess 0 --yes ;
+ddev drush config:set system.logging error_level all --yes ;
+ddev drush cache:rebuild ;
 
 # Add testing users.
 cd ${vdo_root}/${doc_name}/${PROJECT_NAME}/docroot/profiles/varbase/scripts

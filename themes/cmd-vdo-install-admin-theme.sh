@@ -18,23 +18,18 @@ echo "*-----------------------------------------------------------*";
 echo "| Install ${theme_name}";
 echo "*-----------------------------------------------------------*";
 
-full_database_name="${database_prefix}${theme_name}";
-mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};"
-
-
 cd "${vdo_root}/themes/${theme_name}/web";
 
-drush site-install standard --yes \
+ddev drush site-install standard --yes \
 --site-name="Theme ${theme_name}" \
 --account-name="${account_name}" \
 --account-pass="${account_pass}" \
---account-mail="${account_mail}" \
---db-url="mysql://${database_username}:${database_password}@${database_host}/${full_database_name}" ;
+--account-mail="${account_mail}" ;
 
-drush config-set system.performance css.preprocess 0 --yes ;
-drush config-set system.performance js.preprocess 0 --yes ;
-drush config-set system.logging error_level all --yes ;
-drush cr ;
+ddev drush config-set system.performance css.preprocess 0 --yes ;
+ddev drush config-set system.performance js.preprocess 0 --yes ;
+ddev drush config-set system.logging error_level all --yes ;
+ddev drush cr ;
 
-drush theme-enable ${theme_name} ;
-drush config-set system.theme admin ${theme_name} --yes ;
+ddev drush theme-enable ${theme_name} ;
+ddev drush config-set system.theme admin ${theme_name} --yes ;

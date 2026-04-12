@@ -12,9 +12,7 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 # Load workspace settings and extra lists.
 eval $(parse_yaml ${vdo_config}/workspace.profiles.settings.yml);
 
-drush dl champion --drupal-project-rename=champion;
+ddev drush dl champion --drupal-project-rename=champion;
 
-full_database_name="${database_prefix}champion";
-mysql -u${database_username} -p${database_password} -e "DROP DATABASE IF EXISTS ${full_database_name};"
 
 

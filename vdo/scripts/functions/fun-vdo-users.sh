@@ -22,16 +22,16 @@ function add_users () {
     echo "      User role: ${!user_role}";
     echo " ================================================================= ";
 
-    ../vendor/drush/drush/drush user:create "${!user_name}" --mail="${!user_mail}" --password="${!user_password}" ;
+    ddev drush user:create "${!user_name}" --mail="${!user_mail}" --password="${!user_password}" ;
     if [ "${!user_role}" == '_none_' ] ; then
       echo "   No user role for this user" ;
     else
-      ../vendor/drush/drush/drush user:role:add "${!user_role}" "${!user_name}" ;
+      ddev drush user:role:add "${!user_role}" "${!user_name}" ;
     fi
   done
 
   echo "Cache rebuilding ...";
-  ../vendor/drush/drush/drush cache:rebuild ;
+  ddev drush cache:rebuild ;
 
   cd ${vdo_root}/${doc_name};
 }
@@ -51,11 +51,11 @@ function cancel_users () {
     echo " ---------------------------------------------------------------- ";
     echo "      User name: ${!user_name}";
     echo " ================================================================= ";
-    ../vendor/drush/drush/drush user:cancel --delete-content "${!user_name}" -y ;
+    ddev drush user:cancel --delete-content "${!user_name}" -y ;
   done
 
   echo "Cache rebuilding ...";
-  ../vendor/drush/drush/drush cache:rebuild ;
+  ddev drush cache:rebuild ;
 
   cd ${vdo_root}/${doc_name};
 }

@@ -19,7 +19,7 @@ cd ${vdo_root}/modules/ ;
 # Delete modules.
 for module_name in "${modules[@]}"
 do
-  sudo rm -rf ${vdo_root}/modules/${module_name};
+  rm -rf ${vdo_root}/modules/${module_name};
 done
 
 # GIT clone modules.
