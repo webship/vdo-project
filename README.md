@@ -1,6 +1,6 @@
 # VDO Project
 
-Helps Drupal developers manage base code development work cycle for custom distributions/profiles/starter kit templates.
+Helps Drupal developers manage base code development work cycle for custom recipes/distributions/profiles/starter kit templates.
 [![VDO](https://raw.githubusercontent.com/webship/vdo/11.0.x/images/logo.svg)](https://www.drupal.org/project/vdo)
 
 
@@ -108,7 +108,7 @@ If you get the VDO bash files from
 sudo -s
 rm -rf /var/www/html
 cd /var/www/
-git clone --branch '9.0.x' https://github.com/webship/vdo-project.git
+git clone --branch '11.0.x' https://github.com/webship/vdo-project.git
 mv /var/www/vdo-project /var/www/html
 cd /var/www/html/
 rm -rf .git
