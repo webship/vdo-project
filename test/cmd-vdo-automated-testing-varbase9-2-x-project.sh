@@ -7,9 +7,9 @@ source ${vdo_scripts}/bootstrap.sh || exit 1 ;
 eval $(parse_yaml ${vdo_config}/workspace.test.settings.yml);
 
 # Set site version.
-site_version="10.1.x-dev";
+site_version="9.2.x-dev";
 
-ARGPARSE_DESCRIPTION="Add new Varbase 10.1.x-dev ready Automated testing builds with DDEV, and install. Then run tests using webship-js (cucumber).(chromium)."
+ARGPARSE_DESCRIPTION="Add new Varbase 9.2.x-dev ready Automated testing builds with DDEV, and install. Then run tests using webship-js (cucumber).(chromium)."
 argparse "$@" <<EOF || exit 1
 parser.add_argument('PROJECT_NAME',
                     help='The name of the project.')
@@ -42,7 +42,7 @@ EOF
 shift $#;
 
 # Help link:
-# Add new Varbase 10.1 ready Automated testing builds with DDEV, install,
+# Add new Varbase 9.2 ready Automated testing builds with DDEV, install,
 # then run tests using webship-js (cucumber).
 # ---------------------------------------------------
 # https://github.com/webship/vdo-project/issues/50
